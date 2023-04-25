@@ -1,0 +1,13 @@
+.events {
+    display: flex;
+    justify-content: center;
+}
+.events ul{
+    padding: 0;
+    margin: 0;
+}
+
+.island{
+    display: flex;
+    justify-content: center;
+}
