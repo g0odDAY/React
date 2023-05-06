@@ -1,0 +1,41 @@
+.slider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-radius: 8px;
+    margin: auto;
+}
+.inner{
+    white-space: nowrap;
+    transition: transform 0.5s;
+    width: 268px;
+    height: 115px;
+
+}
+.lists{
+    padding:0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    object-fit: cover;
+}
+
+.leftArrow,
+.rightArrow{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+.rightArrow{
+    right: 0;
+}

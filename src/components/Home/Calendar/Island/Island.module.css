@@ -1,0 +1,58 @@
+.island{
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3열 */
+    grid-template-rows: repeat(2, 1fr); /* 2행 */
+    grid-gap: 10px; /* 그리드 셀 사이의 간격 */
+    width: 100%;
+}
+.island_box{
+    background: #f5f6f7;
+    border-radius: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.5rem;
+    margin-right: 0.8rem;
+    margin-top: 0.8rem;
+}
+.island_box img{
+    object-fit: contain;
+    border-radius: 6px;
+}
+.island_reward{
+    margin-left: 1rem;
+    flex-grow: 1;
+}
+.island_reward label{
+    font-size: 0.8rem;
+    background: #7D839533;
+    padding:0.3rem;
+    border-radius: 3px;
+    color:#7D8395;
+    margin-right: 0.4rem;
+}
+.island_reward_lists{
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    display: flex;
+    overflow: hidden;
+    width: 14.375rem;
+}
+.island_reward_lists li{
+    margin-right:8px;
+}
+.inner{
+    white-space: nowrap;
+    transition: transform 0.5s;
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .island{
+        display: block;
+        margin-top:1rem;
+    }
+    .island_box{
+        margin-top:.5rem;
+    }
+}

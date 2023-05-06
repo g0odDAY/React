@@ -1,0 +1,15 @@
+.content{
+    display:flex;
+
+}
+
+.box{
+    overflow: hidden;
+    position:relative;
+    text-align: center;
+}
+.box img{
+    display: inline-block;
+    position: relative;
+    left: -20%;
+}

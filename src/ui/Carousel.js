@@ -4,7 +4,7 @@ import classes from './Carousel.module.css';
 import { BiRadioCircleMarked,BiChevronLeft,BiChevronRight } from "react-icons/bi";
 
 const Carousel = ({items})=>{
-
+        console.log(items);
     const [activeIdx,setActiveIdx] = useState(0);
     const updateIdx = (newIdx)=>{
         if(newIdx<=0){
@@ -26,7 +26,6 @@ const Carousel = ({items})=>{
                 <button className={classes.buttonArrow} onClick={()=>updateIdx(activeIdx-1)}>
                     <BiChevronLeft size="48" color="#FFF"/>
                 </button>
-
                 <button className={classes.buttonArrow} onClick={()=>updateIdx(activeIdx+1)}>
                     <BiChevronRight size="48" color="#FFF"/>
                 </button>

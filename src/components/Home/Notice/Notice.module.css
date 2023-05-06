@@ -1,0 +1,68 @@
+.wrapper{
+    max-width: 68.75rem;
+    width: 100%;
+    margin: 0 auto;
+}
+.content{
+    margin-top:2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.box h3{
+    margin: 1.3rem 0 1.3rem 1rem;
+}
+.lists{
+    width: 33.75rem;
+    border:2px solid #d0d0d0;
+    padding:1rem 1.2rem;
+    border-radius: 8px;
+}
+.lists li{
+    padding :0.5rem;
+}
+.lists span{
+    text-align: center;
+    margin-right: 1rem;
+    display: inline-block;
+    width: 5rem;
+    font-weight:600;
+    padding : 0.5rem 0.9rem;
+    border:1px solid #d0d0d0;
+    border-radius: 8px;
+}
+.lists a:hover{
+    text-decoration: underline;
+}
+.event{
+    color: #dd45bf;
+}
+.store{
+    color:#5865fd;
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .wrapper{
+        width: 90%;
+    }
+    .content{
+        margin-top:1.5rem;
+        display: block;
+    }
+    .box{
+        width: 100%;
+    }
+    .lists{
+        width: 100%;
+        padding : 0.5rem 0.9rem;
+    }
+    .lists span{
+        margin-right: 0.5rem;
+        padding : 0.3rem 0.7rem;
+
+    }
+    .lists li{
+        padding:0.3rem;
+        white-space: nowrap; /* 줄바꿈 방지 */
+        overflow: hidden; /* 넘치는 부분 숨기기 */
+        text-overflow: ellipsis; /* 생략 부호(...) 표시 */
+    }
+}

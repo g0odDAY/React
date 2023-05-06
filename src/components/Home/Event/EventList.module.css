@@ -1,0 +1,92 @@
+
+.container{
+    width: 100%;
+    max-width: 68.75rem;
+    margin: 8rem auto 0;
+    display: flex;
+    justify-content: space-between;
+}
+.slider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    overflow: hidden;
+    width: 38.75rem;
+    height: 17.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-radius: 8px;
+    margin: auto;
+}
+.inner{
+    white-space: nowrap;
+    transition: transform 0.5s;
+}
+.lists{
+    padding:0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    object-fit: cover;
+}
+.arrows{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top:100px;
+    width: 100%;
+}
+.arrow,
+.indicator{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.indicators{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    top: 87%;
+    right: 0;
+}
+.indicatorSymbol{
+    color: #26343f;
+}
+.indicatorSymbolActive{
+    color: #ffffff;
+}
+/* trade*/
+.trade{
+    margin-left: 1rem;
+    width: 100%;
+}
+.box{
+    border: 2px solid #d0d0d0;
+}
+tbody tr:hover{
+    color: var(--purple);
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .container{
+        width: 80%;
+    }
+    .content{
+        width: 35.75rem;
+        height: 15.43rem;
+    }
+    .lists img{
+        width: 35.75rem;
+        height: 15.43rem;
+    }
+    .indicators{
+        top:84%;
+    }
+}
+/*calendar*/

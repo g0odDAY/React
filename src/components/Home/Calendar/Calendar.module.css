@@ -1,0 +1,58 @@
+hr{
+    border:solid 1px #d0d0d0;
+    margin:1rem 0;
+}
+.wrapper{
+    max-width: 68.75rem;
+    width: 100%;
+    margin: 0 auto;
+}
+.header{
+    padding:0 1rem;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.islandTimer{
+    margin-left: 0.5rem;
+    color: var(--purple);
+}
+.main{
+    border:2px solid #d0d0d0;
+    border-radius: 8px;
+    padding:1rem 2rem;
+}
+.selector {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.selector span{
+    display: block;
+    padding:0.4rem;
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content_box{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding:0.7rem;
+}
+.content_box_info{
+    display: flex;
+    align-items: end;
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .wrapper{
+        width: 90%;
+    }
+    .main{
+        padding:0.75rem 1rem;
+    }
+}
