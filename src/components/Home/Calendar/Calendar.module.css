@@ -14,10 +14,7 @@ hr{
     justify-content: space-between;
     align-items: center;
 }
-.islandTimer{
-    margin-left: 0.5rem;
-    color: var(--purple);
-}
+
 .main{
     border:2px solid #d0d0d0;
     border-radius: 8px;
@@ -28,10 +25,7 @@ hr{
     padding: 0;
     display: flex;
 }
-.selector span{
-    display: block;
-    padding:0.4rem;
-}
+
 .content{
     display: flex;
     justify-content: space-between;
@@ -41,7 +35,7 @@ hr{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     padding:0.7rem;
 }
 .content_box_info{

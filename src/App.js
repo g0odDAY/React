@@ -1,4 +1,4 @@
-import Home from "./components/Home/Home";
+import Home,{eventLoader,calendarLoader} from "./components/Home/Home";
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
 import BoardForm from "./components/Board/BoardForm";
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
         children:[
             {
                 index:true,
-                element:<Home/>
+                element:<Home/>,
             },
             {
                 path:'board',

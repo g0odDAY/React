@@ -5,8 +5,10 @@
 }
 .content{
     margin-top:2rem;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(1, 1fr); /* 2행 */
+    grid-gap: 10px; /* 그리드 셀 사이의 간격 */
 }
 .box h3{
     margin: 1.3rem 0 1.3rem 1rem;
@@ -16,6 +18,21 @@
     border:2px solid #d0d0d0;
     padding:1rem 1.2rem;
     border-radius: 8px;
+    display:grid;
+    grid-template-rows:repeat(5,1fr);
+}
+.none_lists{
+    width: 33.75rem;
+    border:2px solid #d0d0d0;
+    padding:1rem 1.2rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 301px;
+}
+.none_lists:after{
+    content: '글이 존재하지 않습니다.';
 }
 .lists li{
     padding :0.5rem;
@@ -64,5 +81,9 @@
         white-space: nowrap; /* 줄바꿈 방지 */
         overflow: hidden; /* 넘치는 부분 숨기기 */
         text-overflow: ellipsis; /* 생략 부호(...) 표시 */
+    }
+    .none_lists{
+        width: 100%;
+        min-height: 220px;
     }
 }

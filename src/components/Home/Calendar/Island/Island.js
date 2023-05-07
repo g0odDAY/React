@@ -4,6 +4,7 @@ import classes from './Island.module.css'
 const Island = ({items,hasTodayDate}) =>{
     const data = items.map(reward=> reward.RewardItems);
 
+
     return  <div className={classes.island}>
         {items.map((item,idx)=><div key={idx} className={classes.island_box}>
             <img src={item.ContentsIcon} alt={item.ContentsName}/>
