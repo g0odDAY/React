@@ -11,8 +11,7 @@ const MainNavigation = () =>{
                 <div className={classes.main_menu}>
                     <ul className={classes.main_menu_lists}>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="#">랭킹</Link></li>
-                        <li><Link to="#">아이템거래</Link></li>
+                        <li><Link to="/market">아이템거래</Link></li>
                         <li><Link to="#">시세표</Link></li>
                     </ul>
                     <div className={classes.main_search}>

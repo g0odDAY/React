@@ -5,6 +5,8 @@ import BoardForm from "./components/Board/BoardForm";
 import BoardRootLayout from "./pages/BoardRootLayout";
 import BoardTable from "./components/Board/BoardTable";
 import BoardPage,{loader as boardLoader} from "./pages/BoardPage";
+import Market from "./components/Market/Market";
+import MarketForm from "./components/Market/MarketForm";
 const router = createBrowserRouter([
     {
         path:'/',
@@ -23,14 +25,26 @@ const router = createBrowserRouter([
                         element:<BoardPage/>,
                         loader:boardLoader
                     },
-                    {
-                        path:'write',
-                        element:<BoardForm/>
-                    },
+
                 ]
             },
+            {
+                path:'market',
+
+                children:[
+                    {
+                        index:true,
+                        element:<Market/>,
+                    },
+                    {
+                        path:'write',
+                        element:<MarketForm/>
+                    }
+                ]
+            }
         ]
     },
+
 ])
 function App() {
   return (
