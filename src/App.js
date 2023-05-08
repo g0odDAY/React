@@ -6,7 +6,7 @@ import BoardRootLayout from "./pages/BoardRootLayout";
 import BoardTable from "./components/Board/BoardTable";
 import BoardPage,{loader as boardLoader} from "./pages/BoardPage";
 import Market from "./components/Market/Market";
-import MarketForm from "./components/Market/MarketForm";
+import MarketForm from "./components/Market/MarketForm/MarketForm";
 const router = createBrowserRouter([
     {
         path:'/',
