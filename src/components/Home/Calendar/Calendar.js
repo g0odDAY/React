@@ -30,21 +30,26 @@ const Calendar =()=>{
             const data = res.filter(data=>data.CategoryName === '카오스게이트').filter(data=>hasTodayDate(data.StartTimes));
             const today = new Date().toISOString().split('T')[0]; // 현재 날짜를 ISO 8601 형식으로 가져옴 (YYYY-MM-DD)
             const todayData = data[data.length-1].StartTimes.filter((item) => item.startsWith(today)).map(arr=>arr.split('T')[1]);
+            console.log('chaosGate',todayData);
             setChaosgate(todayData);
 
             const data1 = res.filter(data=>data.CategoryName === '유령선').filter(data=>hasTodayDate(data.StartTimes));
             if(data1.length !== 0){
                const filter = data1[data1.length-1].StartTimes.filter((item) => item.startsWith(today)).map(arr=>arr.split('T')[1]);
                setGhostship(filter);
+                console.log('ghostship',filter);
             }
-            setGhostship(data1);
+
+
 
             const data2 = res.filter(data=>data.CategoryName === '필드보스').filter(data=>hasTodayDate(data.StartTimes));
             if(data2.length !== 0){
                 const filter = data2[data2.length-1].StartTimes.filter((item) => item.startsWith(today)).map(arr=>arr.split('T')[1]);
+                console.log('fieldboss',filter);
                 setFieldboss(filter);
             }
-            setFieldboss(data2);
+
+
         });
     },[]);
 

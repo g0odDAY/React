@@ -21,6 +21,7 @@
 .box{
     margin-top:1rem;
     display: flex;
+    align-items:flex-end;
 }
 .boxInner{
     margin-right: 1.5rem;
@@ -28,7 +29,11 @@
 .inner{
     display: flex;
     flex-direction: column;
-
+}
+.title::after{
+    font-size: .7rem;
+    color:#b91404;
+    content: '필수입력값입니다.';
 }
 .container{
     width: 15rem;
@@ -45,6 +50,13 @@
     border-radius:8px;
     margin-right:1rem;
     cursor:pointer;
+}
+.selectBox input{
+    border:0;
+    outline:none;
+}
+.correct{
+    border:2px solid #b91404;
 }
 .selectBtn{
     display:inline-block;
