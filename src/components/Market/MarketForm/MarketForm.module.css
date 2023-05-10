@@ -51,10 +51,8 @@
     margin-right:1rem;
     cursor:pointer;
 }
-.selectBox input{
-    border:0;
-    outline:none;
-}
+
+
 .correct{
     border:2px solid #b91404;
 }
@@ -63,8 +61,10 @@
     border:0;
     font-size:.8725rem;
     font-family: 'MoeumT R',sans-serif;
-
+    outline:none;
+    width:100%;
 }
+
 .selectBtn::placeholder{
     color:#353945;
     font-family: 'MoeumT R',sans-serif;
@@ -110,49 +110,25 @@
 .body::-webkit-scrollbar-thumb{
     background: transparent;
 }
-/*footer*/
-.footer{
-
-}
-.imgBox{
-    width: 120px;
-    height: 120px;
-    background: #d0d0d0;
-    border-radius: 8px;
+.updownBtn{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color:var(--white);
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-.ss{
-    position:relative;
-}
-.removeBtn{
-    position: absolute;
-    bottom: 5px;
-    right: 65%;
-    padding:.6rem;
-    border:0;
-    background:linear-gradient(to right,#5865f2,#8045dd);
-    border-radius:5px 0 5px 0;
-    cursor:pointer;
-}
-.footer textarea{
-    min-width: 33.75rem;
     border:2px solid #d0d0d0;
-    border-radius: 8px;
-    resize: none;
-    padding:1rem;
-    outline:none;
-}
-.footer input{
-    margin-left: 1rem;
-}
-.footer img{
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
     border-radius:8px;
+}
+.updownBtn button{
+    padding:.75rem;
+    width: 35%;
+    background: #fff;
+    border:0;
+    outline: none;
+    border-radius: 8px;
+}
+.updownBtn input{
+    text-align: center;
+    font-weight: bold;
+    padding:0;
+    border:0;
+}
+.updownBtn input:disabled{
+    cursor: auto;
 }

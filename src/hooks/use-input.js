@@ -3,6 +3,7 @@ import {useReducer} from "react";
 const initialState = {
     value:'',
     isOpen:false,
+    amount:3,
 }
 const inputStateReducer = (state,action)=>{
     switch (action.type){
@@ -12,6 +13,16 @@ const inputStateReducer = (state,action)=>{
             return {value:state.value,isOpen: !state.isOpen};
         case 'SELECT':
             return {value:action.value,isOpen:false};
+        case 'UP':
+            if(state.amount >= 6){
+                return {amount:6};
+            }
+            return {amount:state.amount+1};
+        case 'DOWN':
+            if(state.amount <= 3){
+                return {amount: 3};
+            }
+            return {amount:state.amount-1};
         default:
             return state;
     }
@@ -32,14 +43,19 @@ const useInput = (validate)=>{
         console.log('select!');
         dispatch({type:'SELECT',value:e.target.innerText})
     }
+    const updownHandler = (type) =>{
+        console.log(type);
+        dispatch({type})
+    }
     return {
         value:inputState.value,
         isOpen:inputState.isOpen,
+        amount:inputState.amount,
         validation,
         inputHandler,
         openHandler,
         selectHandler,
-
+        updownHandler
     }
 }
 export default useInput;

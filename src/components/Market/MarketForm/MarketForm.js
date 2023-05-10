@@ -3,13 +3,15 @@ import downarrow from '../free-arrow-down-icon-3101-thumb.png';
 import {useEffect, useRef, useState} from "react";
 import MarketFormFooter from "./MarketFormFooter/MarketFormFooter";
 import useInput from "../../../hooks/use-input";
+import {AiOutlinePlus,AiOutlineMinus} from "react-icons/ai";
+import {getDatabase} from "firebase/database";
 const MarketForm = ()=>{
     const serverArr = ['루페온','아브렐슈드','카제로스','카마인','니나브','실리안','카단','아만'];
     const categoryArr=['장신구-목걸이','장신구-귀걸이','장신구-반지','장신구-팔찌','보석'];
     const itemArr = [{type:'necklace',name:'거룩한 수호자의 목걸이'},{type:'necklace',name:'거룩한 선지자의 목걸이'},{type:'necklace',name:'공허한 운명의 목걸이'},{type:'necklace',name:'공허한 미래의 목걸이'},{type:'necklace',name:'참혹한 파멸의 목걸이'},{type:'necklace',name:'참혹한 쇠락의 목걸이'}]
     const characteristic = ['치명','특화','신속','인내','제압','숙련'];
-
-
+    const engraveArr = ['각성','강령술','결투의 대가','구슬동자','굳은 의지','급소 타격','기습의 대가','긴급 구조','달인의 저력'];
+    const [previewImage,setPreviewImage] = useState('');
     const {
         value:serverValue,
         isOpen:serverIsOpen,
@@ -58,6 +60,7 @@ const MarketForm = ()=>{
         openHandler:characteristicOpen,
         selectHandler:characteristicSelect,
     }=useInput(data=>data !== '');
+
     const {
         value:amountValue,
         isOpen:amountIsOpen,
@@ -67,6 +70,14 @@ const MarketForm = ()=>{
         selectHandler:amountSelect,
     }=useInput(data=>data !== '');
     const {
+        value:subCharacteristicValue,
+        isOpen:subCharacteristicIsOpen,
+        validation:subCharacteristicValidation,
+        inputHandler:subCharacteristicInput,
+        openHandler:subCharacteristicOpen,
+        selectHandler:subCharacteristicSelect,
+    }=useInput(data=>data !== '');
+    const {
         value:subAmountValue,
         isOpen:subAmountIsOpen,
         validation:subAmountValidation,
@@ -74,7 +85,40 @@ const MarketForm = ()=>{
         openHandler:subAmountOpen,
         selectHandler:subAmountSelect,
     }=useInput(data=>data !== '');
-
+    const {
+        value:engraveValue,
+        isOpen:engraveIsOpen,
+        validation:engraveValidation,
+        inputHandler:engraveInput,
+        openHandler:engraveOpen,
+        selectHandler:engraveSelect,
+    }=useInput(data=>data !== '');
+    const {
+        amount:enAmount,
+        isOpen:enAmountIsOpen,
+        validation:enAmountValidation,
+        inputHandler:enAmountInput,
+        openHandler:enAmountOpen,
+        selectHandler:enAmountSelect,
+        updownHandler:enAmountUpdown,
+    }=useInput(data=>data !== '');
+    const {
+        value:subEngraveValue,
+        isOpen:subEngraveIsOpen,
+        validation:subEngraveValidation,
+        inputHandler:subEngraveInput,
+        openHandler:subEngraveOpen,
+        selectHandler:subEngraveSelect,
+    }=useInput(data=>data !== '');
+    const {
+        amount:subEnAmount,
+        isOpen:subEnAmountIsOpen,
+        validation:subEnAmountValidation,
+        inputHandler:subEnAmountInput,
+        openHandler:subEnAmountOpen,
+        selectHandler:subEnAmountSelect,
+        updownHandler:subEnAmountUpdown,
+    }=useInput(data=>data !== '');
     const handleClick = (e) =>{
     }
 
@@ -95,6 +139,32 @@ const MarketForm = ()=>{
         console.log(qualityValue);
         console.log(characteristicValue);
         console.log(amountValue);
+        console.log(engraveValue);
+        const database = getDatabase();
+        fetch('https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json',{
+            method:'POST',
+            headers:{
+                'Content-type':'application/json',
+            },
+            body:JSON.stringify({
+                server:serverValue,
+                category:categoryValue,
+                grade:gradeValue,
+                item:itemValue,
+                quality:qualityValue,
+                characteristic:characteristicValue,
+                amount:amountValue,
+                subCharacteristic:subCharacteristicValue,
+                subAmount:subAmountValue,
+                img:previewImage
+            })
+        }).then(res=>{
+            return res.json();
+        }).then(res=>{
+            console.log(res);
+        })
+
+
     }
 
     return <form onSubmit={submitHandle}>
@@ -198,8 +268,77 @@ const MarketForm = ()=>{
                             </div>
 
                         </div>
+                        <div className={classes.box}>
+                            <div className={classes.inner}>
+                                <div className={`${classes.container}`}>
+                                    <div className={classes.selectBox} onClick={subCharacteristicOpen}>
+                                        <input className={classes.selectBtn} placeholder="선택" disabled={true} name='subCharacteristic' value={subCharacteristicValue}/>
+                                        <img src={downarrow}  alt="downarrow" width={16}/>
+                                    </div>
+                                    <ul className={classes.selectList} style={{display:subCharacteristicIsOpen ? 'block' : 'none'}}>
+                                        <div className={classes.hidden}>
+                                            {characteristic.map((data,idx)=><li key={idx} onClick={subCharacteristicSelect}>{data}</li>)}
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={classes.container}>
+                                <div className={classes.selectBox}>
+                                    <input className={classes.selectBtn} type="text" placeholder="수치" name='subAmount' value={subAmountValue} onChange={subAmountInput}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={classes.box}>
+                            <div className={classes.inner}>
+                                <div>각인 효과*</div>
+                                <div className={classes.container}>
+                                    <div className={classes.selectBox} onClick={engraveOpen}>
+                                        <input className={classes.selectBtn} placeholder="선택" disabled={true} name="engrave" value={engraveValue}/>
+                                        <img src={downarrow} alt="downarrow" width={16}/>
+                                    </div>
+                                    <ul className={classes.selectList} style={{display:engraveIsOpen ? 'block' : 'none'}}>
+                                        <div className={classes.hidden}>
+                                            {engraveArr.map((data,idx)=><li key={idx} onClick={engraveSelect}>{data}</li>)}
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={classes.updownBtn}>
+                                <button type="button" onClick={()=>enAmountUpdown('DOWN')}>
+                                    -
+                                </button>
+                                <input className={classes.selectBtn} placeholder="3" disabled={true} value={enAmount}/>
+                                <button type="button" onClick={()=>enAmountUpdown('UP')}>
+                                   +
+                                </button >
+                            </div>
+                        </div>
+                        <div className={classes.box}>
+                            <div className={classes.inner}>
+                                <div className={classes.container}>
+                                    <div className={classes.selectBox} onClick={subEngraveOpen}>
+                                        <input className={classes.selectBtn} placeholder="선택" disabled={true} name="subEngrave" value={subEngraveValue}/>
+                                        <img src={downarrow} alt="downarrow" width={16}/>
+                                    </div>
+                                    <ul className={classes.selectList} style={{display:subEngraveIsOpen ? 'block' : 'none'}}>
+                                        <div className={classes.hidden}>
+                                            {engraveArr.map((data,idx)=><li key={idx} onClick={subEngraveSelect}>{data}</li>)}
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={classes.updownBtn}>
+                                <button type="button" onClick={()=>subEnAmountUpdown('DOWN')} >
+                                    -
+                                </button>
+                                <input className={classes.selectBtn} placeholder="3" disabled={true} value={subEnAmount}/>
+                                <button type="button" onClick={()=>subEnAmountUpdown('UP')}>
+                                    +
+                                </button>
+                            </div>
+                        </div>
                         <hr/>
-                        <MarketFormFooter/>
+                        <MarketFormFooter previewImage={previewImage} setPreviewImage={setPreviewImage}/>
                     </div>
                 </div>
             </form>

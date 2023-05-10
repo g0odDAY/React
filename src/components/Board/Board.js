@@ -1,5 +1,5 @@
 import classes from "./Board.module.css";
-import {faker} from "@faker-js/faker";
+
 import BoardTable from "./BoardTable";
 import {NavLink} from "react-router-dom";
 import {useRef, useState} from "react";
