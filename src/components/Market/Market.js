@@ -40,8 +40,6 @@ const Market = ()=>{
         fetchRequest({url: `https://curious-furnace-340706-default-rtdb.firebaseio.com/items/${e.target.id}.json`}, (data)=>setItem(data)).then();
     }
     const filterHandler = (type,content) =>{
-        const itemPath = encodeURIComponent('item');
-        const contentPath = encodeURIComponent(content);
         fetchRequest({url: `https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json?orderBy="${type}"&equalTo="${content}"`}, loadedHandler).then();
     }
     return <div className={classes.container}>
