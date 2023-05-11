@@ -23,6 +23,9 @@ a{
 li{
     list-style:none;
 }
+button{
+    cursor: pointer;
+}
 .wrapper{
     background: #26343f;
     max-width: 68.75rem;

@@ -12,7 +12,7 @@ const MarketForm = ()=>{
     const characteristic = ['치명','특화','신속','인내','제압','숙련'];
     const engraveArr = ['각성','강령술','결투의 대가','구슬동자','굳은 의지','급소 타격','기습의 대가','긴급 구조','달인의 저력'];
     const penaltyArr = ['공격력 감소','공격속도 감소','방어력 감소','이동속도 감소'];
-    const [penaltyAmount,setPenaltyAmount] = useState(1);
+
     const [previewImage,setPreviewImage] = useState('');
     const {
         value:serverValue,
@@ -130,6 +130,20 @@ const MarketForm = ()=>{
         selectHandler:penaltySelect,
         updownHandler:penaltyUpdown,
     }=useInput(data=>data !== '');
+    const {
+        value:penaltyAmountValue,
+        isOpen:penaltyAmountIsOpen,
+        validation:penaltyAmountValidation,
+        inputHandler:penaltyAmountInput,
+        openHandler:penaltyAmountOpen,
+        selectHandler:penaltyAmountSelect,
+        updownHandler:penaltyAmountUpdown,
+    }=useInput(data=>data !== '');
+    const {
+        value:priceValue,
+        validation:priceValidation,
+        inputHandler:priceInput,
+    }=useInput(data=>data !== '');
     const handleClick = (e) =>{
     }
 
@@ -151,7 +165,6 @@ const MarketForm = ()=>{
         console.log(characteristicValue);
         console.log(amountValue);
         console.log(engraveValue);
-        const database = getDatabase();
         fetch('https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json',{
             method:'POST',
             headers:{
@@ -164,12 +177,19 @@ const MarketForm = ()=>{
                 item:itemValue,
                 quality:qualityValue,
                 characteristic:{
-                    chrch:characteristic+amountValue,
-                    subChrch:subCharacteristicValue+subAmountValue
+                    chrch:characteristicValue,
+                    amount:amountValue,
+                    subChrch:subCharacteristicValue,
+                    subAmount:subAmountValue
                 },
                 option:{
-
+                    engrave:engraveValue,
+                    amount:enAmount,
+                    subEgrave:subEngraveValue,
+                    subAmount:subEnAmount,
+                    penalty:penaltyValue
                 },
+                price:priceValue,
                 img:previewImage
             })
         }).then(res=>{
@@ -182,12 +202,7 @@ const MarketForm = ()=>{
     }
 
     const penaltyUpdownHandler = (type)=>{
-        if(type === 'UP'){
-            if(penaltyAmount > 3){
-                setPenaltyAmount(3);
-            }
-            setPenaltyAmount(penaltyAmount+1);
-        }
+
 
     }
 
@@ -331,7 +346,7 @@ const MarketForm = ()=>{
                                 <button type="button" onClick={()=>enAmountUpdown('DOWN')}>
                                     -
                                 </button>
-                                <input className={classes.selectBtn} type="number" placeholder="3" min={3} max={6} step={1} value={enAmount} />
+                                <input className={classes.selectBtn}  value={enAmount} onChange={enAmountInput} />
                                 <button type="button" onClick={()=>enAmountUpdown('UP')}>
                                    +
                                 </button >
@@ -354,7 +369,7 @@ const MarketForm = ()=>{
                                 <button type="button" onClick={()=>penaltyUpdownHandler('DOWN')}>
                                     -
                                 </button>
-                                <input className={classes.selectBtn} placeholder="3" disabled={true} value={penaltyAmount}/>
+                                <input className={classes.selectBtn} placeholder="3" disabled={true} />
                                 <button type="button" onClick={()=>penaltyUpdownHandler('UP')}>
                                     +
                                 </button >
@@ -389,7 +404,7 @@ const MarketForm = ()=>{
                                 <div>판매가격*</div>
                                 <div className={classes.container}>
                                     <div className={classes.selectBox}>
-                                        <input className={classes.selectBtn} type="text" placeholder="가격" name='price'/>
+                                        <input className={classes.selectBtn} type="text" placeholder="가격" onChange={priceInput}/>
                                     </div>
                                 </div>
                             </div>
