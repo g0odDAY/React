@@ -11,6 +11,8 @@ const MarketForm = ()=>{
     const itemArr = [{type:'necklace',name:'거룩한 수호자의 목걸이'},{type:'necklace',name:'거룩한 선지자의 목걸이'},{type:'necklace',name:'공허한 운명의 목걸이'},{type:'necklace',name:'공허한 미래의 목걸이'},{type:'necklace',name:'참혹한 파멸의 목걸이'},{type:'necklace',name:'참혹한 쇠락의 목걸이'}]
     const characteristic = ['치명','특화','신속','인내','제압','숙련'];
     const engraveArr = ['각성','강령술','결투의 대가','구슬동자','굳은 의지','급소 타격','기습의 대가','긴급 구조','달인의 저력'];
+    const penaltyArr = ['공격력 감소','공격속도 감소','방어력 감소','이동속도 감소'];
+    const [penaltyAmount,setPenaltyAmount] = useState(1);
     const [previewImage,setPreviewImage] = useState('');
     const {
         value:serverValue,
@@ -119,6 +121,15 @@ const MarketForm = ()=>{
         selectHandler:subEnAmountSelect,
         updownHandler:subEnAmountUpdown,
     }=useInput(data=>data !== '');
+    const {
+        value:penaltyValue,
+        isOpen:penaltyIsOpen,
+        validation:penaltyValidation,
+        inputHandler:penaltyInput,
+        openHandler:penaltyOpen,
+        selectHandler:penaltySelect,
+        updownHandler:penaltyUpdown,
+    }=useInput(data=>data !== '');
     const handleClick = (e) =>{
     }
 
@@ -152,10 +163,13 @@ const MarketForm = ()=>{
                 grade:gradeValue,
                 item:itemValue,
                 quality:qualityValue,
-                characteristic:characteristicValue,
-                amount:amountValue,
-                subCharacteristic:subCharacteristicValue,
-                subAmount:subAmountValue,
+                characteristic:{
+                    chrch:characteristic+amountValue,
+                    subChrch:subCharacteristicValue+subAmountValue
+                },
+                option:{
+
+                },
                 img:previewImage
             })
         }).then(res=>{
@@ -164,6 +178,16 @@ const MarketForm = ()=>{
             console.log(res);
         })
 
+
+    }
+
+    const penaltyUpdownHandler = (type)=>{
+        if(type === 'UP'){
+            if(penaltyAmount > 3){
+                setPenaltyAmount(3);
+            }
+            setPenaltyAmount(penaltyAmount+1);
+        }
 
     }
 
@@ -183,7 +207,7 @@ const MarketForm = ()=>{
                                         <input className={classes.selectBtn} placeholder="서버명" value={serverValue} name='server' disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:serverIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} style={{display:serverIsOpen ? 'block' : 'none',zIndex:10}}>
                                         <div className={classes.hidden}>
                                             {serverArr.map((data,idx) => <li key={idx} onClick={serverSelect}>{data}</li>)}
                                         </div>
@@ -197,7 +221,7 @@ const MarketForm = ()=>{
                                         <input type="text" className={classes.selectBtn} placeholder="카테고리" name='category' value={categoryValue} disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:categoryIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} style={{display:categoryIsOpen ? 'block' : 'none',zIndex:9}}>
                                         <div className={classes.hidden}>
                                             {categoryArr.map((data,idx) => <li key={idx} onClick={categorySelect}>{data}</li>)}
                                         </div>
@@ -215,7 +239,7 @@ const MarketForm = ()=>{
                                         <input className={classes.selectBtn} placeholder="등급" name='grade' value={gradeValue} disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:gradeIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} style={{display:gradeIsOpen ? 'block' : 'none',zIndex:8}}>
                                         <div className={classes.hidden}>
                                             <li onClick={gradeSelect}>유물</li>
                                             <li onClick={gradeSelect}>고대</li>
@@ -230,7 +254,7 @@ const MarketForm = ()=>{
                                         <input className={classes.selectBtn} placeholder="아이템 이름" name='item' disabled={true} value={itemValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:itemIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} style={{display:itemIsOpen ? 'block' : 'none',zIndex:7}}>
                                         <div className={classes.hidden}>
                                             {itemArr.map((data,idx)=> <li key={idx} onClick={itemSelect}>{data.name}</li>)}
                                         </div>
@@ -254,7 +278,7 @@ const MarketForm = ()=>{
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name='characteristic' value={characteristicValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:characteristicIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} style={{display:characteristicIsOpen ? 'block' : 'none',zIndex:6}}>
                                         <div className={classes.hidden}>
                                             {characteristic.map((data,idx)=><li key={idx} onClick={characteristicSelect}>{data}</li>)}
                                         </div>
@@ -275,7 +299,7 @@ const MarketForm = ()=>{
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name='subCharacteristic' value={subCharacteristicValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:subCharacteristicIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} style={{display:subCharacteristicIsOpen ? 'block' : 'none',zIndex:5}}>
                                         <div className={classes.hidden}>
                                             {characteristic.map((data,idx)=><li key={idx} onClick={subCharacteristicSelect}>{data}</li>)}
                                         </div>
@@ -296,7 +320,7 @@ const MarketForm = ()=>{
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name="engrave" value={engraveValue}/>
                                         <img src={downarrow} alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:engraveIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} style={{display:engraveIsOpen ? 'block' : 'none',zIndex:4}}>
                                         <div className={classes.hidden}>
                                             {engraveArr.map((data,idx)=><li key={idx} onClick={engraveSelect}>{data}</li>)}
                                         </div>
@@ -307,9 +331,32 @@ const MarketForm = ()=>{
                                 <button type="button" onClick={()=>enAmountUpdown('DOWN')}>
                                     -
                                 </button>
-                                <input className={classes.selectBtn} placeholder="3" disabled={true} value={enAmount}/>
+                                <input className={classes.selectBtn} type="number" placeholder="3" min={3} max={6} step={1} value={enAmount} />
                                 <button type="button" onClick={()=>enAmountUpdown('UP')}>
                                    +
+                                </button >
+                            </div>
+                            <div className={classes.inner}>
+                                <div>패널티*</div>
+                                <div className={classes.container}>
+                                    <div className={classes.selectBox} onClick={penaltyOpen}>
+                                        <input type="text" className={classes.selectBtn} placeholder='선택' disabled={true} value={penaltyValue} name="penalty" />
+                                        <img src={downarrow} alt="downarrow" width={16}/>
+                                    </div>
+                                    <ul className={classes.selectList} style={{display:penaltyIsOpen ? 'block' :'none',zIndex:4}}>
+                                        <div className={classes.hidden}>
+                                            {penaltyArr.map((data,idx)=><li key={idx} onClick={penaltySelect}>{data}</li>)}
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={classes.updownBtn}>
+                                <button type="button" onClick={()=>penaltyUpdownHandler('DOWN')}>
+                                    -
+                                </button>
+                                <input className={classes.selectBtn} placeholder="3" disabled={true} value={penaltyAmount}/>
+                                <button type="button" onClick={()=>penaltyUpdownHandler('UP')}>
+                                    +
                                 </button >
                             </div>
                         </div>
@@ -335,6 +382,16 @@ const MarketForm = ()=>{
                                 <button type="button" onClick={()=>subEnAmountUpdown('UP')}>
                                     +
                                 </button>
+                            </div>
+                        </div>
+                        <div className={classes.box}>
+                            <div className={classes.inner}>
+                                <div>판매가격*</div>
+                                <div className={classes.container}>
+                                    <div className={classes.selectBox}>
+                                        <input className={classes.selectBtn} type="text" placeholder="가격" name='price'/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr/>

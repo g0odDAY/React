@@ -23,3 +23,6 @@
     color:var(--white);
     background: linear-gradient(to right,#5865f2,#8045dd);
 }
+hr{
+    margin:2rem 0;
+}

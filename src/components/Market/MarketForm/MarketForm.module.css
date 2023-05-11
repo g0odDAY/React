@@ -7,6 +7,7 @@
 .header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .header button{
     border:none;
@@ -81,7 +82,7 @@
     box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
     background: #fff;
     position:absolute;
-    z-index: 1;
+
 
 }
 .hidden{
@@ -104,7 +105,7 @@
 .body{
     overflow-y:scroll;
     width: 100%;
-    height:60vh;
+    height:63vh;
 
 }
 .body::-webkit-scrollbar-thumb{
@@ -114,6 +115,7 @@
     display: flex;
     border:2px solid #d0d0d0;
     border-radius:8px;
+    margin-right:1rem;
 }
 .updownBtn button{
     padding:.75rem;
