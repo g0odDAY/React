@@ -3,13 +3,35 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
+    width: 90%;
 }
 .main{
     width:68%;
 }
+.main_header{
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+.main_body{
+
+}
+.row_box{
+    display: flex;
+    align-items: center;
+}
+.column_box{
+    display:flex;
+    flex-direction:column;
+}
+.main_body_box{
+    display:flex;
+    align-items: center;
+}
 .main li{
     border :2px solid #d0d0d0;
     border-radius: 5px;
+
 }
 /* aside */
 .aside{
