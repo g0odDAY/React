@@ -52,7 +52,7 @@ const Market =()=>{
         fetchRequest({url: `https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json?orderBy="${type}"&equalTo="${content}"`}, loadedHandler).then();
     },[])
     console.log('render');
-    const openHandler =useCallback ((idx)=>{
+    const openHandler =(idx)=>{
         console.log(idx,activeIdx);
         setIsOpen(!isOpen);
         if(idx === activeIdx){
@@ -64,7 +64,7 @@ const Market =()=>{
             console.log(activeIdx)
         }
 
-    },[]);
+    };
     return <div className={classes.container}>
         <div className={classes.main}>
 
@@ -109,9 +109,9 @@ const Market =()=>{
                             </div>
                         </div>
                         <div className={classes.openBtn} onClick={()=>openHandler(0)}>
-                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={isOpen}/>
+                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={0 === activeIdx}/>
                         </div>
-                            <Accordion idx={0} activeIdx={activeIdx} isOpen={isOpen}/>
+                            <Accordion idx={0} activeIdx={activeIdx} isOpen={0===activeIdx}/>
                     </div>
                     <div className={classes.main_body_container}>
                         <div className={classes.row_box} >
@@ -144,10 +144,10 @@ const Market =()=>{
                                 7,0000G
                             </div>
                         </div>
-                        <div className={classes.openBtn} >
-                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={isOpen}/>
+                        <div className={classes.openBtn} onClick={()=>openHandler(1)} >
+                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={1===activeIdx}/>
                         </div>
-                        <Accordion idx={1} activeIdx={activeIdx} isOpen={isOpen}/>
+                        <Accordion idx={1} activeIdx={activeIdx} isOpen={1===activeIdx}/>
                     </div>
                     <div className={classes.main_body_container}>
                         <div className={classes.row_box} >
@@ -180,10 +180,10 @@ const Market =()=>{
                                 7,0000G
                             </div>
                         </div>
-                        <div className={classes.openBtn} >
-                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={isOpen}/>
+                        <div className={classes.openBtn} onClick={()=>openHandler(2)}>
+                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={2===activeIdx}/>
                         </div>
-                        <Accordion idx={2} activeIdx={activeIdx} isOpen={isOpen}/>
+                        <Accordion idx={2} activeIdx={activeIdx} isOpen={2===activeIdx}/>
                     </div>
 
 
