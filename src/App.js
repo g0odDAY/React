@@ -17,20 +17,7 @@ const router = createBrowserRouter([
                 element:<Home/>,
             },
             {
-                path:'board',
-                element:<BoardRootLayout/>,
-                children:[
-                    {
-                        index:true,
-                        element:<BoardPage/>,
-                        loader:boardLoader
-                    },
-
-                ]
-            },
-            {
                 path:'market',
-
                 children:[
                     {
                         index:true,

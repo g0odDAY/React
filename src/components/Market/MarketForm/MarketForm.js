@@ -153,7 +153,7 @@ const MarketForm = ()=>{
             document.removeEventListener('click',handleClick);
         }
     },[])
-
+    console.log('render');
 
     const submitHandle = (e)=>{
         e.preventDefault();

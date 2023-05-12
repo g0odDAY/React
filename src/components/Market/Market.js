@@ -1,21 +1,28 @@
 import classes from './Market.module.css';
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import useHttp from "../../hooks/use-http";
 import {BsStar, BsStarFill} from "react-icons/bs";
 import ac from '../../img/img_acc_21.png';
 import Progress from "../../ui/Progress";
+import Accordion from "../../ui/Accordion";
+import {AiOutlineArrowDown} from "react-icons/ai";
+import downArrow from '../../img/arrow-down-sign-to-navigate.png';
 
 
-const Market = ()=>{
+const Market =()=>{
+
     const [items,setItems] = useState([]);
     const [item,setItem] = useState();
+    const [activeIdx,setActiveIdx]=useState(null);
+    const [isOpen, setIsOpen] = useState(false);
     const {
         isLoading,
         error,
         sendRequest:fetchRequest
     } = useHttp();
-    const loadedHandler = (data)=>{
+    const loadedHandler = useCallback((data)=>{
+        console.log('loadedHandler.')
         const loadedItems = [];
 
         for(const key in data){
@@ -30,55 +37,160 @@ const Market = ()=>{
             })
         }
         setItems(loadedItems);
-    }
+    },[]);
     useEffect(()=>{
         fetchRequest({url: 'https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json?print=pretty'}, loadedHandler).then();
+        console.log('처음에 랜더릴 될 떄 실행됨.')
+    },[])
 
-    },[fetchRequest])
-
-    const itemHandler = (e)=>{
+    const itemHandler =useCallback((e)=>{
+        console.log('itemHandler.')
         fetchRequest({url: `https://curious-furnace-340706-default-rtdb.firebaseio.com/items/${e.target.id}.json`}, (data)=>setItem(data)).then();
-    }
-    const filterHandler = (type,content) =>{
+    },[])
+    const filterHandler =useCallback( (type,content) =>{
+        console.log('filterHandler.')
         fetchRequest({url: `https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json?orderBy="${type}"&equalTo="${content}"`}, loadedHandler).then();
-    }
+    },[])
+    console.log('render');
+    const openHandler =useCallback ((idx)=>{
+        console.log(idx,activeIdx);
+        setIsOpen(!isOpen);
+        if(idx === activeIdx){
+            console.log(`${idx}와 ${activeIdx}은 같다.`)
+            setActiveIdx(null);
+        }else{
+            console.log(`${idx}와 ${activeIdx}은 다르다.`)
+            setActiveIdx(idx);
+            console.log(activeIdx)
+        }
+
+    },[]);
     return <div className={classes.container}>
         <div className={classes.main}>
+
             <div className={classes.main_header}>
-                <span>이름</span>
-                <span>등급</span>
-                <span>품질</span>
-                <span>옵션</span>
-                <span>금액</span>
+                <div style={{width:"310px"}}>이름</div>
+                <div  style={{width:"60px",textAlign:'start'}}>등급</div>
+                <div  style={{width:"200px"}}>품질</div>
+                <div  style={{width:"200px"}}>옵션</div>
+                <div  style={{width:"100px"}}>금액</div>
             </div>
             <div className={classes.main_body}>
                 <div className={classes.main_body_box}>
-                    <BsStar size={22} cursor="pointer"/>
-                    <div className={classes.row_box}>
-                        <img src={ac} alt="ac"/>
-                        <span>참혹한 파멸의 목걸이</span>
+                    <div className={classes.main_body_container}>
+                        <div className={classes.row_box} >
+                            <div className={classes.inner_row_box}>
+                                <BsStar className={classes.favorite} size={25}  cursor="pointer"/>
+                                <img src={ac} alt="ac"/>
+                                <span>참혹한 파멸의 목걸이</span>
+                            </div>
+                            <div className={classes.column_box}>
+                                <div>티어3</div>
+                                <div>고대</div>
+                            </div>
+                            <div className={classes.inner_row_box}>
+                                <div className={classes.column_box}>
+                                    <span>49</span>
+                                    <Progress value={49}/>
+                                </div>
+
+                                <div className={classes.column_box}>
+                                    <span>치명+499</span>
+                                    <span>신속+490</span>
+                                </div>
+                            </div>
+                            <div className={classes.column_box}>
+                                <span>돌격대장+6</span>
+                                <span>저주받은 인형+3</span>
+                                <span className={classes.penalty}>공격력 감소+3</span>
+                            </div>
+                            <div>
+                                7,0000G
+                            </div>
+                        </div>
+                        <div className={classes.openBtn} onClick={()=>openHandler(0)}>
+                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={isOpen}/>
+                        </div>
+                            <Accordion idx={0} activeIdx={activeIdx} isOpen={isOpen}/>
                     </div>
-                    <div className={classes.column_box}>
-                        <span>티어3</span>
-                        <span>고대</span>
+                    <div className={classes.main_body_container}>
+                        <div className={classes.row_box} >
+                            <div className={classes.inner_row_box}>
+                                <BsStar className={classes.favorite} size={25}  cursor="pointer"/>
+                                <img src={ac} alt="ac"/>
+                                <span>참혹한 파멸의 목걸이</span>
+                            </div>
+                            <div className={classes.column_box}>
+                                <div>티어3</div>
+                                <div>고대</div>
+                            </div>
+                            <div className={classes.inner_row_box}>
+                                <div className={classes.column_box}>
+                                    <span>49</span>
+                                    <Progress value={49}/>
+                                </div>
+
+                                <div className={classes.column_box}>
+                                    <span>치명+499</span>
+                                    <span>신속+490</span>
+                                </div>
+                            </div>
+                            <div className={classes.column_box}>
+                                <span>돌격대장+6</span>
+                                <span>저주받은 인형+3</span>
+                                <span className={classes.penalty}>공격력 감소+3</span>
+                            </div>
+                            <div>
+                                7,0000G
+                            </div>
+                        </div>
+                        <div className={classes.openBtn} >
+                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={isOpen}/>
+                        </div>
+                        <Accordion idx={1} activeIdx={activeIdx} isOpen={isOpen}/>
                     </div>
-                    <div>
-                        <Progress value={49}/>
+                    <div className={classes.main_body_container}>
+                        <div className={classes.row_box} >
+                            <div className={classes.inner_row_box}>
+                                <BsStar className={classes.favorite} size={25}  cursor="pointer"/>
+                                <img src={ac} alt="ac"/>
+                                <span>참혹한 파멸의 목걸이</span>
+                            </div>
+                            <div className={classes.column_box}>
+                                <div>티어3</div>
+                                <div>고대</div>
+                            </div>
+                            <div className={classes.inner_row_box}>
+                                <div className={classes.column_box}>
+                                    <span>49</span>
+                                    <Progress value={49}/>
+                                </div>
+
+                                <div className={classes.column_box}>
+                                    <span>치명+499</span>
+                                    <span>신속+490</span>
+                                </div>
+                            </div>
+                            <div className={classes.column_box}>
+                                <span>돌격대장+6</span>
+                                <span>저주받은 인형+3</span>
+                                <span className={classes.penalty}>공격력 감소+3</span>
+                            </div>
+                            <div>
+                                7,0000G
+                            </div>
+                        </div>
+                        <div className={classes.openBtn} >
+                            <AiOutlineArrowDown className={classes.arrow} aria-expanded={isOpen}/>
+                        </div>
+                        <Accordion idx={2} activeIdx={activeIdx} isOpen={isOpen}/>
                     </div>
-                    <div className={classes.column_box}>
-                        <span>치명+499</span>
-                        <span>신속+490</span>
-                    </div>
-                    <div className={classes.column_box}>
-                        <span>돌격대장+6</span>
-                        <span>저주받은 인형+3</span>
-                        <span>공격력 감소+3</span>
-                    </div>
-                    <div>
-                        7,0000G
-                    </div>
+
+
                 </div>
+
             </div>
+
 
         </div>
         <div className={classes.aside}>

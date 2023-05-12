@@ -3,6 +3,7 @@ import classes from "./MainNavigation.module.css";
 import {FaSearch} from "react-icons/fa";
 
 const MainNavigation = () =>{
+    //console.log('rendered main nav')
     return <>
         <header className={classes.main_header}>
             <nav className={classes.main_nav}>

@@ -1,11 +1,13 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import classes from "./EventList.module.css";
 import {BiChevronLeft, BiChevronRight, BiRadioCircleMarked} from "react-icons/bi";
 
 const EventList = ()=>{
+    console.log('rendered eventList');
     const [events,setEvents] = useState([]);
+    const [activeIdx,setActiveIdx] = useState(0);
     useEffect(()=>{
         fetch('https://developer-lostark.game.onstove.com/news/events',{
             headers:{
@@ -19,15 +21,15 @@ const EventList = ()=>{
             setEvents(res);
         });
     },[])
-    const [activeIdx,setActiveIdx] = useState(0);
-    const updateIdx = (newIdx)=>{
+
+    const updateIdx = useCallback((newIdx)=>{
         if(newIdx < 0){
             newIdx = events.length-1;
         }else if(newIdx >= events.length){
             newIdx = 0;
         }
         setActiveIdx(newIdx);
-    }
+    },[])
     return <>
         <section id="slider">
             <div className={classes.container}>
