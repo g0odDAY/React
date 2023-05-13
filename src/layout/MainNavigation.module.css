@@ -72,9 +72,8 @@
     right: 20px;
 }
 .main_login{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--light_gray);
-    width: 6.25rem;
     padding:0.7rem;
 }
 @media screen and (min-width: 768px) and (max-width: 1199px) {

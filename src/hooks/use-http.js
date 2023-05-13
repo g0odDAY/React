@@ -5,6 +5,7 @@ const useHttp = ()=>{
     const [error,setError] = useState(false);
 
     const sendRequest = useCallback(async (config,applyData)=>{
+        console.log('fetchRequest config',config);
         setIsLoading(prevState => !prevState.isLoading);
         setError(false);
         try{

@@ -9,6 +9,7 @@ import Market from "./components/Market/Market";
 import MarketForm from "./components/Market/MarketForm/MarketForm";
 import Signin from "./components/Login/Signin";
 import Login from "./components/Login/Login";
+import AuthContext from "./Context/auth-context";
 const router = createBrowserRouter([
     {
         path:'/',
@@ -52,7 +53,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+
         <RouterProvider router={router}/>
+
     </>
   );
 }

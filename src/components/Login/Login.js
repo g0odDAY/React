@@ -1,13 +1,15 @@
 import classes from './Login.module.css';
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {getAuth,signInWithEmailAndPassword} from "firebase/auth";
 import {app} from "../../firebaseConfig";
 import {Link, useNavigate} from "react-router-dom";
+import useHttp from "../../hooks/use-http";
+import AuthContext from "../../Context/auth-context";
 
 const Login = ()=>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const auth = getAuth();
+    const ctx = useContext(AuthContext);
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
@@ -15,28 +17,10 @@ const Login = ()=>{
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
-    const handleLogin = async (email, password) => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const navigation = useNavigate();
-        console.log(email,password);
-        try {
-            await signInWithEmailAndPassword(auth,email, password)
-                .then((userCredential)=>{
-                    console.log(userCredential.user)
-                });
-            navigation('/');
-            console.log('User logged in successfully!');
-            // 로그인 성공 후 필요한 동작을 수행하세요.
 
-        } catch (error) {
-            console.error('Error occurred during login:', error);
-            alert(`${error}`);
-            // 로그인 실패 시 에러 처리를 수행하세요.
-        }
-    };
     return (
         <div className={classes.container}>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={(e)=>ctx.onLogin(e,email,password)}>
             <div>
                 <label htmlFor="email">Email:</label>
                 <input

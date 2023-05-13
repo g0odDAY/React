@@ -22,14 +22,14 @@ const EventList = ()=>{
         });
     },[])
 
-    const updateIdx = useCallback((newIdx)=>{
+    const updateIdx = (newIdx)=>{
         if(newIdx < 0){
             newIdx = events.length-1;
         }else if(newIdx >= events.length){
             newIdx = 0;
         }
         setActiveIdx(newIdx);
-    },[])
+    };
     return <>
         <section id="slider">
             <div className={classes.container}>

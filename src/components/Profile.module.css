@@ -1,0 +1,43 @@
+.container{
+    position:relative;
+}
+.box{
+    display: flex;
+    padding:.5rem;
+    justify-content: center;
+    cursor:pointer;
+}
+.box:hover{
+    color:var(--purple);
+    background: #f5f6f7;
+    border-radius: 8px;
+}
+.sector{
+    display:flex;
+    align-items: center;
+    padding:.25rem;
+}
+.menu{
+    display: flex;
+    flex-direction: column;
+    position:absolute;
+    width: 60%;
+    right:0;
+    top:84px;
+    background: #f5f6f7;
+    border-radius: 3px 3px 8px 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+.menuLists li{
+    padding:.5rem .75rem;
+    display: flex;
+    align-items: flex-start;
+    cursor:pointer;
+
+}
+.menuLists li:hover{
+    background:linear-gradient(to right,#5865f2,#8045dd);
+    border-radius: 8px;
+    color:var(--white);
+}

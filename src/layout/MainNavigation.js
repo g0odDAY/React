@@ -1,14 +1,15 @@
 import {Link} from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import {FaSearch} from "react-icons/fa";
-import {getAuth} from "firebase/auth";
-import {app} from "../firebaseConfig";
-
+import {useContext} from "react";
+import AuthContext from "../Context/auth-context";
+import Profile from "../components/Profile";
 const MainNavigation = () =>{
     //console.log('rendered main nav')
-    const auth = getAuth(app);
-    const user = auth.currentUser;
-    console.log(user);
+    const ctx = useContext(AuthContext);
+    console.log(localStorage.getItem('userData'));
+
+
     return <>
         <header className={classes.main_header}>
             <nav className={classes.main_nav}>
@@ -30,9 +31,8 @@ const MainNavigation = () =>{
                     </div>
                 </div>
                 <div className={classes.main_login}>
-                    <Link to="login">로그인</Link>
+                    {ctx.isLogin? <Profile/>:<Link to="login">로그인</Link>}
                 </div>
-                {user ? <p>{user}</p> : <p>no user</p>}
             </nav>
         </header>
     </>

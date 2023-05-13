@@ -1,14 +1,16 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import {app} from '../../firebaseConfig';
 import classes from './Signin.module.css';
-import {useNavigate} from "react-router-dom";
+import AuthContext from "../../Context/auth-context";
+
 // Firebase 인증 객체
 const auth = getAuth(app);
 const Signin = ()=>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const navigation = useNavigate();
+    const ctx = useContext(AuthContext);
+
     const onChange = (event) => {
         const {
             target: { name, value }
@@ -20,25 +22,11 @@ const Signin = ()=>{
         }
     }
 
-    const onSubmit = async (event) => {
-        event.preventDefault()
-        try {
-            await createUserWithEmailAndPassword(auth, email, password)
-                .then(userCredential=>{
-                    console.log(userCredential.user);
-                });
-            navigation('/');
-            console.log('User signed up successfully!');
-            // 회원가입 성공 후 필요한 동작을 수행하세요.
-        } catch (error) {
-            console.error('Error occurred during signup:', error);
-            // 회원가입 실패 시 에러 처리를 수행하세요.
-        }
-    }
+
 
     return (
         <div className={classes.container}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={(e)=>ctx.onSignup(e,email,password)}>
                 <input
                     name="email"
                     type="text"
@@ -55,7 +43,7 @@ const Signin = ()=>{
                     onChange={onChange}
                     required
                 />
-                <input type="submit" value="Log-In" />
+                <input type="submit" value="sign-In" />
             </form>
             <div>
                 <button>Continue with Google</button>
