@@ -18,8 +18,6 @@
     padding:.25rem;
 }
 .menu{
-    display: flex;
-    flex-direction: column;
     position:absolute;
     width: 60%;
     right:0;

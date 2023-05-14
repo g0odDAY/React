@@ -1,45 +1,67 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import useHttp from "../hooks/use-http";
 import {useNavigate} from "react-router-dom";
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+    createUserWithEmailAndPassword
+} from "firebase/auth";
 const AuthContext = React.createContext({
-    isLogin:false,
     onLogout:()=>{},
     onLogin:(e,email,password)=>{},
     onSignup:(e,email,password)=>{},
 })
 
-export const AuthContextProvider = (props)=>{
-    const [isLogin,setIsLogin] = useState(false);
-    const {sendRequest:fetchRequest} = useHttp();
+export const AuthContextProvider =(props)=>{
+    const auth = getAuth();
     const navigation = useNavigate();
-    useEffect(()=>{
-        // if( localStorage.getItem('userData') !== null){
-        //     setUsers(JSON.parse(localStorage.getItem('userData')));
-        // }
-    },[])
-    const signUpHandler =async (e,email,password)=>{
+    const signUpHandler =useCallback( async (e,email,password)=>{
         e.preventDefault();
-        await fetchRequest({url:'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC7oDJh_w5VbLAE-6hechqvz1RmVqJKzjs',method:'POST',header:{'Content-Type':'application/json'},body:{email,password}},(data)=>data);
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+
+                console.log(user.email);
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
         navigation(-1);
-    }
-    const logoutHandler = async ()=>{
-        setIsLogin(false);
-        await fetchRequest({url:'https://identitytoolkit.googleapis.com/v1/accounts:signOut?key=AIzaSyC7oDJh_w5VbLAE-6hechqvz1RmVqJKzjs',headers:{'Content-Type':'application/json'},body:{idToken:JSON.parse(localStorage.getItem('userData')).idToken}},()=> localStorage.removeItem('userData'))
+    },[])
+    const logoutHandler = useCallback(async ()=>{
+        await signOut(auth).then(()=>{
+            console.log('로그아웃 성공~!');
+            localStorage.removeItem('userData');
 
+        }).catch(error=>{
+
+        })
         navigation('/');
-    }
-    const loginHandler = async (e,email,password)=>{
-        setIsLogin(prevState => !prevState.isLogin);
+
+    },[])
+    const loginHandler =useCallback( async (e,email,password)=>{
+
         e.preventDefault();
-        await fetchRequest({url:'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC7oDJh_w5VbLAE-6hechqvz1RmVqJKzjs',method:'POST',headers:{'Content-type':'application/json'},body:{
-                email:email,
-                password:password,
-                returnSecureToken:true
-            }},data=>localStorage.setItem("userData", JSON.stringify(data)));
+        await signInWithEmailAndPassword(auth,email,password)
+            .then(userCredential=>{
+                const user = userCredential.user;
+                localStorage.setItem('userData',JSON.stringify(user));
+                console.log('login 성공 했을때 ', user);
+                navigation('/');
+            })
+            .catch(error=>{
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            })
 
-        navigation('/');
-    }
-    return <AuthContext.Provider value={{isLogin,onLogin:loginHandler,onLogout:logoutHandler,onSignup:signUpHandler}}>
+    },[])
+    return <AuthContext.Provider value={{onLogin:loginHandler,onLogout:logoutHandler,onSignup:signUpHandler}}>
         {props.children}
     </AuthContext.Provider>
 }

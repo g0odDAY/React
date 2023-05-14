@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    gap:1rem;
+}
+.loginBtn{
+    padding:.9rem 1.3rem;
+    font-size: 1.3rem;
+    background: linear-gradient(to right,#5865f2,#8045dd);
+    color:var(--white);
+    border-radius: 8px;
+    cursor:pointer;
+}

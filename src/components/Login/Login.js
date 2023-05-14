@@ -20,8 +20,8 @@ const Login = ()=>{
 
     return (
         <div className={classes.container}>
-        <form onSubmit={(e)=>ctx.onLogin(e,email,password)}>
-            <div>
+        <form className={classes.loginForm} onSubmit={(e)=>ctx.onLogin(e,email,password)}>
+            <div className={classes.box}>
                 <label htmlFor="email">Email:</label>
                 <input
                     type="email"
@@ -29,9 +29,10 @@ const Login = ()=>{
                     value={email}
                     onChange={handleEmailChange}
                     required
+                    placeholder='@포함한 이메일형식'
                 />
             </div>
-            <div>
+            <div className={classes.box}>
                 <label htmlFor="password">Password:</label>
                 <input
                     type="password"
@@ -39,11 +40,12 @@ const Login = ()=>{
                     value={password}
                     onChange={handlePasswordChange}
                     required
+                    placeholder='7자리 이상 입력해주세요.!'
                 />
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" className={classes.submitBtn}>Login</button>
         </form>
-        <Link to='sign'>회원가입폼</Link>
+        <Link to='sign' className={classes.signForm} >회원가입폼</Link>
         </div>
     );
 }

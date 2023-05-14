@@ -1,3 +1,32 @@
 .container{
-    margin-top:8rem;
+    margin:0 auto;
+    padding: 1rem;
+}
+.loginForm{
+    border:2px #f5f6f7 solid;
+    padding:1rem;
+}
+.box{
+
+    padding:.5rem;
+}
+.submitBtn{
+    border:0;
+    padding:.5rem 1rem;
+    background: var(--purple);
+    color:#fff;
+    border-radius: 8px;
+}
+.signForm{
+    display: inline-block;
+    padding:.5rem;
+    background: var(--purple);
+    color:#fff;
+    border-radius: 8px;
+}
+.submitBtn:hover,
+.signForm:hover{
+    background: #fff;
+    color:var(--purple);
+    border:1px solid var(--purple);
 }

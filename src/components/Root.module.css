@@ -30,6 +30,11 @@ li{
 button{
     cursor: pointer;
 }
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
 .wrapper{
     background: #26343f;
     max-width: 68.75rem;

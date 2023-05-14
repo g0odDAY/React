@@ -1,5 +1,13 @@
+.body{
+    overflow-y: scroll;
+    height: 88.3vh;
+    padding:1rem;
+}
+.body::-webkit-scrollbar-thumb{
+    background: transparent;
+}
 .container{
-    margin:8rem auto 0;
+    margin:0 auto;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
@@ -86,6 +94,7 @@
     border: 2px solid #e6e8ec;
     border-radius: 8px;
     height: 300px;
+    transform: translateY(12%);
 }
 .box{
     margin-top:1.5rem;
@@ -112,6 +121,6 @@
     background: linear-gradient(to right,#5865f2,#8045dd);
 }
 hr{
-    margin:2rem 0;
+    margin:1rem 0 .5rem;
 }
 

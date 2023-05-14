@@ -1,15 +1,14 @@
 import {Link} from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import {FaSearch} from "react-icons/fa";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import AuthContext from "../Context/auth-context";
 import Profile from "../components/Profile";
+
 const MainNavigation = () =>{
-    //console.log('rendered main nav')
+    const isLogin = localStorage.getItem('userData');
     const ctx = useContext(AuthContext);
-    console.log(localStorage.getItem('userData'));
-
-
+    const loginComponent = isLogin ? <Profile users={JSON.parse(isLogin)}/>:<Link to="login">로그인</Link>;
     return <>
         <header className={classes.main_header}>
             <nav className={classes.main_nav}>
@@ -31,7 +30,7 @@ const MainNavigation = () =>{
                     </div>
                 </div>
                 <div className={classes.main_login}>
-                    {ctx.isLogin? <Profile/>:<Link to="login">로그인</Link>}
+                    {loginComponent}
                 </div>
             </nav>
         </header>

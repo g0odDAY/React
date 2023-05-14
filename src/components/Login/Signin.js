@@ -27,28 +27,28 @@ const Signin = ()=>{
     return (
         <div className={classes.container}>
             <form onSubmit={(e)=>ctx.onSignup(e,email,password)}>
-                <input
-                    name="email"
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={onChange}
-                    required
-                />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={onChange}
-                    required
-                />
+                <div>
+                    <input
+                        name="email"
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={onChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <input
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={onChange}
+                        required
+                    />
+                </div>
                 <input type="submit" value="sign-In" />
             </form>
-            <div>
-                <button>Continue with Google</button>
-                <button>Continue with Github</button>
-            </div>
         </div>
     );
 }

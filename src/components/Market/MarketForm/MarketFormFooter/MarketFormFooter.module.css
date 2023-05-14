@@ -1,6 +1,7 @@
 /*footer*/
 .footer{
     display: flex;
+    margin-bottom:1rem;
 }
 .footer_content textarea{
     min-width: 33.75rem;
