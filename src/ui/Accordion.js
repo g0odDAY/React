@@ -3,7 +3,7 @@ import classes from './Accordion.module.css';
 const Accordion = ({ idx,activeIdx,isOpen }) => {
     //console.log(idx === activeIdx)
     return (
-        <div className={`${classes.accordion}`} aria-expanded={!isOpen}>
+        <div className={classes.accordion} aria-expanded={!isOpen}>
             <div className={classes.accordion_container}>
                 <div className={classes.accordion_header}>
                     <h4>기타내용</h4>
@@ -26,12 +26,3 @@ const Accordion = ({ idx,activeIdx,isOpen }) => {
 };
 
 export default Accordion;
-const DelayedContent = ({ delay, children }) => {
-    const [showContent, setShowContent] = useState(false);
-
-    setTimeout(() => {
-        setShowContent(true);
-    }, delay);
-
-    return showContent ? children : null;
-};

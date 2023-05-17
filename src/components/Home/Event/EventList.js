@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import {useCallback, useEffect, useState} from "react";
 import classes from "./EventList.module.css";
 import {BiChevronLeft, BiChevronRight, BiRadioCircleMarked} from "react-icons/bi";
+import AudioPlayer from "../AudioPlayer";
 
 const EventList = ()=>{
     console.log('rendered eventList');
@@ -21,6 +22,9 @@ const EventList = ()=>{
             setEvents(res);
         });
     },[])
+
+
+
 
     const updateIdx = (newIdx)=>{
         if(newIdx < 0){
@@ -61,57 +65,7 @@ const EventList = ()=>{
                     </div>
                 </div>
                 <div className={classes.trade}>
-                    <h2>거래</h2>
-                    <div className={classes.box}>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th><span>서버</span></th>
-                                <th>아이템명</th>
-                                <th>직업</th>
-                                <th>가격</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>카마인</td>
-                                <td>울부짖는 혼돈의 반지</td>
-                                <td>리퍼</td>
-                                <td>64000G</td>
-                            </tr>
-                            <tr>
-                                <td>카마인</td>
-                                <td>울부짖는 혼돈의 반지</td>
-                                <td>리퍼</td>
-                                <td>64000G</td>
-                            </tr>
-                            <tr>
-                                <td>카마인</td>
-                                <td>울부짖는 혼돈의 반지</td>
-                                <td>리퍼</td>
-                                <td>64000G</td>
-                            </tr>
-                            <tr>
-                                <td>카마인</td>
-                                <td>울부짖는 혼돈의 반지</td>
-                                <td>리퍼</td>
-                                <td>64000G</td>
-                            </tr>
-                            <tr>
-                                <td>카마인</td>
-                                <td>울부짖는 혼돈의 반지</td>
-                                <td>리퍼</td>
-                                <td>64000G</td>
-                            </tr>
-                            <tr>
-                                <td>카마인</td>
-                                <td>울부짖는 혼돈의 반지</td>
-                                <td>리퍼</td>
-                                <td>64000G</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <AudioPlayer />
                 </div>
             </div>
         </section>

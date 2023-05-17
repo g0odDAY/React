@@ -10,6 +10,8 @@ const Login = ()=>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const ctx = useContext(AuthContext);
+
+    
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };

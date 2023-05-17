@@ -1,0 +1,27 @@
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.audioControls {
+    display: flex;
+    justify-content: space-between;
+    width:  75%;
+    margin: 0 auto 15px;
+}
+
+.audioControls .prev svg,
+.audioControls .next svg {
+    width: 35px;
+    height: 35px;
+}
+
+.audioControls .play svg,
+.audioControls .pause svg {
+    height: 40px;
+    width: 40px;
+}
+
+.audioControls path {
+    /*fill: var(--white);*/
+}

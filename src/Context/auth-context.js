@@ -45,7 +45,7 @@ export const AuthContextProvider =(props)=>{
         navigation('/');
 
     },[])
-    const loginHandler =useCallback( async (e,email,password)=>{
+    const loginHandler = useCallback( async (e,email,password)=>{
 
         e.preventDefault();
         await signInWithEmailAndPassword(auth,email,password)

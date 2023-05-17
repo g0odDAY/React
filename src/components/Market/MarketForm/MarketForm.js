@@ -200,7 +200,16 @@ const MarketForm = ()=>{
 
 
     }
-
+    const [activeIdx,setActiveIdx]=useState(null);
+    const openHandler = (idx)=>{
+        if(idx === activeIdx){
+            console.log(`${idx}와 ${activeIdx}은 같다.`)
+            setActiveIdx(null);
+        }else{
+            console.log(`${idx}와 ${activeIdx}은 다르다.`)
+            setActiveIdx(idx);
+        }
+    }
     const penaltyUpdownHandler = (type)=>{
 
 
@@ -218,11 +227,11 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>서버 명*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={serverOpen}>
+                                    <div className={classes.selectBox} onClick={()=>openHandler(0)}>
                                         <input className={classes.selectBtn} placeholder="서버명" value={serverValue} name='server' disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:serverIsOpen ? 'block' : 'none',zIndex:10}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 0)} >
                                         <div className={classes.hidden}>
                                             {serverArr.map((data,idx) => <li key={idx} onClick={serverSelect}>{data}</li>)}
                                         </div>
@@ -232,11 +241,11 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>카테고리*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={categoryOpen}>
+                                    <div className={classes.selectBox} onClick={()=>openHandler(1)}>
                                         <input type="text" className={classes.selectBtn} placeholder="카테고리" name='category' value={categoryValue} disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:categoryIsOpen ? 'block' : 'none',zIndex:9}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 1)}>
                                         <div className={classes.hidden}>
                                             {categoryArr.map((data,idx) => <li key={idx} onClick={categorySelect}>{data}</li>)}
                                         </div>

@@ -7,11 +7,7 @@
     max-height: 0px;
     transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
 }
-.active{
-    display: block;
-    opacity: 1;
-    transition-delay: 6s;
-}
+
 .accordion_container{
     text-align:center;
     height: 300px;

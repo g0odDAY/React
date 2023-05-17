@@ -6,8 +6,7 @@ import {AiOutlineArrowDown} from "react-icons/ai";
 import Accordion from "../../../ui/Accordion";
 
 
-const MarketList = ({items,activeIdx,setActiveIdx})=>{
-    console.log(items);
+const MarketList = ({idx,items,activeIdx,setActiveIdx})=>{
 
 
     const openHandler =(idx)=>{
@@ -52,10 +51,10 @@ const MarketList = ({items,activeIdx,setActiveIdx})=>{
                 7,0000G
             </div>
         </div>
-        <div className={classes.openBtn} onClick={()=>openHandler(items.id)}>
-            <AiOutlineArrowDown className={classes.arrow} aria-expanded={items.id === activeIdx}/>
+        <div className={classes.openBtn} onClick={()=>openHandler(idx)}>
+            <AiOutlineArrowDown className={classes.arrow} aria-expanded={idx === activeIdx}/>
         </div>
-        <Accordion idx={items.id} activeIdx={activeIdx} isOpen={items.id===activeIdx}/>
+        <Accordion idx={items.id} activeIdx={activeIdx} isOpen={idx===activeIdx}/>
     </div>;
 }
 
