@@ -10,6 +10,9 @@ import MarketForm from "./components/Market/MarketForm/MarketForm";
 import Signin from "./components/Login/Signin";
 import Login from "./components/Login/Login";
 import Warning from "./components/Warning/Warning";
+import MarketForm1 from "./components/Market/MarketForm/MarketForm1";
+import Characters from "./components/Characters/Characters";
+
 const router = createBrowserRouter([
     {
         path:'/',
@@ -49,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path:'warning',
                 element:<Warning/>
+            },
+            {
+                path:'search/:id',
+                element:<Characters/>
             }
         ],
     },

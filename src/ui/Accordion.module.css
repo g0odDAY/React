@@ -5,40 +5,6 @@
 }
 .accordion[aria-expanded='true']{
     max-height: 0px;
-    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.accordion_container{
-    text-align:center;
-    height: 300px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-}
-.accordion_header{
-    display: flex;
-    justify-content: space-around;
-}
-.accordion_content{
-    display: flex;
-    padding: .5rem;
-}
-.content{
-    flex-basis: 70%;
-}
-.innerContent{
-    display:flex;
-    padding:.75rem;
-}
-.preview{
-    flex-basis: 30%;
-}
-.preview img{
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-
-}

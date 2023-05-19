@@ -10,7 +10,6 @@ const Loading = ()=>{
             <CircularProgress />
             <p>Loading...</p>
         </div>
-
     )
 }
 export default Loading;

@@ -5,6 +5,9 @@ import MarketFormFooter from "./MarketFormFooter/MarketFormFooter";
 import useInput from "../../../hooks/use-input";
 import {AiOutlinePlus,AiOutlineMinus} from "react-icons/ai";
 import {getDatabase} from "firebase/database";
+import Accordion from "../../../ui/Accordion";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import MarketForm1 from "./MarketForm1";
 const MarketForm = ()=>{
     const serverArr = ['루페온','아브렐슈드','카제로스','카마인','니나브','실리안','카단','아만'];
     const categoryArr=['장신구-목걸이','장신구-귀걸이','장신구-반지','장신구-팔찌','보석'];
@@ -214,9 +217,11 @@ const MarketForm = ()=>{
 
 
     }
-
+    const clickHandler = ()=>{
+        console.log ('click')
+    }
     return <form onSubmit={submitHandle}>
-                <div className={classes.wrapper}>
+                <div className={classes.wrapper} onClick={clickHandler}>
                         <div className={classes.header}>
                             <h2>아이템 등록</h2>
                             <div>
@@ -225,19 +230,10 @@ const MarketForm = ()=>{
                         </div>
                         <div className={classes.box}>
                             <div className={classes.inner}>
-                                <div>서버 명*</div>
-                                <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={()=>openHandler(0)}>
-                                        <input className={classes.selectBtn} placeholder="서버명" value={serverValue} name='server' disabled={true}/>
-                                        <img src={downarrow}  alt="downarrow" width={16}/>
-                                    </div>
-                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 0)} >
-                                        <div className={classes.hidden}>
-                                            {serverArr.map((data,idx) => <li key={idx} onClick={serverSelect}>{data}</li>)}
-                                        </div>
-                                    </ul>
-                                </div>
+                                <div>서버*</div>
+                                <MarketForm1 arry={serverArr}/>
                             </div>
+
                             <div className={classes.inner}>
                                 <div>카테고리*</div>
                                 <div className={classes.container}>
@@ -259,11 +255,11 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div className={`${gradeValidation ? classes.title : ''}`}>등급*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={gradeOpen}>
+                                    <div className={classes.selectBox} onClick={()=>openHandler(2)}>
                                         <input className={classes.selectBtn} placeholder="등급" name='grade' value={gradeValue} disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:gradeIsOpen ? 'block' : 'none',zIndex:8}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 2)}>
                                         <div className={classes.hidden}>
                                             <li onClick={gradeSelect}>유물</li>
                                             <li onClick={gradeSelect}>고대</li>
@@ -274,11 +270,11 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>아이템 이름*</div>
                                 <div className={classes.container}>
-                                    <div className={`${classes.selectBox}`} onClick={itemOpen}>
+                                    <div className={`${classes.selectBox}`} onClick={()=>openHandler(3)}>
                                         <input className={classes.selectBtn} placeholder="아이템 이름" name='item' disabled={true} value={itemValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:itemIsOpen ? 'block' : 'none',zIndex:7}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 3)}>
                                         <div className={classes.hidden}>
                                             {itemArr.map((data,idx)=> <li key={idx} onClick={itemSelect}>{data.name}</li>)}
                                         </div>
@@ -298,11 +294,11 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>전투 특성*</div>
                                 <div className={`${classes.container}`}>
-                                    <div className={classes.selectBox} onClick={characteristicOpen}>
+                                    <div className={classes.selectBox} onClick={()=>openHandler(4)}>
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name='characteristic' value={characteristicValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:characteristicIsOpen ? 'block' : 'none',zIndex:6}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 4)}>
                                         <div className={classes.hidden}>
                                             {characteristic.map((data,idx)=><li key={idx} onClick={characteristicSelect}>{data}</li>)}
                                         </div>
@@ -319,11 +315,11 @@ const MarketForm = ()=>{
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div className={`${classes.container}`}>
-                                    <div className={classes.selectBox} onClick={subCharacteristicOpen}>
+                                    <div className={classes.selectBox} onClick={()=>openHandler(5)}>
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name='subCharacteristic' value={subCharacteristicValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:subCharacteristicIsOpen ? 'block' : 'none',zIndex:5}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 5)}>
                                         <div className={classes.hidden}>
                                             {characteristic.map((data,idx)=><li key={idx} onClick={subCharacteristicSelect}>{data}</li>)}
                                         </div>

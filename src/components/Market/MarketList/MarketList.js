@@ -4,6 +4,7 @@ import ac from "../../../img/img_acc_21.png";
 import Progress from "../../../ui/Progress";
 import {AiOutlineArrowDown} from "react-icons/ai";
 import Accordion from "../../../ui/Accordion";
+import React from "react";
 
 
 const MarketList = ({idx,items,activeIdx,setActiveIdx})=>{
@@ -54,7 +55,25 @@ const MarketList = ({idx,items,activeIdx,setActiveIdx})=>{
         <div className={classes.openBtn} onClick={()=>openHandler(idx)}>
             <AiOutlineArrowDown className={classes.arrow} aria-expanded={idx === activeIdx}/>
         </div>
-        <Accordion idx={items.id} activeIdx={activeIdx} isOpen={idx===activeIdx}/>
+        <Accordion isOpen={idx===activeIdx}>
+            <div className={classes.accordion_container}>
+                <div className={classes.accordion_header}>
+                    <h4>기타내용</h4>
+                    <h4>이미지</h4>
+                </div>
+                <div className={classes.accordion_content}>
+                    <div className={classes.content}>
+                        <div className={classes.innerContent}>
+                            <span>경매장에 올려놨어요!@</span>
+                        </div>
+
+                    </div>
+                    <div className={classes.preview}>
+                        <img src="https://i.pinimg.com/474x/61/73/bd/6173bdabb6bcde83fe0909a64883cef8.jpg" alt="img"/>
+                    </div>
+                </div>
+            </div>
+        </Accordion>
     </div>;
 }
 

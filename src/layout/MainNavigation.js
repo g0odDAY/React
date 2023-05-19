@@ -1,14 +1,30 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import {FaSearch} from "react-icons/fa";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import AuthContext from "../Context/auth-context";
 import Profile from "../components/Profile";
 
 const MainNavigation = () =>{
+    const searchName = useRef();
+    const navigation = useNavigate();
     const isLogin = localStorage.getItem('userData');
     const ctx = useContext(AuthContext);
     const loginComponent = isLogin ? <Profile users={JSON.parse(isLogin)}/>:<Link to="login">로그인</Link>;
+    const getUrl = ()=>{
+
+    }
+
+    const searchHandler =(e)=>{
+        e.preventDefault();
+        if(searchName.current.value===''){
+            alert('검색어를 입력해주세요!');
+            return null;
+        }
+        navigation(`search/${searchName.current.value}`);
+        console.log(searchName.current.value);
+        console.log('search');
+    }
     return <>
         <header className={classes.main_header}>
             <nav className={classes.main_nav}>
@@ -21,12 +37,10 @@ const MainNavigation = () =>{
                         <li><Link to="#">시세표</Link></li>
                     </ul>
                     <div className={classes.main_search}>
-                        <form action="">
-                            <input type="text" placeholder="캐릭터명을 입력하세요" maxLength={12}/>
+                        <form onSubmit={searchHandler}>
+                            <input type="text" placeholder="황이서" maxLength={12} ref={searchName}/>
+                            <button type='submit'><FaSearch size={18}/></button>
                         </form>
-                        <div className={classes.main_search_btn}>
-                            <Link to="#"><FaSearch/></Link>
-                        </div>
                     </div>
                 </div>
                 <div className={classes.main_login}>

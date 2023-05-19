@@ -49,10 +49,12 @@
     width: 14.375rem;
     padding:0.7rem;
     position: relative;
+
 }
 .main_search form{
     display: inline-block;
     width: 80%;
+    display: flex;
 }
 .main_search input{
     outline:none;

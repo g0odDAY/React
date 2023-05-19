@@ -75,31 +75,25 @@
 }
 .selectList{
     margin:.25rem 0 0;
-    padding:.25rem;
-    border:1px solid #d0d0d0;
     width: 14rem;
     border-radius:8px;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background: #fff;
     position:absolute;
     overflow: hidden;
+    z-index:1;
     max-height: 400px;
     transition: max-height 1s ease-in-out;
-    z-index:1;
 }
-
 .selectList[aria-expanded='true']{
     max-height: 0px;
-    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-    padding:0;
+    transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     border:0;
 }
+
 .hidden{
     height: 6.2rem;
     overflow-y:scroll;
-}
-.openList{
-    display: block;
 }
 .selectList li{
     padding:.4375rem;
