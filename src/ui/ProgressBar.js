@@ -2,7 +2,7 @@ const ProgressBar = (props)=>{
     const {bgColor,completed} = props;
     const containerStyles = {
         display:'inline-block',
-        width: '55%',
+        width: '140px',
         height:'8px',
         backgroundColor:'#d0d0d0',
         margin: `0 0.5rem`

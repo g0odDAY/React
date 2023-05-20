@@ -1,14 +1,21 @@
 .equipment{
-    margin: .75rem;
+    padding:.5rem;
     display: flex;
-    gap:.5rem;
+    gap:.25rem;
+    margin-bottom:.25rem;
 }
 .icon{
     width: 48px;
     height: 48px;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 .icon img{
     max-width: 100%; /* 이미지가 부모 요소의 너비를 초과하지 않도록 설정 */
     max-height: 100%;
+    border-radius: 6px;
+}
+.equipment_info{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
 }

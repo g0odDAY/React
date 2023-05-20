@@ -22,19 +22,16 @@ const Characters = ()=>{
         }catch(error){
             console.log(error);
         }
-
-
-
-
     }
 
     const {data,isLoading,isError,error} = useQuery(['characters',id],()=>getUrl(id),{
         onError:(error)=> alert('Error occured : '+ error.message),
         refetchOnMount: false, // 마운트 시 요청하지 않음
-        refetchInterval: 200000, // 2초마다 요청
+        refetchInterval: 200000000, // 2초마다 요청
     });
     if(data === null) return <div className={classes.warning}><GrStatusWarning size={22}/>검색 결과가 없습니다.</div>
     if(isLoading) return <p></p>;
+
     if(isError) return <p>Error occurred! {error.toString()}</p>
     return <div className={classes.container}>
        <div className={classes.header}>
@@ -72,12 +69,63 @@ const Characters = ()=>{
                     <Equipment equipment={data.ArmoryEquipment[3]}/>
                     <Equipment equipment={data.ArmoryEquipment[4]}/>
                     <Equipment equipment={data.ArmoryEquipment[0]}/>
+                    <div className={classes.engrave}>
+                        <div className={classes.engrave_sector}>
+                            <div className={classes.engrave_Icon}>
+                                <img src={data.ArmoryEngraving.Engravings[0].Icon} alt=""/>
+                            </div>
+                            <div className={classes.engrave_Info}>
+                                <div>{data.ArmoryEngraving.Engravings[0].Name}</div>
+                                <div>활성 포인트 x12</div>
+                            </div>
+                        </div>
+                        <div className={classes.engrave_sector}>
+                            <div className={classes.engrave_Icon}>
+                                <img src={data.ArmoryEngraving.Engravings[1].Icon} alt=""/>
+                            </div>
+                            <div className={classes.engrave_Info}>
+                                <div>{data.ArmoryEngraving.Engravings[1].Name}</div>
+                                <div>활성 포인트 x12</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
                 <div className={classes.accessories}>
-
+                   <div>
+                       <Equipment equipment={data.ArmoryEquipment[6]}/>
+                       <Equipment equipment={data.ArmoryEquipment[7]}/>
+                       <Equipment equipment={data.ArmoryEquipment[8]}/>
+                       <Equipment equipment={data.ArmoryEquipment[9]}/>
+                       <Equipment equipment={data.ArmoryEquipment[10]}/>
+                       {/*<div>*/}
+                       {/*    <img src={data.ArmoryEquipment[12].Icon} alt=""/>*/}
+                       {/*    <span>{data.ArmoryEquipment[12].Name}</span>*/}
+                       {/*</div>*/}
+                       {/*<div>*/}
+                       {/*    <img src={data.ArmoryEquipment[11].Icon} alt=""/>*/}
+                       {/*    <span>{data.ArmoryEquipment[11].Name}</span>*/}
+                       {/*    <div>*/}
+                       {/*      <div dangerouslySetInnerHTML={{__html:JSON.parse(data.ArmoryEquipment[11].Tooltip).Element_006.value.Element_000.contentStr.Element_000.contentStr}}/>*/}
+                       {/*      <div dangerouslySetInnerHTML={{__html:JSON.parse(data.ArmoryEquipment[11].Tooltip).Element_006.value.Element_000.contentStr.Element_001.contentStr}}/>*/}
+                       {/*      <div dangerouslySetInnerHTML={{__html:JSON.parse(data.ArmoryEquipment[11].Tooltip).Element_006.value.Element_000.contentStr.Element_002.contentStr}}/>*/}
+                       {/*    </div>*/}
+                       {/*</div>*/}
+                   </div>
                 </div>
+            </div>
+        </div>
+        <div className={classes.body}>
+            <div className={classes.ranking}>
+                랭킹
+            </div>
+            <div className={classes.gem}>
+                {data.ArmoryGem.Gems.map((data,idx)=> {
+                    return <div className={classes.gemIcon}>
+                        <img src={data.Icon} alt=""/>
+                    </div>
+                })}
             </div>
         </div>
     </div>

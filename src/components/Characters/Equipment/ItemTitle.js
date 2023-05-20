@@ -2,7 +2,7 @@ import ProgressBar from "../../../ui/ProgressBar";
 import {useEffect, useState} from "react";
 
 const ItemTitle = ({value})=>{
-    const {leftStr1, qualityValue} = value;
+    const {qualityValue} = value;
 
     let color;
 
@@ -26,7 +26,7 @@ const ItemTitle = ({value})=>{
             color = '#F9AE00';
             break;
         default:
-            color = ''; // 처리하지 못한 상태에 대한 초기 값 설정
+            color = '';
             break;
     }
     const labelStyle={
@@ -34,6 +34,7 @@ const ItemTitle = ({value})=>{
         padding:'.25rem',
         backgroundColor:'#e6e8ec',
         borderRadius:'4px',
+        marginRight:'.25rem'
 
     }
     const spanStyle = {
@@ -41,7 +42,11 @@ const ItemTitle = ({value})=>{
         fontWeight:'bold',
         color
     }
-    return <span style={spanStyle}>{qualityValue}<ProgressBar bgColor={color} completed={qualityValue}/></span>
+    return <div>
+        <label style={labelStyle}>품질</label>
+        <span style={spanStyle}>{qualityValue}<ProgressBar bgColor={color} completed={qualityValue}/></span>
+    </div> 
+    
 
 
 

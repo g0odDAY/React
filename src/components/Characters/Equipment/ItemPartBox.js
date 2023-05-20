@@ -1,5 +1,5 @@
 const ItemPartBox = ({value})=> {
-    console.log(value.value.Element_001);
+    console.log(value);
     const spanStyle={
         fontSize:'12px',
         color:'black',
@@ -7,6 +7,6 @@ const ItemPartBox = ({value})=> {
         padding:'.125rem',
         borderRadius:'4px',
     }
-    return <span style={spanStyle} dangerouslySetInnerHTML={{ __html: value.value.Element_001.toLowerCase() }}></span>
+    //return <span style={spanStyle} dangerouslySetInnerHTML={{ __html: value.value.Element_001}}></span>
 }
 export default ItemPartBox;
