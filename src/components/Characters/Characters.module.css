@@ -1,12 +1,17 @@
 .container{
     width: 100%;
     max-width: 68.75rem;
-    margin: 1rem auto 0;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     background: #f5f6f7;
-    padding:.5rem;
+    padding:2rem 1rem;
+    height: 88vh;
+    overflow-y:scroll;
+}
+.container::-webkit-scrollbar{
+    width:0;
 }
 .warning{
     position : fixed;
@@ -43,6 +48,8 @@
 .body_aside{
     flex-basis: 40%;
     position: relative;
+    background: rgba(255,255,255,1);
+    border-radius: 10px;
 }
 .body_aside img{
     max-width: 100%;
@@ -98,10 +105,11 @@
 }
 .engrave_sector{
     display: flex;
-    gap:.5rem;
+    gap:.125rem;
     background: #e6e8ec;
     padding:.25rem;
     border-radius: 8px;
+    flex:1;
 }
 .engrave_Icon{
     width: 48px;
@@ -120,7 +128,8 @@
 }
 .ranking{
     flex-basis: 40%;
-
+    background: rgba(255,255,255,1);
+    border-radius: 10px;
 }
 .gem{
     flex-basis: 60%;
@@ -132,16 +141,110 @@
     border-radius: 8px;
 }
 .gemIcon{
-    width: 40px;
-    height: 40px;
+    width: 51px;
+    height: 51px;
     background:#e6e8ec;
     border-radius: 10px;
     display: flex;
     justify-content: flex-start;
+    position:relative;
+}
+.gemIcon span{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding:.125rem 0.4rem;
+    background: #e6e8ec;
+    border-radius: 4px;
+    font-size:8px;
+    color:#fa5d00;
+    font-weight: bold;
 }
 .gemIcon img{
     max-width: 100%;
     max-height: 100%;
     border-radius:8px;
     margin-right: 0;
+}
+.ability{
+    display: flex;
+    gap:0.5rem;
+    flex-basis:40%;
+}
+.stat,
+.engrave_effects{
+    background: rgba(255,255,255,1);
+    padding:.5rem;
+    border-radius: 10px;
+}
+.stat{
+    flex-basis: 50%;
+}
+.stat_lists{
+    padding:.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+.stat_item{
+    flex-basis: calc(50% - .25rem);
+}
+.stat_item + stat_item{
+    margin-left:.25rem;
+}
+.stat_item{
+    display: flex;
+    justify-content: space-between;
+}
+.stat_name{
+    color:#7D8395;
+}
+.stat_value{
+    color:#353945;
+}
+.title{
+    display: inline-block;
+    padding:0.5rem 0.75rem;
+    background: #8045dd26;
+    color:#8045dd;
+    text-align: center;
+    border-radius: 8px;
+}
+.engrave_effects{
+    flex-basis: 50%;
+}
+.card{
+    flex-basis:60%;
+    background: rgba(255,255,255,1);
+    border-radius: 10px;
+    padding:.5rem;
+}
+.card_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor:pointer;
+}
+.card_lists{
+    display:flex;
+    justify-content: space-evenly;
+}
+.card_item{
+    width: 94px;
+    border-radius: 4px;
+    position:relative;
+
+}
+.card_border{
+    position:absolute;
+    z-index: 1;
+    left: -1px;
+}
+.card_item::after{
+    background: url('card_grade_img/img_card_grade.png');
+}
+.card_lists img{
+    max-width: 99%;
+    border-radius: 4px;
 }
