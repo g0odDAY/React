@@ -7,7 +7,8 @@
     justify-content: center;
     cursor:pointer;
 }
-.box:hover{
+.box:hover,
+.box:focus{
     color:var(--purple);
     background: #f5f6f7;
     border-radius: 8px;
@@ -38,4 +39,7 @@
     background:linear-gradient(to right,#5865f2,#8045dd);
     border-radius: 8px;
     color:var(--white);
+}
+.logout{
+    color:#F95126;
 }

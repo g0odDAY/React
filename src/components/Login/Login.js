@@ -22,33 +22,42 @@ const Login = ()=>{
 
     return (
         <div className={classes.container}>
-        <form className={classes.loginForm} onSubmit={(e)=>ctx.onLogin(e,email,password)}>
             <div className={classes.box}>
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    required
-                    placeholder='@포함한 이메일형식'
-                />
+                <div>
+                    <h2>Login</h2>
+                </div>
+                <form className={classes.loginForm} onSubmit={(e)=>ctx.onLogin(e,email,password)}>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        required
+                        placeholder='Email'
+                    />
+
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        required
+                        placeholder='password'
+                    />
+                    <div>
+                        <div className={classes.password}>
+                            <Link to='password'>비밀번호 찾기</Link>
+                        </div>
+                        <button type="submit" className={classes.loginBtn}>로그인</button>
+                    </div>
+
+                </form>
+                <div className={classes.signupBox}>
+                    <Link to='signup' className={classes.signupBtn} >회원가입폼</Link>
+                </div>
             </div>
-            <div className={classes.box}>
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    required
-                    placeholder='7자리 이상 입력해주세요.!'
-                />
             </div>
-            <button type="submit" className={classes.submitBtn}>Login</button>
-        </form>
-        <Link to='sign' className={classes.signForm} >회원가입폼</Link>
-        </div>
+
     );
 }
 export default Login;

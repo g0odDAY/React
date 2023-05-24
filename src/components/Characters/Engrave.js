@@ -1,7 +1,6 @@
 import classes from "./Characters.module.css";
 
 const Engrave = ({engrave})=>{
-    console.log(engrave);
     const engraveComponent = engrave ? engrave.Engravings.map((data,idx)=>{
            return <div key={idx} className={classes.engrave_sector}>
                     <div className={classes.engrave_Icon}>

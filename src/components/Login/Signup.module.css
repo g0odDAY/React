@@ -1,0 +1,55 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:70vh;
+}
+.box{
+    padding:2rem 4rem;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    border-radius: 6px;
+}
+.signupForm{
+
+}
+.formGroup{
+    margin-bottom: 1rem;
+    position:relative;
+}
+.formGroup .correct{
+    border:#0dd4bc;
+}
+.formGroup .incorrect{
+    border:red;
+}
+.emailInput{
+    border:2px solid #e6e8ec;
+    padding: 0.625rem 0.75rem;
+    outline:none;
+    width: 400px;
+    border-radius: 6px;
+    background: #e8f0fe;
+}
+.emailInput:focus{
+    border:2px solid #0dd4bc;
+}
+.formGroup button{
+    position:absolute;
+    top: 9px;
+    right: 7px;
+    color: mediumpurple;
+    font-weight: bold;
+}
+.formGroup button:hover{
+    color:#8045dd;
+}
+.formGroup button::after{
+    content: '중복확인';
+}
+.feedback{
+    font-size:12px;
+    color:#d0d0d0;
+}
+.signupBtn{
+
+}

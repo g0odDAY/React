@@ -3,7 +3,7 @@ import NameTagBox from "./NameTagBox";
 import ItemTitle from "./ItemTitle";
 import ItemPartBox from "./ItemPartBox";
 import ProgressBar from "../../../ui/ProgressBar";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 const gradeColor = {
     에스더:'#2faba8',
     고대:'#dcc999',
@@ -14,10 +14,15 @@ const gradeColor = {
     고급:'#93bc46',
     일반:'#d0d0d0',
 }
-const Equipment = ({equipment,type})=>{
-    console.log(equipment);
+const Equipment =({equipment,type})=>{
+    console.log('render!',type);
+
     const filterEquipment = equipment.filter(data=> data.Type === type);
-    console.log(type+'에 맞는 equipment',filterEquipment);
+    //console.log(type+'에 맞는 equipment',filterEquipment);
+    const description = filterEquipment.map(data=>{
+        return JSON.parse(data.Tooltip);
+    });
+    //console.log('description',description);
     const equipmentComponent = filterEquipment ? filterEquipment.map((data,idx)=>{
         return <div key={idx} className={classes.equipment}>
             <div className={classes.icon} style={{backgroundColor: gradeColor[data.Grade]}}>
@@ -27,9 +32,10 @@ const Equipment = ({equipment,type})=>{
                 {<NameTagBox value={JSON.parse(data.Tooltip).Element_000.value}/>}
                 {<ItemTitle value={JSON.parse(data.Tooltip).Element_001.value}/>}
             </div>
+
         </div>
     }) : [];
-    console.log(equipmentComponent.length);
+    //console.log(equipmentComponent.length);
     while(equipmentComponent.length<1){
         equipmentComponent.push(<div key={equipmentComponent.length} className={classes.equipment}>
             <div className={classes.icon} style={{backgroundColor: '#d0d0d0'}}>

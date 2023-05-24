@@ -1,17 +1,15 @@
-import Home,{eventLoader,calendarLoader} from "./components/Home/Home";
+import Home from "./components/Home/Home";
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
-import BoardForm from "./components/Board/BoardForm";
-import BoardRootLayout from "./pages/BoardRootLayout";
-import BoardTable from "./components/Board/BoardTable";
-import BoardPage,{loader as boardLoader} from "./pages/BoardPage";
 import Market from "./components/Market/Market";
 import MarketForm from "./components/Market/MarketForm/MarketForm";
-import Signin from "./components/Login/Signin";
+import Signup from "./components/Login/Signup";
 import Login from "./components/Login/Login";
 import Warning from "./components/Warning/Warning";
 import MarketForm1 from "./components/Market/MarketForm/MarketForm1";
 import Characters from "./components/Characters/Characters";
+import SignupForm from "./components/Login/SignupForm";
+
 
 const router = createBrowserRouter([
     {
@@ -43,8 +41,8 @@ const router = createBrowserRouter([
                         element:<Login/>
                     },
                     {
-                        path:'sign',
-                        element:<Signin/>
+                        path:'signup',
+                        element:<SignupForm/>
                     }
                 ]
 

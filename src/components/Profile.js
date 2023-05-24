@@ -16,11 +16,14 @@ const Profile = ({users})=>{
     const ctx = useContext(AuthContext);
 
     const [isOpen,setIsOpen] = useState(false);
-    const openHandler = ()=>{
-        console.log('clicked')
+    const openMenuHandler = ()=>{
         setIsOpen(!isOpen);
     }
-    return <div className={classes.container} onClick={openHandler}>
+    const closeMenuHandler = ()=>{
+        setIsOpen(false);
+    }
+
+    return <div className={classes.container} onBlur={closeMenuHandler} tabIndex={0} onClick={openMenuHandler}>
             <div className={classes.box}>
                 <div className={classes.sector}>
                     <img src={userImage} alt="userImage" width={30}/>
@@ -32,14 +35,13 @@ const Profile = ({users})=>{
                     <IoIosArrowDown size={24}/>
                 </div>
             </div>
-            <div className={classes.menu} style={{display: isOpen ? 'block':'none'}}>
-                <ul className={classes.menuLists}>
-                    <li onClick={ctx.onLogout}><RiLogoutBoxLine/>로그 아웃</li>
+        {isOpen && <div className={classes.menu} >
+                <ul className={classes.menuLists} >
                     <li onClick={ctx.onLogout}><FaExchangeAlt/>정보 수정</li>
                     <li onClick={ctx.onLogout}><AiOutlineNotification/>1:1문의</li>
+                    <li className={classes.logout} onClick={ctx.onLogout}><RiLogoutBoxLine/>로그 아웃</li>
                 </ul>
-
-            </div>
+            </div>}
         </div>
 
 }

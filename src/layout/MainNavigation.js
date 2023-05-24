@@ -11,9 +11,7 @@ const MainNavigation = () =>{
     const isLogin = localStorage.getItem('userData');
     const ctx = useContext(AuthContext);
     const loginComponent = isLogin ? <Profile users={JSON.parse(isLogin)}/>:<Link to="login">로그인</Link>;
-    const getUrl = ()=>{
 
-    }
 
     const searchHandler =(e)=>{
         e.preventDefault();
