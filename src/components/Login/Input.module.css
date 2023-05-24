@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     margin: 0 0 15px;
+    padding:.5rem;
+
 }
 
 .inputContainer label {
@@ -13,7 +15,7 @@
     padding: 10px;
     border: none;
     border-bottom: 1px solid #777;
-    background-color: #eee;
+    background-color: #e8f0fe;
     outline: none;
     font-size: 1.1rem;
     box-sizing: border-box;
@@ -21,5 +23,8 @@
 }
 
 .error {
-    color: red;
+    color: lightcoral;
+}
+#email:after{
+    content:'중복 체크'
 }

@@ -1,15 +1,21 @@
 import useForm from "./hooks/useForm";
-import {signupForm} from "./FormConfig";
+import {signupForm} from "./utils/FormConfig";
 import classes from './SignupForm.module.css';
+import {Link} from "react-router-dom";
 const SignupForm = ()=>{
-    const {renderFormInputs,isFormValid}=useForm(signupForm);
+    const {renderFormInputs,isFormValid,submitHandler}=useForm(signupForm);
 
     return (
-        <form className={classes.signupForm}>
-            <h1>회원가입</h1>
-            {renderFormInputs()}
-            <button type='submit' disabled={!isFormValid()}>submit</button>
-        </form>
+        <div className={classes.container}>
+            <form className={classes.signupForm} onSubmit={(e)=>submitHandler(e)}>
+                <h2>회원가입</h2>
+                {renderFormInputs()}
+                <button className={classes.signupBtn} disabled={!isFormValid()}>회원가입</button>
+                <div className={classes.sector}>
+                    회원이신가요? <Link to='/login'>로그인 하기</Link>
+                </div>
+            </form>
+        </div>
     )
 }
 export default SignupForm;

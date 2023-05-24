@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "../Input";
 import {maxLengthRule, minLengthRule, passwordMatchRule, requiredRule} from "./inputValidationRules";
 
 const FormConfig = (label,name,type,defaultValue='')=>{
@@ -8,9 +8,13 @@ const FormConfig = (label,name,type,defaultValue='')=>{
                 <Input
                     key={key}
                     value={value}
+                    name={name}
+                    type={type}
+                    label={label}
                     error={error}
                     isValid={isValid}
                     handleChange={handleChange}
+                    errorMessage={error}
                 />
             )
         },
@@ -22,16 +26,8 @@ const FormConfig = (label,name,type,defaultValue='')=>{
     }
 }
 export const signupForm = {
-    name:{
-        ...FormConfig('name','name','text'),
-        validationRules:[
-            requiredRule("name"),
-            minLengthRule("name", 3),
-            maxLengthRule("name", 25)
-        ]
-    },
     email:{
-        ...FormConfig('Email','email','email'),
+        ...FormConfig('이메일','email','email'),
         validationRules: [
             requiredRule("email"),
             minLengthRule("email", 10),
@@ -39,15 +35,15 @@ export const signupForm = {
         ]
     },
     password:{
-        ...FormConfig('Password','password','password'),
+        ...FormConfig('비밀 번호','password','password'),
         validationRules: [
             requiredRule("password"),
-            minLengthRule("password", 8),
+            minLengthRule("password", 7),
             maxLengthRule("password", 20)
         ]
     },
     confirmPassword:{
-        ...FormConfig('Confirm Password','confirmPassword','password'),
+        ...FormConfig('비밀번호 확인','confirmPassword','password'),
         validationRules: [passwordMatchRule()]
     }
 

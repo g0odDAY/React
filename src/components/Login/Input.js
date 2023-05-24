@@ -4,7 +4,7 @@ const Input = (props)=>{
     return (
         <div className={classes.inputContainer}>
             <label htmlFor="">{label}</label>
-            <input type={type} name={name} value={value} onChange={handleChange}/>
+            <input type={type} id={name} name={name} value={value} onChange={handleChange}/>
             {errorMessage && !isValid && (<span className={classes.error}>{errorMessage}</span>)}
         </div>
     )

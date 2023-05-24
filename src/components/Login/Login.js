@@ -1,9 +1,6 @@
 import classes from './Login.module.css';
 import {useContext, useState} from "react";
-import {getAuth,signInWithEmailAndPassword} from "firebase/auth";
-import {app} from "../../firebaseConfig";
-import {Link, useNavigate} from "react-router-dom";
-import useHttp from "../../hooks/use-http";
+import {Link} from "react-router-dom";
 import AuthContext from "../../Context/auth-context";
 
 const Login = ()=>{
@@ -24,7 +21,7 @@ const Login = ()=>{
         <div className={classes.container}>
             <div className={classes.box}>
                 <div>
-                    <h2>Login</h2>
+                    <h2>로그인</h2>
                 </div>
                 <form className={classes.loginForm} onSubmit={(e)=>ctx.onLogin(e,email,password)}>
                     <input
@@ -35,7 +32,6 @@ const Login = ()=>{
                         required
                         placeholder='Email'
                     />
-
                     <input
                         type="password"
                         id="password"

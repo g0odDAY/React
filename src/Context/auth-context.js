@@ -6,13 +6,16 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut,
-    createUserWithEmailAndPassword, fetchSignInMethodsForEmail
+    createUserWithEmailAndPassword,
+    fetchSignInMethodsForEmail,
+    sendPasswordResetEmail
 } from "firebase/auth";
 const AuthContext = React.createContext({
     onLogout:()=>{},
     onLogin:(e,email,password)=>{},
     onSignup:(e,email,password)=>{},
     checkDuplicateEmail:(email)=>{},
+    resetPassword:(email)=>{}
 })
 
 export const AuthContextProvider =(props)=>{
@@ -41,18 +44,18 @@ export const AuthContextProvider =(props)=>{
                 alert(errorCode+errorMessage);
             });
         navigation(-1);
-    },[])
+    },[auth,navigation])
     const logoutHandler = useCallback(async ()=>{
         await signOut(auth).then(()=>{
             console.log('로그아웃 성공~!');
             localStorage.removeItem('userData');
 
         }).catch(error=>{
-
+            alert(error.message());
         })
         navigation('/');
 
-    },[])
+    },[auth,navigation])
     const loginHandler = useCallback( async (e,email,password)=>{
 
         e.preventDefault();
@@ -69,7 +72,7 @@ export const AuthContextProvider =(props)=>{
                 alert(errorCode+errorMessage);
             })
 
-    },[])
+    },[auth,navigation])
     const checkDuplicateEmail  = async (email)=>{
         await fetchSignInMethodsForEmail(auth, email)
             .then(signInMethods =>{
@@ -83,7 +86,14 @@ export const AuthContextProvider =(props)=>{
             }).catch(error=>alert('중복 확인 실패'+error))
 
     }
-    return <AuthContext.Provider value={{onLogin:loginHandler,onLogout:logoutHandler,onSignup:signUpHandler,checkDuplicateEmail}}>
+    const resetPassword = async (e,email)=>{
+        console.log(email);
+        e.preventDefault();
+        await sendPasswordResetEmail(auth,email)
+            .then(()=> alert('비밀번호 재설정 이메일 발송완료!'))
+            .catch(error=>alert('에러발생!'+error));
+    }
+    return <AuthContext.Provider value={{onLogin:loginHandler,onLogout:logoutHandler,onSignup:signUpHandler,checkDuplicateEmail,resetPassword}}>
         {props.children}
     </AuthContext.Provider>
 }

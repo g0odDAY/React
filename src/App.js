@@ -9,6 +9,7 @@ import Warning from "./components/Warning/Warning";
 import MarketForm1 from "./components/Market/MarketForm/MarketForm1";
 import Characters from "./components/Characters/Characters";
 import SignupForm from "./components/Login/SignupForm";
+import Password from "./components/Login/Password";
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
                     {
                         path:'signup',
                         element:<SignupForm/>
+                    },
+                    {
+                        path:'password',
+                        element:<Password/>
                     }
                 ]
 

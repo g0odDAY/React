@@ -1,8 +1,15 @@
-import {useCallback, useState} from "react";
+import {useCallback, useContext, useState} from "react";
+import authContext from "../../../Context/auth-context";
 
 const useForm = (formObj)=>{
-    console.log('useForm formObj');
+    const ctx = useContext(authContext);
+
     const [form,setForm] = useState(formObj);
+    const [formData,setFormData] = useState({
+        email:'',
+        password:''
+    });
+
     const renderFormInputs = ()=>{
         return Object.values(form).map((inputObj)=>{
             const {value,label,errorMessage,valid,renderInput} = inputObj;
@@ -20,6 +27,10 @@ const useForm = (formObj)=>{
     },[form])
     const onInputChange = useCallback((e)=>{
         const {name,value} = e.target;
+        setFormData((prevState)=>({
+            ...prevState,
+            [name]:value,
+        }))
         const inputObj = {...form[name]};
         inputObj.value = value;
         const isValidInput = isInputFieldValid(inputObj);
@@ -41,9 +52,13 @@ const useForm = (formObj)=>{
             }
         }
         return isValid;
-
-
     },[form])
-    return {renderFormInputs,isFormValid};
+    const submitHandler = (e)=>{
+        e.preventDefault();
+        console.log('submit',formData);
+        const {email,password} = formData;
+        ctx.onSignup(e,email,password);
+    }
+    return {renderFormInputs,isFormValid,submitHandler};
 }
 export default useForm;
