@@ -3,15 +3,14 @@
     justify-content:center;
     align-items:center;
     height:70vh;
-
 }
-.signupForm{
+.form{
     flex-basis: 25%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding:1.5rem 1rem 0;
     border-radius: 8px;
 }
-.signupForm h2 {
+.form h2 {
     margin: 0 0 20px;
     color:#8045dd;
 }
@@ -36,7 +35,7 @@
     padding:2rem .5rem;
 }
 .sector a{
-    color:#8045dd;
+    color:#5865f2;
 }
 .sector a:hover{
     cursor:pointer;

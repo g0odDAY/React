@@ -7,7 +7,7 @@ const SignupForm = ()=>{
 
     return (
         <div className={classes.container}>
-            <form className={classes.signupForm} onSubmit={(e)=>submitHandler(e)}>
+            <form className={classes.form} onSubmit={(e)=>submitHandler(e)}>
                 <h2>회원가입</h2>
                 {renderFormInputs()}
                 <button className={classes.signupBtn} disabled={!isFormValid()}>회원가입</button>

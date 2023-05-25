@@ -76,14 +76,14 @@
 .selectList{
     margin:.25rem 0 0;
     width: 14rem;
-    border-radius:8px;
+    border-radius:4px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background: #fff;
     position:absolute;
     overflow: hidden;
     z-index:1;
     max-height: 400px;
-    transition: max-height 1s ease-in-out;
+    transition: max-height 1s ease;
 }
 .selectList[aria-expanded='true']{
     max-height: 0px;

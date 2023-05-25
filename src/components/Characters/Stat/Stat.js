@@ -2,8 +2,8 @@ import classes from "../Characters.module.css";
 import {useState} from "react";
 
 const Stat = ({stat})=>{
-    const combatStat = stat.filter((data,idx) => idx<=5);
-    const normalStat = stat.filter((data,idx)=> idx>5);
+    const combatStat =stat? stat.filter((data,idx) => idx<=5) :[];
+    const normalStat = stat ? stat.filter((data,idx)=> idx>5) : [];
     const combatStatComponent = combatStat.map((data,idx)=>{
             return <div key={idx} className={classes.stat_item}>
                 <span className={classes.stat_name}>{data.Type}</span><span className={classes.stat_value}>{data.Value}</span>

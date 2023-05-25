@@ -213,6 +213,9 @@ const MarketForm = ()=>{
             setActiveIdx(idx);
         }
     }
+    const closeHandler = ()=>{
+        setActiveIdx(null);
+    }
     const penaltyUpdownHandler = (type)=>{
 
 
@@ -231,13 +234,23 @@ const MarketForm = ()=>{
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div>서버*</div>
-                                <MarketForm1 arry={serverArr}/>
+                                <div className={classes.container}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(0)}>
+                                        <input type="text" className={classes.selectBtn} placeholder="서버" name='server' value={serverValue} disabled={true}/>
+                                        <img src={downarrow}  alt="downarrow" width={16}/>
+                                    </div>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 0)}>
+                                        <div className={classes.hidden}>
+                                            {serverArr.map((data,idx)=><li key={idx} onClick={serverSelect}>{data}</li>)}
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div className={classes.inner}>
                                 <div>카테고리*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={()=>openHandler(1)}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(1)}>
                                         <input type="text" className={classes.selectBtn} placeholder="카테고리" name='category' value={categoryValue} disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
@@ -255,7 +268,7 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div className={`${gradeValidation ? classes.title : ''}`}>등급*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={()=>openHandler(2)}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(2)}>
                                         <input className={classes.selectBtn} placeholder="등급" name='grade' value={gradeValue} disabled={true}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
@@ -270,7 +283,7 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>아이템 이름*</div>
                                 <div className={classes.container}>
-                                    <div className={`${classes.selectBox}`} onClick={()=>openHandler(3)}>
+                                    <div className={`${classes.selectBox}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(3)}>
                                         <input className={classes.selectBtn} placeholder="아이템 이름" name='item' disabled={true} value={itemValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
@@ -294,7 +307,7 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>전투 특성*</div>
                                 <div className={`${classes.container}`}>
-                                    <div className={classes.selectBox} onClick={()=>openHandler(4)}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(4)}>
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name='characteristic' value={characteristicValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
@@ -315,7 +328,7 @@ const MarketForm = ()=>{
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div className={`${classes.container}`}>
-                                    <div className={classes.selectBox} onClick={()=>openHandler(5)}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(5)}>
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name='subCharacteristic' value={subCharacteristicValue}/>
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
@@ -336,7 +349,7 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>각인 효과*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={engraveOpen}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={engraveOpen}>
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name="engrave" value={engraveValue}/>
                                         <img src={downarrow} alt="downarrow" width={16}/>
                                     </div>
@@ -359,7 +372,7 @@ const MarketForm = ()=>{
                             <div className={classes.inner}>
                                 <div>패널티*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={penaltyOpen}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={penaltyOpen}>
                                         <input type="text" className={classes.selectBtn} placeholder='선택' disabled={true} value={penaltyValue} name="penalty" />
                                         <img src={downarrow} alt="downarrow" width={16}/>
                                     </div>
@@ -383,7 +396,7 @@ const MarketForm = ()=>{
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} onClick={subEngraveOpen}>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={subEngraveOpen}>
                                         <input className={classes.selectBtn} placeholder="선택" disabled={true} name="subEngrave" value={subEngraveValue}/>
                                         <img src={downarrow} alt="downarrow" width={16}/>
                                     </div>

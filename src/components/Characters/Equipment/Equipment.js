@@ -17,11 +17,9 @@ const gradeColor = {
 const Equipment =({equipment,type})=>{
     console.log('render!',type);
 
-    const filterEquipment = equipment.filter(data=> data.Type === type);
+    const filterEquipment = equipment ? equipment.filter(data=> data.Type === type):null;
     //console.log(type+'에 맞는 equipment',filterEquipment);
-    const description = filterEquipment.map(data=>{
-        return JSON.parse(data.Tooltip);
-    });
+
     //console.log('description',description);
     const equipmentComponent = filterEquipment ? filterEquipment.map((data,idx)=>{
         return <div key={idx} className={classes.equipment}>
