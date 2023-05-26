@@ -1,15 +1,14 @@
 import Home from "./components/Home/Home";
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
-import Market from "./components/Market/Market";
-import MarketForm from "./components/Market/MarketForm/MarketForm";
+import Exchange from "./components/Exchange/Exchange";
+import ExchangeForm from "./components/Exchange/ExchangeForm/ExchangeForm";
 import Signup from "./components/Login/Signup";
 import Login from "./components/Login/Login";
-import Warning from "./components/Warning/Warning";
-import MarketForm1 from "./components/Market/MarketForm/MarketForm1";
 import Characters from "./components/Characters/Characters";
 import SignupForm from "./components/Login/SignupForm";
 import Password from "./components/Login/Password";
+import Market from "./components/Market/Market";
 
 
 const router = createBrowserRouter([
@@ -22,15 +21,15 @@ const router = createBrowserRouter([
                 element:<Home/>,
             },
             {
-                path:'market',
+                path:'exchange',
                 children:[
                     {
                         index:true,
-                        element:<Market/>,
+                        element:<Exchange/>,
                     },
                     {
                         path:'write',
-                        element:<MarketForm/>
+                        element:<ExchangeForm/>
                     }
                 ]
             },
@@ -53,12 +52,12 @@ const router = createBrowserRouter([
 
             },
             {
-                path:'warning',
-                element:<Warning/>
-            },
-            {
                 path:'search/:id',
                 element:<Characters/>
+            },
+            {
+                path:'market',
+                element:<Market/>
             }
         ],
     },

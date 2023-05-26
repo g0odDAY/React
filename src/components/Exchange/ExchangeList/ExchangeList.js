@@ -1,4 +1,4 @@
-import classes from "../Market.module.css";
+import classes from "../Exchange.module.css";
 import {BsStar} from "react-icons/bs";
 import ac from "../../../img/img_acc_21.png";
 import Progress from "../../../ui/Progress";
@@ -7,7 +7,7 @@ import Accordion from "../../../ui/Accordion";
 import React from "react";
 
 
-const MarketList = ({idx,items,activeIdx,setActiveIdx})=>{
+const ExchangeList = ({idx,items,activeIdx,setActiveIdx})=>{
 
 
     const openHandler =(idx)=>{
@@ -77,4 +77,4 @@ const MarketList = ({idx,items,activeIdx,setActiveIdx})=>{
     </div>;
 }
 
-export default MarketList;
+export default ExchangeList;

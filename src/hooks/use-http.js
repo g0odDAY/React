@@ -1,13 +1,8 @@
 import {useCallback, useState} from "react";
 
-const useHttp = ()=>{
-    const [isLoading,setIsLoading] = useState(false);
-    const [error,setError] = useState(false);
-
-    const sendRequest = useCallback(async (config,applyData)=>{
+const useHttp = (config)=>{
+    const sendRequest = useCallback(async ()=>{
         console.log('fetchRequest config',config);
-        setIsLoading(prevState => !prevState.isLoading);
-        setError(false);
         try{
             const response = await fetch(config.url,{
                 method:config.method ? config.method : 'GET',
@@ -17,18 +12,12 @@ const useHttp = ()=>{
             if(!response.ok){
                 throw new Error('요청에 실패 했어요.');
             }
-            const data = await response.json();
-            applyData(data);
+            return response.json();
         }catch (error){
-            setError(error);
+          alert('error 발생'+error);
         }
-        setIsLoading(prevState => !prevState.isLoading);
     },[]);
-
-
     return {
-        isLoading,
-        error,
         sendRequest
     }
 }

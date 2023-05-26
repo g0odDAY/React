@@ -1,9 +1,9 @@
-import classes from "./MarketFormFooter.module.css";
+import classes from "./ExchangeFormFooter.module.css";
 import {BsPlusSquareDotted} from "react-icons/bs";
 import {GrTrash} from "react-icons/gr";
 import {useState} from "react";
 
-const MarketFormFooter = ({previewImage,setPreviewImage}) =>{
+const ExchangeFormFooter = ({previewImage,setPreviewImage}) =>{
 
     const fileHandler = (e)=>{
         const file = e.target.files[0];
@@ -32,4 +32,4 @@ const MarketFormFooter = ({previewImage,setPreviewImage}) =>{
                 </div>
            </div>
 }
-export default MarketFormFooter;
+export default ExchangeFormFooter;

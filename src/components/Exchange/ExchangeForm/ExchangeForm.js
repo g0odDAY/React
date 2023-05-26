@@ -1,14 +1,10 @@
-import classes from './MarketForm.module.css';
+import classes from './ExchangeForm.module.css';
 import downarrow from '../free-arrow-down-icon-3101-thumb.png';
 import {useEffect, useRef, useState} from "react";
-import MarketFormFooter from "./MarketFormFooter/MarketFormFooter";
+import ExchangeFormFooter from "./ExchangeFormFooter/ExchangeFormFooter";
 import useInput from "../../../hooks/use-input";
-import {AiOutlinePlus,AiOutlineMinus} from "react-icons/ai";
-import {getDatabase} from "firebase/database";
-import Accordion from "../../../ui/Accordion";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import MarketForm1 from "./MarketForm1";
-const MarketForm = ()=>{
+
+const ExchangeForm = ()=>{
     const serverArr = ['루페온','아브렐슈드','카제로스','카마인','니나브','실리안','카단','아만'];
     const categoryArr=['장신구-목걸이','장신구-귀걸이','장신구-반지','장신구-팔찌','보석'];
     const itemArr = [{type:'necklace',name:'거룩한 수호자의 목걸이'},{type:'necklace',name:'거룩한 선지자의 목걸이'},{type:'necklace',name:'공허한 운명의 목걸이'},{type:'necklace',name:'공허한 미래의 목걸이'},{type:'necklace',name:'참혹한 파멸의 목걸이'},{type:'necklace',name:'참혹한 쇠락의 목걸이'}]
@@ -220,11 +216,11 @@ const MarketForm = ()=>{
 
 
     }
-    const clickHandler = ()=>{
-        console.log ('click')
+    const show=(e)=>{
+
     }
     return <form onSubmit={submitHandle}>
-                <div className={classes.wrapper} onClick={clickHandler}>
+                <div className={classes.wrapper}>
                         <div className={classes.header}>
                             <h2>아이템 등록</h2>
                             <div>
@@ -428,9 +424,9 @@ const MarketForm = ()=>{
                             </div>
                         </div>
                         <hr/>
-                        <MarketFormFooter previewImage={previewImage} setPreviewImage={setPreviewImage}/>
+                        <ExchangeFormFooter previewImage={previewImage} setPreviewImage={setPreviewImage}/>
                     </div>
                 </div>
             </form>
 }
-export default MarketForm;
+export default ExchangeForm;
