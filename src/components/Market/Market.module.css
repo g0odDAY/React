@@ -1,33 +1,41 @@
 .container{
-   display:flex;
+    display:flex;
     gap:2rem;
-    margin: 1rem auto;
+    height:100%;
+    padding:1rem;
+    justify-content: center;
+    width: 100%;
+    max-width: 68.75rem;
+    margin: 0 auto;
+}
+.aside{
+    flex-basis: 20%;
+}
+.main{
+    flex-basis:80%
 }
 .accordionMenu{
-    max-width: 350px;
-    background: #e6e8ec;
+    width: 200px;
     overflow:hidden;
-    box-shadow: 0 0 10px #000;
-    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 .accordionMenu li:last-child .dropdown{
-    border-botton:0;
+    border-bottom:0;
 }
 
 .dropdown{
     cursor: pointer;
-    display:block;
-    padding:15px 15px 15px 45px;
     font-size:18px;
-    border-bottom:2px solid #2d374d;
-    color:#999;
+    border-bottom:1px solid #2d374d;
     position:relative;
     transition: all .4s ease-out;
-
+    padding:.25rem;
+    display:flex;
+    justify-content: space-between;
+    align-items:baseline;
 }
 .dropdown:hover{
     background: #556f82;
-    background: -webkit-gradient(linear,0% 0%,0% 100%,from(#27455c),to(#273a47));
 }
 .dropdown .arrowIcon{
     right:12px;
@@ -41,20 +49,41 @@
 .accordionMenu .link.active .submenuItems{
     display: block;
 }
+.submenuItems {
+    padding:.75rem .5rem;
+}
 .submenuItems a{
     display:block;
-    color:#66b2ff;
-    font-weight:600;
-    padding:12px 12px 12px 45px;
+    color:#7D8395;
     transition: all 0.2s ease-out;
-    text-decoration: none;
+    margin:.125rem;
 }
 .submenuItems a:hover{
-    background: #5c7185;
+    text-decoration: underline;
+    transition: .6s;
+    color:#8045dd;
 }
 /*main header*/
 .form{
-    display:flex;
+    display: flex;
+}
+.form_box{
+    flex:1;
+    display:grid;
+    grid-template-rows:auto auto;
+    grid-template-columns:auto auto;
+    grip-gap:10px;
+    padding:1rem;
+    position:relative;
+}
+.form_box:before{
+    position:absolute;
+    top:17px;
+    right:70px;
+    width:1px;
+    height:140px;
+    background: #8045dd;
+    content: '';
 }
 .form_dropdown{
     position:relative;
@@ -106,6 +135,20 @@
     outline:none;
     border:none;
 }
+.form_input{
+    width:150px;
+    height:50px;
+}
+.input_value{
+    padding:12px 10px;
+    font-size:1rem;
+    outline:none;
+    border:none;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    background:#fff;
+}
 .form_dropdown .option{
     position:absolute;
     width:100%;
@@ -130,4 +173,19 @@
 .form_dropdown .option div:hover{
     background: #62baea;
     color:#fff;
+}
+.button_sector{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.button_sector button{
+    background: linear-gradient(to right,#5865f2,#8045dd);
+    padding:0.5rem 1.5rem;
+    font-size:1.3rem;
+    color:#fff;
+    border-radius:8px;
+}
+.button_sector button:before{
+
 }
