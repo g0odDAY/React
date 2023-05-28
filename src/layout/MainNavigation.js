@@ -36,7 +36,7 @@ const MainNavigation = () =>{
                     </ul>
                     <div className={classes.main_search}>
                         <form onSubmit={searchHandler}>
-                            <input type="text" placeholder="황이서" maxLength={12} ref={searchName}/>
+                            <input type="search" placeholder="황이서" maxLength={12} ref={searchName}/>
                             <button type='submit'><FaSearch size={18}/></button>
                         </form>
                     </div>

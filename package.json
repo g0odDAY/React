@@ -47,5 +47,10 @@
   },
   "devDependencies": {
     "slick-carousel": "^1.8.1"
-  }
+  },
+  "rules":{
+    "react-hooks/rules-of-hooks": "error"
+}
+
+
 }

@@ -66,6 +66,7 @@
 /*main header*/
 .form{
     display: flex;
+    border:2px solid #d0d0d0;
 }
 .form_box{
     flex:1;
@@ -79,15 +80,15 @@
 .form_box:before{
     position:absolute;
     top:17px;
-    right:70px;
+    right:40px;
     width:1px;
-    height:140px;
+    height:120px;
     background: #8045dd;
     content: '';
 }
 .form_dropdown{
     position:relative;
-    width:150px;
+    width:220px;
     height: 50px;
 }
 .form_dropdown::before{
@@ -138,6 +139,7 @@
 .form_input{
     width:150px;
     height:50px;
+    display:flex;
 }
 .input_value{
     padding:12px 10px;
@@ -178,6 +180,7 @@
     display:flex;
     justify-content:center;
     align-items:center;
+    padding:.5rem;
 }
 .button_sector button{
     background: linear-gradient(to right,#5865f2,#8045dd);
@@ -186,6 +189,4 @@
     color:#fff;
     border-radius:8px;
 }
-.button_sector button:before{
 
-}
