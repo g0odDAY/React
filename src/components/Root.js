@@ -7,6 +7,7 @@ import AuthContext, {AuthContextProvider} from "../Context/auth-context";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ReactQueryDevtools} from "react-query/devtools";
 import Loading from "../ui/Loading";
+import LoadingBar from "../ui/LoadingBar";
 const queryClient = new QueryClient();
 const Root = ()=>{
     return <div className={classes.container}>

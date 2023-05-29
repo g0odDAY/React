@@ -19,9 +19,9 @@ const Market = ()=>{
                     return <li key={idx} className={`${classes.link} ${idx === activeIdx ? classes.active : null}`} >
                         <div className={classes.dropdown}onClick={()=>setActiveIdx(idx)} data-code={category.Code}><span>{category.CodeName}</span><SlArrowDown className={classes.arrowIcon} /></div>
                         <ul className={classes.submenuItems}>
-                            <li><a href="#" data-code={category.Code} onClick={e=>setCurrentCode(e.target.dataset.code)}>전체</a></li>
+                            <li><a data-code={category.Code} onClick={e=>setCurrentCode(e.target.dataset.code)}>전체</a></li>
                             {category.Subs.map((subCategory,idx)=>{
-                                return <li key={idx}><a data-code={subCategory.Code} onClick={e=>setCurrentCode(e.target.dataset.code)} href="#">{subCategory.CodeName}</a></li>
+                                return <li key={idx}><a data-code={subCategory.Code} onClick={e=>setCurrentCode(e.target.dataset.code)}>{subCategory.CodeName}</a></li>
                             })}
                         </ul>
                     </li>

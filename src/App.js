@@ -13,6 +13,7 @@ import {QueryClient} from "react-query";
 import MarketHeader from "./components/Market/MarketHeader";
 import MarketBody from "./components/Market/MarketBody";
 import ErrorPage from "./ErrorPage";
+import MarketDetail from "./components/Market/MarketDetail";
 const queryClient = new QueryClient({
     defaultOptions:{
         queries:{
@@ -71,6 +72,12 @@ const router = createBrowserRouter([
                 element:<Market/>,
                 loader:marketLoader,
                 action:marketAction,
+                children:[
+                    {
+                        path: ':itemId',
+                        element: <MarketDetail/>
+                    }
+                ]
             },
 
         ],
