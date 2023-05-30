@@ -65,7 +65,7 @@ const ModalOverlay = ({items}) => {
                 label:'평균 거래가',
                 type:'line',
                 data:avgPriceData,
-                backgroundColor: 'yellow',
+                backgroundColor: '#8045dd',
                 yAxisID:'y_sub'
             }
         ]

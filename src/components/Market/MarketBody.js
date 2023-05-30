@@ -1,26 +1,16 @@
 import classes from "./Market.module.css";
-import useMarket, {getItemLists, getUrl, preFetchingItems} from "./hooks/use-market";
-import {DataGrid} from "@mui/x-data-grid";
-import {useCallback, useEffect, useState} from "react";
-import {useQuery, useQueryClient} from "react-query";
-import {AiOutlineBarChart} from "react-icons/ai";
-import {Link, Outlet, useNavigate} from "react-router-dom";
-import MarketDetail from "./MarketDetail";
-const columns = [
-    {field:'Name',headerName:'등급'},
-    {field:'YDayAvgPrice',headerName:'전일평균 거래가'},
-    {field:'RecentPrice',headerName:'최근 거래가'},
-    {field:'CurrentMinPrice',headerName:'최저가'},
-    {field:'id',headerName:'시세'},
+import  {getItemLists, preFetchingItems} from "./hooks/use-market";
+import { useState} from "react";
+import {useQuery} from "react-query";
+import {AiOutlineBarChart, AiOutlineGold} from "react-icons/ai";
+import {Link, Outlet} from "react-router-dom";
+import {TbArrowBigDownFilled, TbMoneybag} from "react-icons/tb";
+import {GiGoldBar} from "react-icons/gi";
 
 
-
-];
 
 const MarketBody = ({currentCode})=>{
     const [currentPage,setCurrentPage] = useState(1);
-    const [open,setOpen] = useState(false);
-    const navigate = useNavigate();
     preFetchingItems(currentPage,currentCode);
     const {data,isLoading} = useQuery(['market',currentCode,currentPage],()=>getItemLists(currentCode,currentPage),{
         enabled:currentCode !== '',
@@ -28,28 +18,77 @@ const MarketBody = ({currentCode})=>{
         staleTime:2000,
     })
     if(isLoading) return <p></p>;
-    console.log(data);
-    const openModal = (id)=>{
-        navigate(`${id}`);
-    }
-    //const updateRows = marketItems? marketItems.Items.map(row=>({id:row.Id, ...row})) :null;
-    //console.log(updateRows);
     return (
         <div className={classes.main_body}>
-            {/*<div style={{ height: '100%', width: "100%" }}>*/}
-            {/*    {marketItems?<DataGrid*/}
-            {/*        rows={updateRows}*/}
-            {/*        columns={columns}*/}
+            <div className={classes.table_container}>
+                <div className={classes.table_row}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div className={classes.th_content}>
+                                        <span>등급</span>
+                                        <TbArrowBigDownFilled/>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className={classes.th_content}>
+                                        <span>전일 평균 거래가</span>
+                                        <TbArrowBigDownFilled/>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className={classes.th_content}>
+                                        <span>최근 거래가</span>
+                                        <TbArrowBigDownFilled/>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div className={classes.th_content}>
+                                        <span>최저가</span>
+                                        <TbArrowBigDownFilled/>
+                                    </div>
+                                </th>
+                                <th>시세</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data? data.Items.map((data,idx)=> {
+                                return <tr key={idx}>
+                                    <td>
+                                            <img src={data.Icon}  alt=""/>
+                                            <div>
+                                                {data.Name}
+                                            </div>
+                                    </td>
+                                    <td>
+                                        <div className={classes.td_content}>
+                                            <span>{data.YDayAvgPrice}</span>
+                                            <GiGoldBar size={25} className={classes.gold}/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className={classes.td_content}>
+                                            <span>{data.RecentPrice}</span>
+                                            <GiGoldBar size={25} className={classes.gold}/>
+                                        </div>
 
-            {/*        initialState={{*/}
-            {/*            pagination: {*/}
-            {/*                paginationModel: {page: 0, pageSize: 10}*/}
-            {/*            }*/}
-            {/*        }}*/}
-            {/*        pageSizeOptions={[5, 10]}*/}
-            {/*    />:null}*/}
-            {/*</div>*/}
-            {data? data.Items.map((data,idx)=><li key={idx}>{data.Name}<Link to={`/market/${data.Id}`} ><AiOutlineBarChart/></Link></li>):null}
+                                    </td>
+                                    <td>
+                                        <div className={classes.td_content}>
+                                            <span>{data.CurrentMinPrice}</span>
+                                            <GiGoldBar size={25} className={classes.gold}/>
+                                        </div>
+
+                                    </td>
+                                    <td><Link to={`${data.Id}`}><AiOutlineBarChart size={40}/></Link></td>
+                                </tr>
+                            }):null}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div>
                 <button type='button' onClick={()=>setCurrentPage(prev=>prev-1)}>prev</button>
                 { data?`${currentPage}/${data.TotalCount}` : null}

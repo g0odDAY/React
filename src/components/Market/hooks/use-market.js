@@ -38,6 +38,11 @@ export const detailItem = (id)=>({
             },
         });
         return await response.json();
+    },
+    config:{
+        refetchOnWindowFocus:false,
+        staleTime: 10 * 60 * 1000,
+        cacheTime: 10 * 60 * 1000,
     }
 })
 
