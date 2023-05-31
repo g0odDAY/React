@@ -1,17 +1,18 @@
-import useMarket from "./hooks/use-market";
 import classes from './Market.module.css';
 import {SlArrowDown} from "react-icons/sl";
 import {useState} from "react";
 import MarketHeader from "./MarketHeader";
 import MarketBody from "./MarketBody";
 import {useLoaderData} from "react-router-dom";
-import {getUrl} from './hooks/use-market';
+import useMarket from "./hooks/marketReducer";
+
 
 
 const Market = ()=>{
     const [activeIdx,setActiveIdx] = useState('');
-    const [currentCode,setCurrentCode] = useState('');
     const market = useLoaderData();
+    const {codeHandler,sortHandler,pageHandler,marketState} = useMarket();
+
     return <div className={classes.container}>
         <div className={classes.aside}>
             <ul className={classes.accordionMenu}>
@@ -19,9 +20,9 @@ const Market = ()=>{
                     return <li key={idx} className={`${classes.link} ${idx === activeIdx ? classes.active : null}`} >
                         <div className={classes.dropdown}onClick={()=>setActiveIdx(idx)} data-code={category.Code}><span>{category.CodeName}</span><SlArrowDown className={classes.arrowIcon} /></div>
                         <ul className={classes.submenuItems}>
-                            <li><a data-code={category.Code} onClick={e=>setCurrentCode(e.target.dataset.code)}>전체</a></li>
+                            <li><a data-code={category.Code} onClick={e=>codeHandler(e)}>전체</a></li>
                             {category.Subs.map((subCategory,idx)=>{
-                                return <li key={idx}><a data-code={subCategory.Code} onClick={e=>setCurrentCode(e.target.dataset.code)}>{subCategory.CodeName}</a></li>
+                                return <li key={idx}><a data-code={subCategory.Code} onClick={e=>codeHandler(e)}>{subCategory.CodeName}</a></li>
                             })}
                         </ul>
                     </li>
@@ -31,7 +32,7 @@ const Market = ()=>{
 
         <div className={classes.main}>
             <MarketHeader/>
-            <MarketBody currentCode={currentCode}/>
+            <MarketBody sortHandler={sortHandler} pageHandler={pageHandler} marketState={marketState}/>
         </div>
     </div>
 }

@@ -47,6 +47,7 @@ const useInput = (validate)=>{
         console.log(type);
         dispatch({type})
     }
+    console.log('so',inputState.value);
     return {
         value:inputState.value,
         isOpen:inputState.isOpen,

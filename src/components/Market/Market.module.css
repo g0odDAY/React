@@ -210,6 +210,21 @@
 .table_row th{
     border:2px solid #d0d0d0;
     padding:.25rem;
+
+}
+.table_row th:not(:last-child):hover{
+    cursor:pointer;
+}
+.table_row th.active{
+    border:2px solid #8045dd;
+    color:#8045dd;
+
+}
+.table_row th.active .icon{
+    transform:rotate(180deg);
+}
+.icon{
+
 }
 .th_content{
     display: flex;
@@ -234,4 +249,14 @@ td img{
 }
 .gold{
     color:#d0b14e;
+}
+.indicator{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding:.25rem;
+}
+.indicator button{
+    padding:.75rem;
+    border:1px solid #d0d0d0;
 }

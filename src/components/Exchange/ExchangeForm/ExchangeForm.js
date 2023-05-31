@@ -3,6 +3,7 @@ import downarrow from '../free-arrow-down-icon-3101-thumb.png';
 import {useEffect, useRef, useState} from "react";
 import ExchangeFormFooter from "./ExchangeFormFooter/ExchangeFormFooter";
 import useInput from "../../../hooks/use-input";
+import useMarket from "../../Market/hooks/marketReducer";
 
 const ExchangeForm = ()=>{
     const serverArr = ['루페온','아브렐슈드','카제로스','카마인','니나브','실리안','카단','아만'];
@@ -11,7 +12,6 @@ const ExchangeForm = ()=>{
     const characteristic = ['치명','특화','신속','인내','제압','숙련'];
     const engraveArr = ['각성','강령술','결투의 대가','구슬동자','굳은 의지','급소 타격','기습의 대가','긴급 구조','달인의 저력'];
     const penaltyArr = ['공격력 감소','공격속도 감소','방어력 감소','이동속도 감소'];
-
     const [previewImage,setPreviewImage] = useState('');
     const {
         value:serverValue,
@@ -164,38 +164,38 @@ const ExchangeForm = ()=>{
         console.log(characteristicValue);
         console.log(amountValue);
         console.log(engraveValue);
-        fetch('https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json',{
-            method:'POST',
-            headers:{
-                'Content-type':'application/json',
-            },
-            body:JSON.stringify({
-                server:serverValue,
-                category:categoryValue,
-                grade:gradeValue,
-                item:itemValue,
-                quality:qualityValue,
-                characteristic:{
-                    chrch:characteristicValue,
-                    amount:amountValue,
-                    subChrch:subCharacteristicValue,
-                    subAmount:subAmountValue
-                },
-                option:{
-                    engrave:engraveValue,
-                    amount:enAmount,
-                    subEgrave:subEngraveValue,
-                    subAmount:subEnAmount,
-                    penalty:penaltyValue
-                },
-                price:priceValue,
-                img:previewImage
-            })
-        }).then(res=>{
-            return res.json();
-        }).then(res=>{
-            console.log(res);
-        })
+        // fetch('https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json',{
+        //     method:'POST',
+        //     headers:{
+        //         'Content-type':'application/json',
+        //     },
+        //     body:JSON.stringify({
+        //         server:serverValue,
+        //         category:categoryValue,
+        //         grade:gradeValue,
+        //         item:itemValue,
+        //         quality:qualityValue,
+        //         characteristic:{
+        //             chrch:characteristicValue,
+        //             amount:amountValue,
+        //             subChrch:subCharacteristicValue,
+        //             subAmount:subAmountValue
+        //         },
+        //         option:{
+        //             engrave:engraveValue,
+        //             amount:enAmount,
+        //             subEgrave:subEngraveValue,
+        //             subAmount:subEnAmount,
+        //             penalty:penaltyValue
+        //         },
+        //         price:priceValue,
+        //         img:previewImage
+        //     })
+        // }).then(res=>{
+        //     return res.json();
+        // }).then(res=>{
+        //     console.log(res);
+        // })
 
 
     }
