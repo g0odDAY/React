@@ -25,7 +25,7 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
     if(marketState.currentPage){
         preFetchingItems(marketState);
     }
-    const {data,refetch} = useQuery(['market', marketState],()=>getItemLists(marketState),{
+    const {data} = useQuery(['market', marketState],()=>getItemLists(marketState),{
         enabled:marketState.categoryCode !== '',
         keepPreviousData:true,
         staleTime:10*60*20000,

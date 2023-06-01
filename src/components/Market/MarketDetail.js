@@ -37,7 +37,7 @@ const options = {
         },
         y_sub:{
             position:'right',
-
+            afterDataLimits:(scale)=>scale.max = scale.max * 1.1,
         }
     },
 };
