@@ -71,7 +71,6 @@ const router = createBrowserRouter([
                 path:'market',
                 element:<Market/>,
                 loader:marketLoader,
-                action:marketAction,
                 children:[
                     {
                         path: ':itemId',

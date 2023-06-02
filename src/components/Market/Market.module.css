@@ -223,11 +223,9 @@
     color:#8045dd;
 
 }
-.table_row th.active .icon{
-    transform:rotate(180deg);
-}
-.icon{
 
+.icon{
+    transform:rotate(180deg);
 }
 .th_content{
     display: flex;
@@ -262,4 +260,8 @@ td img{
 .indicator button{
     padding:.75rem;
     border:1px solid #d0d0d0;
+}
+
+.empty{
+
 }

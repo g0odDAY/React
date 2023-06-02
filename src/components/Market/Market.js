@@ -11,8 +11,11 @@ import useMarket from "./hooks/marketReducer";
 const Market = ()=>{
     const [activeIdx,setActiveIdx] = useState('');
     const market = useLoaderData();
-    const {codeHandler,sortHandler,pageHandler,marketState} = useMarket();
-
+    const {codeHandler,sortHandler,pageHandler,formHandler,marketState} = useMarket();
+    const submitHandler = (e,formData)=>{
+        e.preventDefault();
+        formHandler(formData);
+    }
     return <div className={classes.container}>
         <div className={classes.aside}>
             <ul className={classes.accordionMenu}>
@@ -31,7 +34,7 @@ const Market = ()=>{
         </div>
 
         <div className={classes.main}>
-            <MarketHeader/>
+            <MarketHeader submitHandler={submitHandler}/>
             <MarketBody sortHandler={sortHandler} pageHandler={pageHandler} marketState={marketState}/>
         </div>
     </div>
@@ -48,9 +51,3 @@ export const loader = async () => {
     const data = await response.json();
     return data;
 };
-
-export const action = async({params,request})=>{
-    const formData = await request.formData();
-    const options = Object.fromEntries(formData);
-    return {...options,CategoryCode:50000};
-}

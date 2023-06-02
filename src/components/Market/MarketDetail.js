@@ -75,7 +75,7 @@ const ModalOverlay = ({items}) => {
             <header className={classes.header}>
                 <div className={classes.header_box}>
                     <h2>{items.Name}</h2>
-                    <MdCancelPresentation onClick={()=>navigate(-1)} color='#fff' size={30}/>
+                    <MdCancelPresentation className={classes.button} onClick={()=>navigate(-1)} size={30}/>
                 </div>
 
             </header>

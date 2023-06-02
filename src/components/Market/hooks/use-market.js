@@ -1,7 +1,6 @@
 import {useQueryClient} from "react-query";
 
 export const getItemLists = async (marketState)=>{
-
     try{
         const response = await fetch(`https://developer-lostark.game.onstove.com/markets/items`,{
             method:'POST',
@@ -12,7 +11,7 @@ export const getItemLists = async (marketState)=>{
             },
             body:JSON.stringify({
                     ...marketState,
-                    Sort:marketState.sort? marketState.sort : 'GRADE',
+                    Sort:marketState.Sort===''?'GRADE': marketState.Sort,
                 })
         });
         return response.json();
@@ -23,9 +22,9 @@ export const getItemLists = async (marketState)=>{
 export const preFetchingItems = (marketState)=>{
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const queryClient = useQueryClient();
-        if(marketState.categoryCode){
-            queryClient.prefetchQuery(['market', {...marketState,currentPage:marketState.currentPage+1}],
-                () => getItemLists({...marketState,currentPage:marketState.currentPage+1})). then(r =>r)
+        if(marketState.CategoryCode){
+            queryClient.prefetchQuery(['market', {...marketState,PageNo:marketState.PageNo+1}],
+                () => getItemLists({...marketState,PageNo:marketState.PageNo+1})). then(r =>r)
         }
 
 }

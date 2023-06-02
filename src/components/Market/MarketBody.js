@@ -1,13 +1,12 @@
 import classes from "./Market.module.css";
 import {getItemLists, preFetchingItems} from "./hooks/use-market";
-import { useState} from "react";
 import {useQuery} from "react-query";
-import {AiOutlineBarChart, AiOutlineGold} from "react-icons/ai";
+import {AiOutlineBarChart} from "react-icons/ai";
 import {Link, Outlet} from "react-router-dom";
-import {TbArrowBigDownFilled, TbMoneybag} from "react-icons/tb";
+import {TbArrowBigDownFilled} from "react-icons/tb";
 import {GiGoldBar} from "react-icons/gi";
-import useMarket from "./hooks/marketReducer";
 import {MdArrowBackIos, MdArrowForwardIos} from "react-icons/md";
+import {useState} from "react";
 const gradeColor = {
     에스더:'#2faba8',
     고대:'#dcc999',
@@ -19,20 +18,24 @@ const gradeColor = {
     일반:'#d0d0d0',
 }
 
-
 const MarketBody = ({sortHandler,pageHandler, marketState})=>{
-
-    if(marketState.currentPage){
-        preFetchingItems(marketState);
-    }
+    const [toggle,setToggle] = useState(false);
+    const [isQueryLoaded,setIsQueryLoaded]=useState(false);
+    preFetchingItems(marketState);
     const {data} = useQuery(['market', marketState],()=>getItemLists(marketState),{
-        enabled:marketState.categoryCode !== '',
+        enabled:marketState.CategoryCode!=='',
         keepPreviousData:true,
         staleTime:10*60*20000,
-        refetchOnWindowFocus:false
+        refetchOnWindowFocus:false,
+        onSuccess:()=>setIsQueryLoaded(true)
     })
     const totalPage = data? Math.ceil(data.TotalCount/10):null;
-
+    const sortFnc = (Sort)=>{
+        if(isQueryLoaded){
+            sortHandler(Sort);
+            setToggle(!toggle);
+        }
+    }
     return (
         <div className={classes.main_body}>
             <div className={classes.table_container}>
@@ -40,35 +43,35 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
                     <table>
                         <thead>
                             <tr>
-                                <th onClick={()=>sortHandler('GRADE')} className={`${marketState.sort==='GRADE'?classes.active:null}`}>
+                                <th onClick={()=>sortFnc('GRADE')} className={`${marketState.Sort==='GRADE'?classes.active:null}`}>
                                     <div className={classes.th_content}>
                                         <span>등급</span>
-                                        <TbArrowBigDownFilled className={classes.icon}/>
+                                        <TbArrowBigDownFilled className={`${marketState.Sort==='GRADE'&& toggle ?classes.icon:''}`}/>
                                     </div>
                                 </th>
-                                <th onClick={()=>sortHandler('YDAY_AVG_PRICE')} className={`${marketState.sort==='YDAY_AVG_PRICE'?classes.active:null}`}>
+                                <th onClick={()=>sortFnc('YDAY_AVG_PRICE')} className={`${marketState.Sort==='YDAY_AVG_PRICE'?classes.active:null}`}>
                                     <div className={classes.th_content}>
                                         <span>전일 평균 거래가</span>
-                                        <TbArrowBigDownFilled className={classes.icon}/>
+                                        <TbArrowBigDownFilled className={`${marketState.Sort==='YDAY_AVG_PRICE'&& toggle ?classes.icon:''}`}/>
                                     </div>
                                 </th>
-                                <th onClick={()=>sortHandler('RECENT_PRICE')} className={`${marketState.sort==='RECENT_PRICE'?classes.active:null}`}>
+                                <th onClick={()=>sortFnc('RECENT_PRICE')} className={`${marketState.Sort==='RECENT_PRICE'?classes.active:null}`}>
                                     <div className={classes.th_content}>
                                         <span>최근 거래가</span>
-                                        <TbArrowBigDownFilled className={classes.icon}/>
+                                        <TbArrowBigDownFilled className={`${marketState.Sort==='RECENT_PRICE'&& toggle ?classes.icon:''}`}/>
                                     </div>
                                 </th>
-                                <th onClick={()=>sortHandler('CURRENT_MIN_PRICE')} className={`${marketState.sort==='CURRENT_MIN_PRICE'?classes.active:null}`}>
+                                <th onClick={()=>sortFnc('CURRENT_MIN_PRICE')} className={`${marketState.Sort==='CURRENT_MIN_PRICE'?classes.active:null}`}>
                                     <div className={classes.th_content}>
                                         <span>최저가</span>
-                                        <TbArrowBigDownFilled className={classes.icon}/>
+                                        <TbArrowBigDownFilled className={`${marketState.Sort==='CURRENT_MIN_PRICE'&& toggle ?classes.icon:''}`} />
                                     </div>
                                 </th>
                                 <th>시세</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data? data.Items.map((data,idx)=> {
+                            {data && data.Items? data.Items.map((data,idx)=> {
                                 return <tr key={idx}>
                                     <td>
                                         <div style={{backgroundColor:gradeColor[`${data.Grade}`]}}>
@@ -86,31 +89,31 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
                                     </td>
                                     <td>
                                         <div className={classes.td_content}>
-                                            <span>{data.RecentPrice}</span>
+                                            <span>{data.RecentPrice === 0?'-':data.RecentPrice}</span>
                                             <GiGoldBar size={25} className={classes.gold}/>
                                         </div>
 
                                     </td>
                                     <td>
                                         <div className={classes.td_content}>
-                                            <span>{data.CurrentMinPrice}</span>
+                                            <span>{data.CurrentMinPrice===0?'-':data.CurrentMinPrice}</span>
                                             <GiGoldBar size={25} className={classes.gold}/>
                                         </div>
                                     </td>
                                     <td><Link to={`${data.Id}`}><AiOutlineBarChart size={40}/></Link></td>
                                 </tr>
-                            }):null}
+                            }): <Empty/>}
                         </tbody>
                     </table>
                 </div>
                 {data?<div className={classes.indicator}>
-                    <button type='button' onClick={() => pageHandler(-1)} disabled={marketState.currentPage === 1}>
+                    <button type='button' onClick={() => pageHandler(-1)} disabled={marketState.PageNo === 1}>
                         <MdArrowBackIos size={25}/></button>
                     <div>
-                        {data ? `${marketState.currentPage}/${totalPage}` : null}
+                        {data ? `${marketState.PageNo}/${totalPage===0 ?1:totalPage}` : null}
                     </div>
                     <button type='button' onClick={() => pageHandler(1)}
-                            disabled={marketState.currentPage === totalPage}><MdArrowForwardIos size={25}/></button>
+                            disabled={marketState.PageNo === totalPage}><MdArrowForwardIos size={25}/></button>
                 </div>:null}
             </div>
 
@@ -121,3 +124,11 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
 
 export default MarketBody;
 
+export const Empty = ()=>{
+    return  <tr>
+
+            <td colSpan="6" style={{ textAlign: 'center' }}>
+                결과 없음
+            </td>
+    </tr>
+}

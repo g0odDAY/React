@@ -1,10 +1,10 @@
-import {useCallback, useReducer} from "react";
+import {useReducer} from "react";
 
 const initialState = {
-    categoryCode:'',
-    currentPage:1,
-    sort:'',
-    sortCondition:'ASC',
+    CategoryCode:'',
+    PageNo:1,
+    Sort:'',
+    SortCondition:'DESC',
     CharacterClass:'',
     ItemTier:'',
     ItemGrade:'',
@@ -13,11 +13,13 @@ const initialState = {
 const marketStateReducer = (state,action)=>{
     switch(action.type){
         case 'CODE':
-            return {...state,currentPage:1,categoryCode:action.code};
+            return {...state,PageNo:1,CategoryCode:action.code};
         case 'PAGE':
-            return {...state,currentPage: state.currentPage+(action.number)};
+            return {...state,PageNo: state.PageNo+(action.number)};
         case 'SORT':
-            return {...state,sort:action.sort,currentPage:1,sortCondition:state.sortCondition ==='ASC'?'DESC':'ASC'};
+            return {...state,Sort:action.sort,PageNo:1,SortCondition:state.SortCondition ==='ASC'?'DESC':'ASC'};
+        case 'FORM':
+            return {...state,...action.formData,PageNo:1};
         default:
             return state;
     }
@@ -26,24 +28,29 @@ const marketStateReducer = (state,action)=>{
 const useMarket = ()=>{
     const [marketState,dispatch] = useReducer(marketStateReducer,initialState);
 
-    const codeHandler = useCallback ((e)=>{
+    const codeHandler = (e)=>{
         const code = e.target.dataset.code;
         dispatch({ type:'CODE', code });
-    },[]);
+    }
 
-    const pageHandler =useCallback( (number) =>{
+    const pageHandler = (number) =>{
         dispatch({type:'PAGE',number});
-    },[])
+    }
 
-    const sortHandler = useCallback((sort)=>{
+    const sortHandler = (sort)=>{
         dispatch({type:'SORT',sort});
-    },[])
+    }
 
+    const formHandler = (formData)=>{
+
+        dispatch({type:'FORM',formData});
+    }
     return {
         marketState,
         codeHandler,
         pageHandler,
         sortHandler,
+        formHandler
     }
 }
 export default useMarket;

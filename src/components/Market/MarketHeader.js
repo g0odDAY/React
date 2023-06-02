@@ -3,32 +3,61 @@ import {useCallback, useState} from "react";
 import {Form, useLoaderData} from "react-router-dom";
 
 
-const MarketHeader = ()=>{
+const MarketHeader = ({submitHandler})=>{
     const market = useLoaderData();
     const [currentInput,setCurrentInput] = useState('');
-    const [tier,setTier] = useState('');
-    console.log('render')
-    const mouseOverHandler =useCallback( (e)=>{
-        setTier(e.target.innerText);
-        setCurrentInput('');
-    },[])
+    const [formData,setFormData] = useState({
+        ItemName:'',
+        CharacterClass:'',
+        ItemTier:'',
+        ItemGrade:''
+    });
+    const selectHandler = (input) =>{
+        if(input === currentInput){
+            setCurrentInput('');
+        }else{
+            setCurrentInput(input);
+        }
+    }
+    const inputHandler = (e)=>{
+        console.log(e.target);
+        const {name,value}=e.target;
+        console.log(name,value);
+        setFormData(prevState =>({
+            ...prevState,
+            [name]:value
+        }));
+    }
+
+
+    const mouseOverHandler =(e)=>{
+        const value = e.target.dataset.value;
+        const name = e.target.dataset.name;
+        console.log(name,value);
+        setFormData(prevState =>({
+            ...prevState,
+            [name]:value
+        }));
+    }
+
     return (
         <div className={classes.main_header}>
-            <Form className={classes.form} method='post'>
+            <Form className={classes.form} onSubmit={(e)=>submitHandler(e,formData)}>
                 <div className={classes.form_box}>
                     <div className={classes.row}>
                         <div className={classes.form_input}>
                             <label htmlFor="">아이템 명</label>
                             <div>
-                                <input name='ItemName' placeholder='아이템 명을 입력해주세요.' type="text" className={classes.input_value}/>
+                                <input name='ItemName' placeholder='아이템 명을 입력해주세요.' value={formData.ItemName} onChange={inputHandler} type="text" className={classes.input_value}/>
                             </div>
                         </div>
                         <div className={classes.form_input}>
                             <label htmlFor="">직업</label>
-                            <div className={`${classes.form_dropdown} ${currentInput === '직업'? classes.active : null}`}  onBlur={()=>setCurrentInput('')} onClick={()=>setCurrentInput('직업')}>
-                                <input name='CharacterClass' type="text" readOnly />
+                            <div className={`${classes.form_dropdown} ${'직업'===currentInput? classes.active:null}`}>
+                                <input  type="text" value={formData.CharacterClass} readOnly onClick={()=>selectHandler('직업')} onBlur={()=>setCurrentInput('')}/>
                                 <div className={classes.option}>
-                                    {market.Classes.map((data,idx)=><div key={idx}>{data}</div>)}
+                                    <div data-name='CharacterClass' data-value={''} onMouseOver={mouseOverHandler}>전체 직업</div>
+                                    {market.Classes.map((data,idx)=><div key={idx} data-name='CharacterClass' data-value={data} onMouseOver={mouseOverHandler}>{data}</div>)}
                                 </div>
                             </div>
                         </div>
@@ -36,26 +65,26 @@ const MarketHeader = ()=>{
                     <div className={classes.row}>
                         <div className={classes.form_input}>
                             <label htmlFor="">아이템 티어</label>
-                            <div className={`${classes.form_dropdown} ${currentInput==='티어'? classes.active : null}`} data-code={currentInput} onBlur={()=>setCurrentInput('')} onClick={()=>setCurrentInput('티어')} >
-                                <input name='ItemTier' type="text" readOnly value={tier} />
+                            <div className={`${classes.form_dropdown} ${'티어'===currentInput? classes.active:null}`}>
+                                <input name='ItemTier' type="text" readOnly value={formData.ItemTier} onClick={()=>selectHandler('티어')} onBlur={()=>setCurrentInput('')}/>
                                 <div className={classes.option}>
-                                    {market.ItemTiers.map((data,idx)=><div key={idx} onClick={e=>mouseOverHandler(e)}>{data}</div>)}
+                                    {market.ItemTiers.map((data,idx)=><div key={idx} data-name='ItemTier' data-value={data} onMouseOver={mouseOverHandler}>{data}</div>)}
                                 </div>
                             </div>
                         </div>
                         <div className={classes.form_input}>
                             <label htmlFor="">아이템 등급</label>
-                            <div className={`${classes.form_dropdown} ${currentInput==='등급'? classes.active : null}`} onBlur={()=>setCurrentInput('')} onClick={()=>setCurrentInput('등급')}>
-                                <input name='ItemGrade' type="text" readOnly />
+                            <div className={`${classes.form_dropdown} ${'등급'===currentInput? classes.active:null}`}>
+                                <input name='ItemGrade' type="text" readOnly value={formData.ItemGrade} onClick={()=>selectHandler('등급')} onBlur={()=>setCurrentInput('')}/>
                                 <div className={classes.option}>
-                                    {market.ItemGrades.map((data,idx)=><div key={idx} onClick={e=>mouseOverHandler(e)}>{data}</div>)}
+                                    {market.ItemGrades.map((data,idx)=><div key={idx} data-name='ItemGrade' data-value={data} onMouseOver={mouseOverHandler}>{data}</div>)}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={classes.button_sector}>
-                    <button type='submit'>검색</button>
+                    <button>검색</button>
                 </div>
             </Form>
         </div>
