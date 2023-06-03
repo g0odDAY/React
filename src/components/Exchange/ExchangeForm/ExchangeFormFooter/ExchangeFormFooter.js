@@ -21,7 +21,11 @@ const ExchangeFormFooter = ({previewImage,setPreviewImage}) =>{
     return <div className={classes.footer}>
                 <div className={classes.footer_content}>
                     <div>기타 내용</div>
-                    <textarea name="" id="" rows={6} placeholder="기타 내용"></textarea>
+                    <textarea
+                        name='description'
+                        rows={6}
+                        placeholder="기타 내용"
+                    />
                 </div>
                 <div>
                     이미지 추가<input type="file" id="file-input" onChange={fileHandler} accept='image/png,image/jpeg,image/webp,image/gif'/>

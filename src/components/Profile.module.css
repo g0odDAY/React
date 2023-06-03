@@ -31,7 +31,7 @@
 .menuLists li{
     padding:.5rem .75rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     cursor:pointer;
 
 }

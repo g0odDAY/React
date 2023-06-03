@@ -2,7 +2,7 @@ import {useReducer} from "react";
 
 const initialState = {
     CategoryCode:'',
-    PageNo:1,
+    PageNo:0,
     Sort:'',
     SortCondition:'DESC',
     CharacterClass:'',
@@ -15,7 +15,7 @@ const marketStateReducer = (state,action)=>{
         case 'CODE':
             return {...state,PageNo:1,CategoryCode:action.code};
         case 'PAGE':
-            return {...state,PageNo: state.PageNo+(action.number)};
+            return {...state,PageNo:(action.number)};
         case 'SORT':
             return {...state,Sort:action.sort,PageNo:1,SortCondition:state.SortCondition ==='ASC'?'DESC':'ASC'};
         case 'FORM':

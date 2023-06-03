@@ -258,8 +258,17 @@ td img{
     padding:.25rem;
 }
 .indicator button{
-    padding:.75rem;
+    padding:.25rem;
+
+}
+.indicator span{
     border:1px solid #d0d0d0;
+    padding:.25rem;
+    margin:.25rem;
+}
+.indicator span.select{
+    background: #26343f;
+    color:#fff;
 }
 
 .empty{

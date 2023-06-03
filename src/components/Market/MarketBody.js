@@ -7,6 +7,7 @@ import {TbArrowBigDownFilled} from "react-icons/tb";
 import {GiGoldBar} from "react-icons/gi";
 import {MdArrowBackIos, MdArrowForwardIos} from "react-icons/md";
 import {useState} from "react";
+import {RxDoubleArrowLeft, RxDoubleArrowRight} from "react-icons/rx";
 const gradeColor = {
     에스더:'#2faba8',
     고대:'#dcc999',
@@ -30,6 +31,7 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
         onSuccess:()=>setIsQueryLoaded(true)
     })
     const totalPage = data? Math.ceil(data.TotalCount/10):null;
+
     const sortFnc = (Sort)=>{
         if(isQueryLoaded){
             sortHandler(Sort);
@@ -107,23 +109,45 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
                     </table>
                 </div>
                 {data?<div className={classes.indicator}>
-                    <button type='button' onClick={() => pageHandler(-1)} disabled={marketState.PageNo === 1}>
-                        <MdArrowBackIos size={25}/></button>
+                    <button type='button' disabled={marketState.PageNo===1} onClick={()=>pageHandler(1)}>
+                        <RxDoubleArrowLeft size={35}/>
+                    </button>
+                    <button type='button' onClick={() => pageHandler(marketState.PageNo-10)} disabled={marketState.PageNo === 1}>
+                        <MdArrowBackIos size={25}/>
+                    </button>
+                    {/*<div>*/}
+                    {/*    {data ? `${marketState.PageNo}/${totalPage===0 ?1:totalPage}` : null}*/}
+                    {/*</div>*/}
                     <div>
-                        {data ? `${marketState.PageNo}/${totalPage===0 ?1:totalPage}` : null}
+                        <Indicator pageNo={marketState.PageNo} totalPage={totalPage} pageHandler={pageHandler}/>
                     </div>
-                    <button type='button' onClick={() => pageHandler(1)}
-                            disabled={marketState.PageNo === totalPage}><MdArrowForwardIos size={25}/></button>
+                    <button type='button' onClick={() => pageHandler(marketState.PageNo+10)} disabled={marketState.PageNo === totalPage}>
+                        <MdArrowForwardIos size={25}/>
+                    </button>
+                    <button type='button' onClick={()=>pageHandler(totalPage)}>
+                        <RxDoubleArrowRight size={35}/>
+                    </button>
                 </div>:null}
             </div>
-
             <Outlet/>
         </div>
     )
 }
 
 export default MarketBody;
+const Indicator = ({pageNo, totalPage, pageHandler})=>{
+        console.log(pageNo);
+        const pageSize = 10;
+        const startPage = Math.floor(pageNo / 10) * 10 ;
+        const endPage = Math.min( startPage+pageSize-1, totalPage);
+        console.log("startPage",startPage,'endPage',endPage);
+        const pages = [];
+        for (let i = startPage+1; i <= endPage+1; i++) {
+            pages.push(<span key={i} className={`${pageNo===i?classes.select:null}`} onClick={()=>pageHandler(i)}>{i}</span>);
+        }
+        return pages;
 
+}
 export const Empty = ()=>{
     return  <tr>
 

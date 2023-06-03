@@ -37,9 +37,9 @@ const Profile = ({users})=>{
             </div>
         {isOpen && <div className={classes.menu} >
                 <ul className={classes.menuLists} >
-                    <li><FaExchangeAlt/>정보 수정</li>
-                    <li><AiOutlineNotification/>1:1문의</li>
-                    <li className={classes.logout} onClick={ctx.onLogout}><RiLogoutBoxLine/>로그 아웃</li>
+                    <li><FaExchangeAlt/><span>정보 수정</span></li>
+                    <li><AiOutlineNotification/><span>1:1문의</span></li>
+                    <li className={classes.logout} onClick={ctx.onLogout}><RiLogoutBoxLine/><span>로그 아웃</span></li>
                 </ul>
             </div>}
         </div>

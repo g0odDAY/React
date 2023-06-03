@@ -1,62 +1,100 @@
 import {useReducer} from "react";
 
 const initialState = {
-    value:'',
-    isOpen:false,
-    amount:3,
+      formData:{
+          server:'',
+          category:'',
+          itemName:'',
+          quality:'',
+          characteristic:'',
+          characteristic_amount:'',
+          sub_characteristic:'',
+          sub_characteristic_amount:'',
+          engrave:'',
+          engrave_amount:'',
+          sub_engrave:'',
+          sub_engrave_amount:'',
+          penalty:'',
+          penalty_amount:'',
+          price:'',
+      },
+      error:{
+          server:'',
+          category:'',
+          itemName:'',
+          quality:'',
+          characteristic:'',
+          characteristic_amount:'',
+          sub_characteristic:'',
+          sub_characteristic_amount:'',
+          engrave:'',
+          engrave_amount:'',
+          sub_engrave:'',
+          sub_engrave_amount:'',
+          penalty:'',
+          penalty_amount:'',
+          price:'',
+      }
 }
 const inputStateReducer = (state,action)=>{
     switch (action.type){
-        case 'INPUT':
-            return {value:action.value,isOpen: state.isOpen};
-        case 'OPEN':
-            return {value:state.value,isOpen: !state.isOpen};
         case 'SELECT':
-            return {value:action.value,isOpen:false};
-        case 'UP':
-            if(state.amount >= 6){
-                return {amount:6};
-            }
-            return {amount:state.amount+1};
-        case 'DOWN':
-            if(state.amount <= 3){
-                return {amount: 3};
-            }
-            return {amount:state.amount-1};
+            return {...state,formData:{...state.formData,[action.name]:action.value}};
+        case 'INPUT':
+            return {...state,formData:{...state.formData,[action.name]:action.value}};
+        case 'ERROR':
+            return {...state,error:{...state.error,[action.name]:action.error}};
+        case 'ERROR_CLEAR':
+            return {...state,error:{...state.error,[action.name]:''}};
         default:
             return state;
     }
 }
-const useInput = (validate)=>{
+const useInput = ()=>{
     const[inputState,dispatch] = useReducer(inputStateReducer,initialState);
-    const validation = validate(inputState.value);
+    const inputHandler = (e,name)=>{
+        const value = e.target.value;
+        // const regex = /^[0-9]+$/;
+        // console.log(regex.test((value)));
+        // if(regex.test(value)){
+        //     dispatch({type:'INPUT',name,value});
+        // };
+        const key = e.target.value;
+        console.log(key.match(/[a-zA-Z]/));
+        if(key.match(/[a-zA-Z]/)){
+            e.preventDefault();
+            dispatch({type:'INPUT',name,value});
+        }
+    }
+    const selectHandler = (e,name)=>{
+        const value= e.target.innerText;
+        dispatch({type:'SELECT',name,value});
+        dispatch({type:'ERROR_CLEAR',name})
 
-    const inputHandler = (e)=>{
-        console.log("input!",e.target.value)
-        dispatch({type:'INPUT',value:e.target.value});
     }
-    const openHandler = (e)=>{
-        console.log('opend!')
-        dispatch({type:'OPEN'});
+    const submitHandler = (e)=>{
+        e.preventDefault();
+        const {formData,error} = inputState;
+        const emptyField = [];
+        Object.entries(formData).forEach(([name,value])=>{
+            if(value.trim() === ''){
+                emptyField.push(name)
+            };
+        });
+        emptyField.map(name => {
+            console.log(name);
+            const errorMessage =`${name}을/를 입력해주세요!`;
+            dispatch({type:'ERROR',name,error:errorMessage});
+        })
+
+
     }
-    const selectHandler = (e)=>{
-        console.log('select!');
-        dispatch({type:'SELECT',value:e.target.innerText})
-    }
-    const updownHandler = (type) =>{
-        console.log(type);
-        dispatch({type})
-    }
-    console.log('so',inputState.value);
     return {
-        value:inputState.value,
-        isOpen:inputState.isOpen,
-        amount:inputState.amount,
-        validation,
+        formData:inputState.formData,
+        error:inputState.error,
         inputHandler,
-        openHandler,
         selectHandler,
-        updownHandler
+        submitHandler
     }
 }
 export default useInput;

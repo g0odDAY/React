@@ -1,9 +1,10 @@
 import classes from './ExchangeForm.module.css';
 import downarrow from '../free-arrow-down-icon-3101-thumb.png';
-import {useEffect, useRef, useState} from "react";
+import {useState} from "react";
 import ExchangeFormFooter from "./ExchangeFormFooter/ExchangeFormFooter";
 import useInput from "../../../hooks/use-input";
-import useMarket from "../../Market/hooks/marketReducer";
+import {FaMinus, FaPlus} from "react-icons/fa";
+
 
 const ExchangeForm = ()=>{
     const serverArr = ['루페온','아브렐슈드','카제로스','카마인','니나브','실리안','카단','아만'];
@@ -13,193 +14,9 @@ const ExchangeForm = ()=>{
     const engraveArr = ['각성','강령술','결투의 대가','구슬동자','굳은 의지','급소 타격','기습의 대가','긴급 구조','달인의 저력'];
     const penaltyArr = ['공격력 감소','공격속도 감소','방어력 감소','이동속도 감소'];
     const [previewImage,setPreviewImage] = useState('');
-    const {
-        value:serverValue,
-        isOpen:serverIsOpen,
-        validation:serverValidation,
-        inputHandler:serverInput,
-        openHandler:serverOpen,
-        selectHandler:serverSelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:categoryValue,
-        isOpen:categoryIsOpen,
-        validation:categoryValidation,
-        inputHandler:categoryInput,
-        openHandler:categoryOpen,
-        selectHandler:categorySelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:gradeValue,
-        isOpen:gradeIsOpen,
-        validation:gradeValidation,
-        inputHandler:gradeInput,
-        openHandler:gradeOpen,
-        selectHandler:gradeSelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:itemValue,
-        isOpen:itemIsOpen,
-        validation:itemValidation,
-        inputHandler:itemInput,
-        openHandler:itemOpen,
-        selectHandler:itemSelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:qualityValue,
-        isOpen:qualityIsOpen,
-        validation:qualityValidation,
-        inputHandler:qualityInput,
-        openHandler:qualityOpen,
-        selectHandler:qualitySelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:characteristicValue,
-        isOpen:characteristicIsOpen,
-        validation:characteristicValidation,
-        inputHandler:characteristicInput,
-        openHandler:characteristicOpen,
-        selectHandler:characteristicSelect,
-    }=useInput(data=>data !== '');
 
-    const {
-        value:amountValue,
-        isOpen:amountIsOpen,
-        validation:amountValidation,
-        inputHandler:amountInput,
-        openHandler:amountOpen,
-        selectHandler:amountSelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:subCharacteristicValue,
-        isOpen:subCharacteristicIsOpen,
-        validation:subCharacteristicValidation,
-        inputHandler:subCharacteristicInput,
-        openHandler:subCharacteristicOpen,
-        selectHandler:subCharacteristicSelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:subAmountValue,
-        isOpen:subAmountIsOpen,
-        validation:subAmountValidation,
-        inputHandler:subAmountInput,
-        openHandler:subAmountOpen,
-        selectHandler:subAmountSelect,
-    }=useInput(data=>data !== '');
-    const {
-        value:engraveValue,
-        isOpen:engraveIsOpen,
-        validation:engraveValidation,
-        inputHandler:engraveInput,
-        openHandler:engraveOpen,
-        selectHandler:engraveSelect,
-    }=useInput(data=>data !== '');
-    const {
-        amount:enAmount,
-        isOpen:enAmountIsOpen,
-        validation:enAmountValidation,
-        inputHandler:enAmountInput,
-        openHandler:enAmountOpen,
-        selectHandler:enAmountSelect,
-        updownHandler:enAmountUpdown,
-    }=useInput(data=>data !== '');
-    const {
-        value:subEngraveValue,
-        isOpen:subEngraveIsOpen,
-        validation:subEngraveValidation,
-        inputHandler:subEngraveInput,
-        openHandler:subEngraveOpen,
-        selectHandler:subEngraveSelect,
-    }=useInput(data=>data !== '');
-    const {
-        amount:subEnAmount,
-        isOpen:subEnAmountIsOpen,
-        validation:subEnAmountValidation,
-        inputHandler:subEnAmountInput,
-        openHandler:subEnAmountOpen,
-        selectHandler:subEnAmountSelect,
-        updownHandler:subEnAmountUpdown,
-    }=useInput(data=>data !== '');
-    const {
-        value:penaltyValue,
-        isOpen:penaltyIsOpen,
-        validation:penaltyValidation,
-        inputHandler:penaltyInput,
-        openHandler:penaltyOpen,
-        selectHandler:penaltySelect,
-        updownHandler:penaltyUpdown,
-    }=useInput(data=>data !== '');
-    const {
-        value:penaltyAmountValue,
-        isOpen:penaltyAmountIsOpen,
-        validation:penaltyAmountValidation,
-        inputHandler:penaltyAmountInput,
-        openHandler:penaltyAmountOpen,
-        selectHandler:penaltyAmountSelect,
-        updownHandler:penaltyAmountUpdown,
-    }=useInput(data=>data !== '');
-    const {
-        value:priceValue,
-        validation:priceValidation,
-        inputHandler:priceInput,
-    }=useInput(data=>data !== '');
-    const handleClick = (e) =>{
-    }
-
-    useEffect(()=>{
-        document.addEventListener('click',handleClick);
-        return ()=>{
-            document.removeEventListener('click',handleClick);
-        }
-    },[])
-    console.log('render');
-
-    const submitHandle = (e)=>{
-        e.preventDefault();
-        console.log(serverValue);
-        console.log(categoryValue);
-        console.log(gradeValue);
-        console.log(itemValue);
-        console.log(qualityValue);
-        console.log(characteristicValue);
-        console.log(amountValue);
-        console.log(engraveValue);
-        // fetch('https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json',{
-        //     method:'POST',
-        //     headers:{
-        //         'Content-type':'application/json',
-        //     },
-        //     body:JSON.stringify({
-        //         server:serverValue,
-        //         category:categoryValue,
-        //         grade:gradeValue,
-        //         item:itemValue,
-        //         quality:qualityValue,
-        //         characteristic:{
-        //             chrch:characteristicValue,
-        //             amount:amountValue,
-        //             subChrch:subCharacteristicValue,
-        //             subAmount:subAmountValue
-        //         },
-        //         option:{
-        //             engrave:engraveValue,
-        //             amount:enAmount,
-        //             subEgrave:subEngraveValue,
-        //             subAmount:subEnAmount,
-        //             penalty:penaltyValue
-        //         },
-        //         price:priceValue,
-        //         img:previewImage
-        //     })
-        // }).then(res=>{
-        //     return res.json();
-        // }).then(res=>{
-        //     console.log(res);
-        // })
-
-
-    }
-    const [activeIdx,setActiveIdx]=useState(null);
+    const [activeIdx,setActiveIdx]=useState('');
+    const {formData,error,selectHandler,inputHandler,submitHandler}=useInput();
     const openHandler = (idx)=>{
         if(idx === activeIdx){
             console.log(`${idx}와 ${activeIdx}은 같다.`)
@@ -210,16 +27,21 @@ const ExchangeForm = ()=>{
         }
     }
     const closeHandler = ()=>{
-        setActiveIdx(null);
+        setActiveIdx('');
     }
-    const penaltyUpdownHandler = (type)=>{
-
-
+    const keyHandler = (event)=>{
+        // const key = e.target.value;
+        // console.log(key.match(/[a-zA-Z]/));
+        // if(key.match(/[a-zA-Z]/)){
+        //     e.preventDefault();
+        // }
+        if (!event.key.match(/[0-9]/)) {
+            event.preventDefault();
+            event.target.value += ' ';
+        }
     }
-    const show=(e)=>{
 
-    }
-    return <form onSubmit={submitHandle}>
+    return <form onSubmit={submitHandler}>
                 <div className={classes.wrapper}>
                         <div className={classes.header}>
                             <h2>아이템 등록</h2>
@@ -232,29 +54,42 @@ const ExchangeForm = ()=>{
                                 <div>서버*</div>
                                 <div className={classes.container}>
                                     <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(0)}>
-                                        <input type="text" className={classes.selectBtn} placeholder="서버" name='server' value={serverValue} disabled={true}/>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="서버"
+                                            name='server'
+                                            disabled
+                                            value={formData.server}
+                                        />
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
                                     <ul className={classes.selectList} aria-expanded={!(activeIdx === 0)}>
                                         <div className={classes.hidden}>
-                                            {serverArr.map((data,idx)=><li key={idx} onClick={serverSelect}>{data}</li>)}
+                                            {serverArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'server')}>{data}</li>)}
                                         </div>
                                     </ul>
+                                    {error.server && <span>{error.server}</span>}
                                 </div>
                             </div>
-
                             <div className={classes.inner}>
                                 <div>카테고리*</div>
                                 <div className={classes.container}>
                                     <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(1)}>
-                                        <input type="text" className={classes.selectBtn} placeholder="카테고리" name='category' value={categoryValue} disabled={true}/>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="카테고리"
+                                            name='category'
+                                            disabled
+                                            value={formData.category}
+                                        />
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
                                     <ul className={classes.selectList} aria-expanded={!(activeIdx === 1)}>
                                         <div className={classes.hidden}>
-                                            {categoryArr.map((data,idx) => <li key={idx} onClick={categorySelect}>{data}</li>)}
+                                            {categoryArr.map((data,idx) => <li key={idx} onClick={(e)=>selectHandler(e,'category')}>{data}</li>)}
                                         </div>
                                     </ul>
+                                    {error.category && <span>{error.category}</span>}
                                 </div>
                             </div>
                         </div>
@@ -262,30 +97,21 @@ const ExchangeForm = ()=>{
                     <div className={classes.body}>
                         <div className={classes.box}>
                             <div className={classes.inner}>
-                                <div className={`${gradeValidation ? classes.title : ''}`}>등급*</div>
-                                <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(2)}>
-                                        <input className={classes.selectBtn} placeholder="등급" name='grade' value={gradeValue} disabled={true}/>
-                                        <img src={downarrow}  alt="downarrow" width={16}/>
-                                    </div>
-                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 2)}>
-                                        <div className={classes.hidden}>
-                                            <li onClick={gradeSelect}>유물</li>
-                                            <li onClick={gradeSelect}>고대</li>
-                                        </div>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className={classes.inner}>
                                 <div>아이템 이름*</div>
                                 <div className={classes.container}>
                                     <div className={`${classes.selectBox}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(3)}>
-                                        <input className={classes.selectBtn} placeholder="아이템 이름" name='item' disabled={true} value={itemValue}/>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="아이템 이름"
+                                            name='itemName'
+                                            disabled
+                                            value={formData.itemName}
+                                        />
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
                                     <ul className={classes.selectList} aria-expanded={!(activeIdx === 3)}>
                                         <div className={classes.hidden}>
-                                            {itemArr.map((data,idx)=> <li key={idx} onClick={itemSelect}>{data.name}</li>)}
+                                            {itemArr.map((data,idx)=> <li key={idx} onClick={(e)=>selectHandler(e,'itemName')}>{data.name}</li>)}
                                         </div>
                                     </ul>
                                 </div>
@@ -294,7 +120,15 @@ const ExchangeForm = ()=>{
                                 <div>품질*</div>
                                 <div className={classes.container}>
                                     <div className={classes.selectBox}>
-                                        <input className={classes.selectBtn} type="text" placeholder="품질" name='quality' value={qualityValue} onChange={qualityInput}/>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="품질"
+                                            name='quality'
+                                            maxLength={3}
+                                            inputMode='numeric'
+                                            pattern='[0-9,\.]*'
+                                            onChange={(e)=>inputHandler(e,'quality')}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -304,40 +138,58 @@ const ExchangeForm = ()=>{
                                 <div>전투 특성*</div>
                                 <div className={`${classes.container}`}>
                                     <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(4)}>
-                                        <input className={classes.selectBtn} placeholder="선택" disabled={true} name='characteristic' value={characteristicValue}/>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="선택"
+                                            name='characteristic'
+                                            disabled
+                                            value={formData.characteristic}
+                                        />
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
                                     <ul className={classes.selectList} aria-expanded={!(activeIdx === 4)}>
                                         <div className={classes.hidden}>
-                                            {characteristic.map((data,idx)=><li key={idx} onClick={characteristicSelect}>{data}</li>)}
+                                            {characteristic.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'characteristic')}>{data}</li>)}
                                         </div>
                                     </ul>
                                 </div>
                             </div>
                             <div className={classes.container}>
                                 <div className={classes.selectBox}>
-                                    <input className={classes.selectBtn} type="text" placeholder="수치" name='amount' value={amountValue} onChange={amountInput}/>
+                                    <input
+                                        className={classes.selectBtn}
+                                        placeholder="수치"
+                                        name='characteristic_amount'/>
                                 </div>
                             </div>
-
                         </div>
                         <div className={classes.box}>
                             <div className={classes.inner}>
-                                <div className={`${classes.container}`}>
+                                <div className={classes.container}>
                                     <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(5)}>
-                                        <input className={classes.selectBtn} placeholder="선택" disabled={true} name='subCharacteristic' value={subCharacteristicValue}/>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="선택"
+                                            name='sub_characteristic'
+                                            disabled
+                                            value={formData.sub_characteristic}
+                                        />
                                         <img src={downarrow}  alt="downarrow" width={16}/>
                                     </div>
                                     <ul className={classes.selectList} aria-expanded={!(activeIdx === 5)}>
                                         <div className={classes.hidden}>
-                                            {characteristic.map((data,idx)=><li key={idx} onClick={subCharacteristicSelect}>{data}</li>)}
+                                            {characteristic.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'sub_characteristic')}>{data}</li>)}
                                         </div>
                                     </ul>
                                 </div>
                             </div>
                             <div className={classes.container}>
                                 <div className={classes.selectBox}>
-                                    <input className={classes.selectBtn} type="text" placeholder="수치" name='subAmount' value={subAmountValue} onChange={subAmountInput}/>
+                                    <input
+                                        className={classes.selectBtn}
+                                        placeholder="수치"
+                                        name='sub_characteristic_amount'
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -345,46 +197,66 @@ const ExchangeForm = ()=>{
                             <div className={classes.inner}>
                                 <div>각인 효과*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={engraveOpen}>
-                                        <input className={classes.selectBtn} placeholder="선택" disabled={true} name="engrave" value={engraveValue}/>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(6)} >
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="선택"
+                                            disabled
+                                            name="engrave"
+                                            value={formData.engrave}
+                                        />
                                         <img src={downarrow} alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:engraveIsOpen ? 'block' : 'none',zIndex:4}}>
-                                        <div className={classes.hidden}>
-                                            {engraveArr.map((data,idx)=><li key={idx} onClick={engraveSelect}>{data}</li>)}
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 6)}>
+                                        <div className={classes.hidden} >
+                                            {engraveArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'engrave')}>{data}</li>)}
                                         </div>
                                     </ul>
                                 </div>
                             </div>
                             <div className={classes.updownBtn}>
-                                <button type="button" onClick={()=>enAmountUpdown('DOWN')}>
-                                    -
+                                <button type="button">
+                                    <FaPlus size={15} color='#d0d0d0'/>
                                 </button>
-                                <input className={classes.selectBtn}  value={enAmount} onChange={enAmountInput} />
-                                <button type="button" onClick={()=>enAmountUpdown('UP')}>
-                                   +
+                                <input
+                                    className={classes.selectBtn}
+                                    disabled
+                                    value={formData.engrave_amount}
+                                />
+                                <button type="button">
+                                   <FaMinus size={15} color='#d0d0d0'/>
                                 </button >
                             </div>
                             <div className={classes.inner}>
                                 <div>패널티*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={penaltyOpen}>
-                                        <input type="text" className={classes.selectBtn} placeholder='선택' disabled={true} value={penaltyValue} name="penalty" />
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(7)}>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder='선택'
+                                            name="penalty"
+                                            disabled
+                                            value={formData.penalty}
+                                        />
                                         <img src={downarrow} alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:penaltyIsOpen ? 'block' :'none',zIndex:4}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 7)}>
                                         <div className={classes.hidden}>
-                                            {penaltyArr.map((data,idx)=><li key={idx} onClick={penaltySelect}>{data}</li>)}
+                                            {penaltyArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'penalty')}>{data}</li>)}
                                         </div>
                                     </ul>
                                 </div>
                             </div>
                             <div className={classes.updownBtn}>
-                                <button type="button" onClick={()=>penaltyUpdownHandler('DOWN')}>
+                                <button type="button" >
                                     -
                                 </button>
-                                <input className={classes.selectBtn} placeholder="3" disabled={true} />
-                                <button type="button" onClick={()=>penaltyUpdownHandler('UP')}>
+                                <input
+                                    className={classes.selectBtn}
+                                    disabled
+                                    value={formData.penalty_amount}
+                                />
+                                <button type="button" >
                                     +
                                 </button >
                             </div>
@@ -392,23 +264,33 @@ const ExchangeForm = ()=>{
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={subEngraveOpen}>
-                                        <input className={classes.selectBtn} placeholder="선택" disabled={true} name="subEngrave" value={subEngraveValue}/>
+                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler}  onClick={()=>openHandler(8)}>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="선택"
+                                            disabled
+                                            name="sub_engrave"
+                                            value={formData.sub_engrave}
+                                        />
                                         <img src={downarrow} alt="downarrow" width={16}/>
                                     </div>
-                                    <ul className={classes.selectList} style={{display:subEngraveIsOpen ? 'block' : 'none'}}>
+                                    <ul className={classes.selectList} aria-expanded={!(activeIdx === 8)}>
                                         <div className={classes.hidden}>
-                                            {engraveArr.map((data,idx)=><li key={idx} onClick={subEngraveSelect}>{data}</li>)}
+                                            {engraveArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'sub_engrave')}>{data}</li>)}
                                         </div>
                                     </ul>
                                 </div>
                             </div>
                             <div className={classes.updownBtn}>
-                                <button type="button" onClick={()=>subEnAmountUpdown('DOWN')} >
+                                <button type="button"  >
                                     -
                                 </button>
-                                <input className={classes.selectBtn} placeholder="3" disabled={true} value={subEnAmount}/>
-                                <button type="button" onClick={()=>subEnAmountUpdown('UP')}>
+                                <input
+                                    className={classes.selectBtn}
+                                    disabled
+                                    value={formData.sub_engrave_amount}
+                                />
+                                <button type="button" >
                                     +
                                 </button>
                             </div>
@@ -418,7 +300,12 @@ const ExchangeForm = ()=>{
                                 <div>판매가격*</div>
                                 <div className={classes.container}>
                                     <div className={classes.selectBox}>
-                                        <input className={classes.selectBtn} type="text" placeholder="가격" onChange={priceInput}/>
+                                        <input
+                                            className={classes.selectBtn}
+                                            placeholder="가격"
+                                            value={formData.price}
+                                            onChange={(e)=>inputHandler(e,'price')}
+                                        />
                                     </div>
                                 </div>
                             </div>

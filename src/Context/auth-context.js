@@ -24,7 +24,6 @@ export const AuthContextProvider =(props)=>{
         e.preventDefault();
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-
                 const user = userCredential.user;
                 fetch('https://curious-furnace-340706-default-rtdb.firebaseio.com/user.json',{
                     method:'POST',
