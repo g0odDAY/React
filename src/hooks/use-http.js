@@ -1,8 +1,7 @@
-import {useCallback, useState} from "react";
+import {useCallback} from "react";
 
-const useHttp = (config)=>{
-    const sendRequest = useCallback(async ()=>{
-        console.log('fetchRequest config',config);
+const useHttp = ()=>{
+    const sendRequest = useCallback(async (config)=>{
         try{
             const response = await fetch(config.url,{
                 method:config.method ? config.method : 'GET',
@@ -17,8 +16,6 @@ const useHttp = (config)=>{
           alert('error 발생'+error);
         }
     },[]);
-    return {
-        sendRequest
-    }
+    return {sendRequest}
 }
 export default useHttp;

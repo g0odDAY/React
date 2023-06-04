@@ -16,7 +16,7 @@ const ExchangeForm = ()=>{
     const [previewImage,setPreviewImage] = useState('');
 
     const [activeIdx,setActiveIdx]=useState('');
-    const {formData,error,selectHandler,inputHandler,submitHandler}=useInput();
+    const {formData,error,selectHandler,inputHandler,updownHandler,submitHandler}=useInput();
     const openHandler = (idx)=>{
         if(idx === activeIdx){
             console.log(`${idx}와 ${activeIdx}은 같다.`)
@@ -53,7 +53,7 @@ const ExchangeForm = ()=>{
                             <div className={classes.inner}>
                                 <div>서버*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(0)}>
+                                    <div className={`${classes.selectBox} ${error.server ? classes.error:null}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(0)}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="서버"
@@ -68,13 +68,13 @@ const ExchangeForm = ()=>{
                                             {serverArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'server')}>{data}</li>)}
                                         </div>
                                     </ul>
-                                    {error.server && <span>{error.server}</span>}
+                                    {error.server && <span className={classes.error_message}>{error.server}</span>}
                                 </div>
                             </div>
                             <div className={classes.inner}>
                                 <div>카테고리*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(1)}>
+                                    <div className={`${classes.selectBox} ${error.category ? classes.error:null}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(1)}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="카테고리"
@@ -89,7 +89,7 @@ const ExchangeForm = ()=>{
                                             {categoryArr.map((data,idx) => <li key={idx} onClick={(e)=>selectHandler(e,'category')}>{data}</li>)}
                                         </div>
                                     </ul>
-                                    {error.category && <span>{error.category}</span>}
+                                    {error.category && <span className={classes.error_message}>{error.category}</span>}
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,7 @@ const ExchangeForm = ()=>{
                             <div className={classes.inner}>
                                 <div>아이템 이름*</div>
                                 <div className={classes.container}>
-                                    <div className={`${classes.selectBox}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(3)}>
+                                    <div className={`${classes.selectBox} ${error.itemName ? classes.error:null}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(3)}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="아이템 이름"
@@ -114,12 +114,13 @@ const ExchangeForm = ()=>{
                                             {itemArr.map((data,idx)=> <li key={idx} onClick={(e)=>selectHandler(e,'itemName')}>{data.name}</li>)}
                                         </div>
                                     </ul>
+                                    {error.itemName && <span className={classes.error_message}>{error.itemName}</span>}
                                 </div>
                             </div>
                             <div className={classes.inner}>
                                 <div>품질*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox}>
+                                    <div className={`${classes.selectBox} ${error.quality ? classes.error:null}`}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="품질"
@@ -130,6 +131,7 @@ const ExchangeForm = ()=>{
                                             onChange={(e)=>inputHandler(e,'quality')}
                                         />
                                     </div>
+                                    {error.quality && <span className={classes.error_message}>{error.quality}</span>}
                                 </div>
                             </div>
                         </div>
@@ -137,7 +139,7 @@ const ExchangeForm = ()=>{
                             <div className={classes.inner}>
                                 <div>전투 특성*</div>
                                 <div className={`${classes.container}`}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(4)}>
+                                    <div className={`${classes.selectBox} ${error.characteristic ? classes.error:null}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(4)}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="선택"
@@ -152,21 +154,24 @@ const ExchangeForm = ()=>{
                                             {characteristic.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'characteristic')}>{data}</li>)}
                                         </div>
                                     </ul>
+                                    {error.characteristic && <span className={classes.error_message}>{error.characteristic}</span>}
                                 </div>
                             </div>
                             <div className={classes.container}>
-                                <div className={classes.selectBox}>
+                                <div className={`${classes.selectBox} ${error.characteristic_amount ? classes.error:null}`}>
                                     <input
                                         className={classes.selectBtn}
                                         placeholder="수치"
+                                        onChange={(e)=>inputHandler(e,'characteristic_amount')}
                                         name='characteristic_amount'/>
                                 </div>
+                                {error.characteristic_amount && <span className={classes.error_message}>{error.characteristic_amount}</span>}
                             </div>
                         </div>
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(5)}>
+                                    <div className={`${classes.selectBox} ${error.sub_characteristic ? classes.error:null}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(5)}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="선택"
@@ -181,23 +186,26 @@ const ExchangeForm = ()=>{
                                             {characteristic.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'sub_characteristic')}>{data}</li>)}
                                         </div>
                                     </ul>
+                                    {error.sub_characteristic && <span className={classes.error_message}>{error.sub_characteristic}</span>}
                                 </div>
                             </div>
                             <div className={classes.container}>
-                                <div className={classes.selectBox}>
+                                <div className={`${classes.selectBox} ${error.sub_characteristic_amount ? classes.error:null}`}>
                                     <input
                                         className={classes.selectBtn}
                                         placeholder="수치"
+                                        onChange={(e)=>inputHandler(e,'sub_characteristic_amount')}
                                         name='sub_characteristic_amount'
                                     />
                                 </div>
+                                {error.sub_characteristic_amount && <span className={classes.error_message}>{error.sub_characteristic_amount}</span>}
                             </div>
                         </div>
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div>각인 효과*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(6)} >
+                                    <div className={`${classes.selectBox} ${error.engrave ? classes.error:null}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(6)} >
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="선택"
@@ -212,25 +220,29 @@ const ExchangeForm = ()=>{
                                             {engraveArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'engrave')}>{data}</li>)}
                                         </div>
                                     </ul>
+                                    {error.engrave && <span className={classes.error_message}>{error.engrave}</span>}
                                 </div>
                             </div>
-                            <div className={classes.updownBtn}>
-                                <button type="button">
-                                    <FaPlus size={15} color='#d0d0d0'/>
+                            <div className={`${classes.updownBtn} ${error.engrave_amount ? classes.error:null}`}>
+                                <button type="button" onClick={()=>updownHandler('DOWN','engrave_amount')}>
+                                    <FaMinus size={15} color='#d0d0d0'/>
                                 </button>
                                 <input
                                     className={classes.selectBtn}
                                     disabled
+                                    placeholder={'0'}
+                                    value={3}
+                                    onChange={(e)=>inputHandler(e,'engrave_amount')}
                                     value={formData.engrave_amount}
                                 />
-                                <button type="button">
-                                   <FaMinus size={15} color='#d0d0d0'/>
+                                <button type="button" onClick={()=>updownHandler('UP','engrave_amount')}>
+                                    <FaPlus size={15} color='#d0d0d0'/>
                                 </button >
                             </div>
                             <div className={classes.inner}>
                                 <div>패널티*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(7)}>
+                                    <div className={`${classes.selectBox} ${error.penalty ? classes.error:null}`} tabIndex={0} onBlur={closeHandler} onClick={()=>openHandler(7)}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder='선택'
@@ -245,26 +257,28 @@ const ExchangeForm = ()=>{
                                             {penaltyArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'penalty')}>{data}</li>)}
                                         </div>
                                     </ul>
+                                    {error.penalty && <span className={classes.error_message}>{error.penalty}</span>}
                                 </div>
                             </div>
-                            <div className={classes.updownBtn}>
-                                <button type="button" >
-                                    -
+                            <div className={`${classes.updownBtn} ${error.penalty_amount ? classes.error:null}`}>
+                                <button type="button" onClick={()=>updownHandler('DOWN','penalty_amount')}>
+                                    <FaMinus size={15} color='#d0d0d0'/>
                                 </button>
                                 <input
                                     className={classes.selectBtn}
                                     disabled
+                                    placeholder={'0'}
                                     value={formData.penalty_amount}
                                 />
-                                <button type="button" >
-                                    +
+                                <button type="button" onClick={()=>updownHandler('UP','penalty_amount')}>
+                                    <FaPlus size={15} color='#d0d0d0'/>
                                 </button >
                             </div>
                         </div>
                         <div className={classes.box}>
                             <div className={classes.inner}>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox} tabIndex={0} onBlur={closeHandler}  onClick={()=>openHandler(8)}>
+                                    <div className={`${classes.selectBox} ${error.sub_engrave ? classes.error:null}`} tabIndex={0} onBlur={closeHandler}  onClick={()=>openHandler(8)}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="선택"
@@ -279,19 +293,20 @@ const ExchangeForm = ()=>{
                                             {engraveArr.map((data,idx)=><li key={idx} onClick={(e)=>selectHandler(e,'sub_engrave')}>{data}</li>)}
                                         </div>
                                     </ul>
+                                    {error.sub_engrave && <span className={classes.error_message}>{error.sub_engrave}</span>}
                                 </div>
                             </div>
-                            <div className={classes.updownBtn}>
-                                <button type="button"  >
-                                    -
+                            <div className={`${classes.updownBtn} ${error.sub_engrave_amount ? classes.error:null}`}>
+                                <button type="button" onClick={()=>updownHandler('DOWN','sub_engrave_amount')} >
+                                    <FaMinus size={15} color='#d0d0d0'/>
                                 </button>
                                 <input
                                     className={classes.selectBtn}
-                                    disabled
+                                    readOnly
                                     value={formData.sub_engrave_amount}
                                 />
-                                <button type="button" >
-                                    +
+                                <button type="button" onClick={()=>updownHandler('UP','sub_engrave_amount')}>
+                                    <FaPlus size={15} color='#d0d0d0'/>
                                 </button>
                             </div>
                         </div>
@@ -299,7 +314,7 @@ const ExchangeForm = ()=>{
                             <div className={classes.inner}>
                                 <div>판매가격*</div>
                                 <div className={classes.container}>
-                                    <div className={classes.selectBox}>
+                                    <div className={`${classes.selectBox} ${error.price ? classes.error:null}`}>
                                         <input
                                             className={classes.selectBtn}
                                             placeholder="가격"
@@ -307,6 +322,7 @@ const ExchangeForm = ()=>{
                                             onChange={(e)=>inputHandler(e,'price')}
                                         />
                                     </div>
+                                    {error.price && <span className={classes.error_message}>{error.price}</span>}
                                 </div>
                             </div>
                         </div>
