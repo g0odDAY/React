@@ -20,8 +20,6 @@ const MainNavigation = () =>{
             return null;
         }
         navigation(`search/${searchName.current.value}`);
-        console.log(searchName.current.value);
-        console.log('search');
     }
     return <>
         <header className={classes.main_header}>

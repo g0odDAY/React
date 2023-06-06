@@ -6,11 +6,11 @@ import classes from './Profile.module.css';
 
 import {IoIosArrowDown} from "react-icons/io";
 import {RiLogoutBoxLine} from "react-icons/ri";
-import {getAuth} from "firebase/auth";
+
 import {FaExchangeAlt} from "react-icons/fa";
 import {AiOutlineNotification} from "react-icons/ai";
 const Profile = ({users})=>{
-
+    console.log(users);
 
 
     const ctx = useContext(AuthContext);

@@ -6,7 +6,7 @@ const initialState = {
           server:'',
           category:'',
           itemName:'',
-          quality:'',
+          quality:0,
           characteristic:'',
           characteristic_amount:'',
           sub_characteristic:'',

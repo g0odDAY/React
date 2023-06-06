@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
-    width: 90%;
+    width: 70%;
 }
 .main{
     width:68%;
@@ -82,7 +82,6 @@
 .favorite:hover{
     color:yellow;
     transition: .4s;
-
 }
 .penalty{
     color:#F95126;
@@ -101,6 +100,7 @@
     display: flex;
     justify-content: space-between;
     gap:1rem;
+
 }
 .box button{
     border:0;
@@ -109,6 +109,56 @@
     width: 100%;
     color:var(--white);
     border-radius:10px;
+}
+.input_container{
+    position:relative;
+}
+.input_box{
+    margin-top:1.5rem;
+    position:relative;
+    border-radius: 8px;
+    border:2px solid #e6e8ec;
+    padding:1rem;
+    cursor:pointer;
+    width: 100%;
+}
+.option{
+    position:absolute;
+    width:100%;
+    background: #fff;
+    top:60px;
+    border-radius:10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    visibility:hidden;
+    opacity: 0;
+    transition:.25s;
+    z-index:1;
+}
+.option.active{
+    visibility:visible;
+    opacity:1;
+}
+
+.option div{
+    padding:.5rem;
+    border-radius: 8px;
+}
+.option div:hover{
+    background: linear-gradient(to right,#5865f2,#8045dd);
+    color:#fff;
+}
+.arrow_icon{
+    position:absolute;
+    right: 10px;
+    top:10px;
+}
+.input_box input{
+    outline:none;
+    border:0;
+    font-size:1rem;
+    font-weight: bold;
+    pointer-events: none;
 }
 .writeBtn{
     width: 100%;
@@ -130,7 +180,6 @@ hr{
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
 
 }
 .accordion_header{
@@ -140,6 +189,7 @@ hr{
 .accordion_content{
     display: flex;
     padding: .5rem;
+    height: 100%;
 }
 .content{
     flex-basis: 70%;

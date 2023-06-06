@@ -9,6 +9,7 @@ import {
     fetchSignInMethodsForEmail,
     sendPasswordResetEmail
 } from "firebase/auth";
+import useHttp from "../hooks/use-http";
 const AuthContext = React.createContext({
     onLogout:()=>{},
     onLogin:(e,email,password)=>{},
@@ -19,6 +20,7 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider =(props)=>{
     const auth = getAuth();
+    const {sendRequest} = useHttp();
     const navigation = useNavigate();
     const signUpHandler =useCallback( async (e,email,password)=>{
         e.preventDefault();
@@ -60,9 +62,15 @@ export const AuthContextProvider =(props)=>{
         await signInWithEmailAndPassword(auth,email,password)
             .then(userCredential=>{
                 const user = userCredential.user;
-                localStorage.setItem('userData',JSON.stringify(user));
-                console.log('login 성공 했을때 ', user);
-                navigation('/');
+                sendRequest({url:`https://curious-furnace-340706-default-rtdb.firebaseio.com/user.json?orderBy="uid"&equalTo="${user.uid}"`})
+                    .then(user=>{
+                        const key = Object.keys(user)[0];
+                        const userData = user[key];
+                        console.log(key,userData);
+                        localStorage.setItem('userData',JSON.stringify({...userData,key}));
+                        navigation('/');
+                    })
+
             })
             .catch(error=>{
                 const errorCode = error.code;

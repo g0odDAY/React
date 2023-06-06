@@ -1,9 +1,7 @@
 import classes from "../Equipment/Equipment.module.css";
 import NameTagBox from "./NameTagBox";
 import ItemTitle from "./ItemTitle";
-import ItemPartBox from "./ItemPartBox";
-import ProgressBar from "../../../ui/ProgressBar";
-import {useCallback, useEffect, useMemo, useState} from "react";
+
 const gradeColor = {
     에스더:'#2faba8',
     고대:'#dcc999',
