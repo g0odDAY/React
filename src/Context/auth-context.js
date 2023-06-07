@@ -1,9 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback} from 'react';
 import {useNavigate} from "react-router-dom";
 import {
     getAuth,
     signInWithEmailAndPassword,
-    onAuthStateChanged,
     signOut,
     createUserWithEmailAndPassword,
     fetchSignInMethodsForEmail,

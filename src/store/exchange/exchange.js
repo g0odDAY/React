@@ -7,7 +7,8 @@ const initialState = {
         server:'',
         category:'',
         quality:'',
-    }
+    },
+    fav_items:[]
 }
 const exchangeSlice = createSlice({
     name:'exchange',
@@ -23,6 +24,9 @@ const exchangeSlice = createSlice({
         filterItem:(state,action)=>{
             const {name,value} = action.payload;
             state.filterOptions[name] = value;
+        },
+        addFavorite:(state,action)=>{
+
         }
     },
     extraReducers:(builder)=>{

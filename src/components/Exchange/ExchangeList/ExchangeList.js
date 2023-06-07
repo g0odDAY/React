@@ -1,20 +1,21 @@
 import classes from "../Exchange.module.css";
 import {BsStar, BsStarFill} from "react-icons/bs";
 import ac from "../../../img/img_acc_21.png";
-import Progress from "../../../ui/Progress";
+
 import {AiOutlineArrowDown} from "react-icons/ai";
 import Accordion from "../../../ui/Accordion";
 import React, {useEffect} from "react";
 import ProgressBar from "../../../ui/ProgressBar";
 import {GiGoldBar} from "react-icons/gi";
-import {getAuth, onAuthStateChanged} from "firebase/auth";
-import useHttp from "../../../hooks/use-http";
+import {getAuth} from "firebase/auth";
+import {fetchFavorite} from "../../../store/exchange/exchange-action";
 import {useDispatch} from "react-redux";
-import {fetchItems} from "../../../store/exchange/exchange-action";
+
 
 const ExchangeList = ({idx,items,activeIdx,setActiveIdx})=>{
     const auth = getAuth();
-
+    const dispatch = useDispatch();
+    //console.log(items);
     const {quality} = items;
 
     let color;
@@ -51,17 +52,17 @@ const ExchangeList = ({idx,items,activeIdx,setActiveIdx})=>{
             setActiveIdx(idx);
         }
     };
-    const addFavItem = (e)=>{
-        const itemId= e.currentTarget.dataset.id;
-        onAuthStateChanged(auth,user=>{
-
-        })
+    const addFavItem = (itemId)=>{
+        const user = JSON.parse(localStorage.getItem('userData')) ;
+        const userKey = user.key;
+        console.log(userKey,itemId);
+       dispatch(fetchFavorite(userKey,itemId));
     }
 
     return <div className={classes.main_body_container}>
         <div className={classes.row_box} >
             <div className={classes.inner_row_box}>
-                <div className={classes.favorite} cursor="pointer" data-id={items.id} onClick={(e)=>addFavItem(e)}>
+                <div className={classes.favorite} cursor="pointer" onClick={()=>addFavItem(items.itemId)}>
                     {items.fav_items && items.fav_items.includes(items.id) ?<BsStarFill color='yellow' size={25} /> :<BsStar size={25}/>}
                 </div>
                 <img src={ac} alt="ac"/>

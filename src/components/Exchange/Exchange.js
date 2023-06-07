@@ -17,18 +17,24 @@ const Exchange =()=>{
     useEffect(()=>{
         dispatch(fetchFilterItems());
     },[filterOptions,dispatch])
+
     useEffect(()=>{
         dispatch(fetchItems());
     },[dispatch])
-    const openHandler = (name)=>{
-        if(name===isOpen){
+    const openHandler = (name)=> {
+        if (name === isOpen) {
             setIsOpen('');
-        }else{
+        } else {
             setIsOpen(name);
         }
     }
     const mouseOverHandler = (e,name)=>{
-        dispatch(exchangeActions.filterItem({name,value:e.target.innerText}));
+        dispatch(exchangeActions.filterItem({name,value:e.target.dataset.name}));
+    }
+    const fnc = ()=>{
+
+
+
     }
     return <div className={classes.body}>
         <div className={classes.container}>
@@ -49,7 +55,7 @@ const Exchange =()=>{
             <div className={classes.aside}>
                 <Link to='write' className={classes.writeBtn}>판매 아이템 등록</Link>
                 <div className={classes.box}>
-                    <button>전체</button>
+                    <button onClick={fnc}>전체</button>
                     <button>관심 아이템</button>
                 </div>
                 <div className={classes.input_container} tabIndex={0} onBlur={()=>setIsOpen('')} onClick={()=>openHandler('서버')}>
@@ -62,18 +68,32 @@ const Exchange =()=>{
                         <MdKeyboardArrowDown size={30} className={classes.arrow_icon}/>
                     </div>
                     <div className={`${classes.option} ${isOpen==='서버'? classes.active:null}`}>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>루페온</div>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>아브렐슈드</div>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>카제로스</div>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>카마인</div>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>아만</div>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>니나브</div>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>실리안</div>
-                        <div onClick={(e)=>mouseOverHandler(e,'server')}>카단</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name=''>전체</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='루페온'>루페온</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='아브렐슈드'>아브렐슈드</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='카제로스'>카제로스</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='카마인'>카마인</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='아만'>아만</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='니나브'>니나브</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='실리안'>실리안</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'server')} data-name='카단'>카단</div>
                     </div>
                 </div>
-                <div className={classes.box} >
-                    카테고리
+                <div className={classes.input_container} tabIndex={0} onBlur={()=>setIsOpen('')} onClick={()=>openHandler('카테고리')}>
+                    <div className={classes.input_box}>
+                        <input
+                            placeholder='카테고리'
+                            disabled
+                            value={filterOptions.category}
+                        />
+                        <MdKeyboardArrowDown size={30} className={classes.arrow_icon}/>
+                    </div>
+                    <div className={`${classes.option} ${isOpen==='카테고리'? classes.active:null}`}>
+                        <div onClick={(e)=>mouseOverHandler(e,'category')} data-name=''>전체</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'category')} data-name='장신구-목걸이'>장신구-목걸이</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'category')} data-name='장신구-귀걸이'>장신구-귀걸이</div>
+                        <div onClick={(e)=>mouseOverHandler(e,'category')} data-name='장신구-반지'>장신구-반지</div>
+                    </div>
                 </div>
             </div>
         </div>
