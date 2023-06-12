@@ -4,19 +4,17 @@ import ac from "../../../img/img_acc_21.png";
 
 import {AiOutlineArrowDown} from "react-icons/ai";
 import Accordion from "../../../ui/Accordion";
-import React, {useEffect} from "react";
+import React from "react";
 import ProgressBar from "../../../ui/ProgressBar";
 import {GiGoldBar} from "react-icons/gi";
-import {getAuth} from "firebase/auth";
-import {fetchFavorite} from "../../../store/exchange/exchange-action";
+import {favoriteHandler} from "../../../store/exchange/exchange-action";
 import {useDispatch} from "react-redux";
 
 
-const ExchangeList = ({idx,items,activeIdx,setActiveIdx})=>{
-    const auth = getAuth();
+const ExchangeList = ({idx,items,activeIdx,setActiveIdx,favorite})=>{
     const dispatch = useDispatch();
-    //console.log(items);
     const {quality} = items;
+
 
     let color;
     switch (true) {
@@ -55,15 +53,15 @@ const ExchangeList = ({idx,items,activeIdx,setActiveIdx})=>{
     const addFavItem = (itemId)=>{
         const user = JSON.parse(localStorage.getItem('userData')) ;
         const userKey = user.key;
-        console.log(userKey,itemId);
-       dispatch(fetchFavorite(userKey,itemId));
+        console.log('itemId을 클릭',itemId);
+       dispatch(favoriteHandler(userKey,itemId));
     }
 
     return <div className={classes.main_body_container}>
         <div className={classes.row_box} >
             <div className={classes.inner_row_box}>
                 <div className={classes.favorite} cursor="pointer" onClick={()=>addFavItem(items.itemId)}>
-                    {items.fav_items && items.fav_items.includes(items.id) ?<BsStarFill color='yellow' size={25} /> :<BsStar size={25}/>}
+                    {favorite.some(item=>item.itemId === items.itemId) ?<BsStarFill color='yellow' size={25} /> :<BsStar size={25}/>}
                 </div>
                 <img src={ac} alt="ac"/>
                 <span>{items.itemName}</span>
@@ -88,9 +86,9 @@ const ExchangeList = ({idx,items,activeIdx,setActiveIdx})=>{
                 <span>{`${items.sub_engrave}+${items.sub_engrave_amount}`}</span>
                 <span className={classes.penalty}>{`${items.penalty}+${items.penalty_amount}`}</span>
             </div>
-            <div>
-                <span>{items.price}</span>
-                <GiGoldBar size={22}/>
+            <div className={classes.gold_sector}>
+                <span>{items.price.toLocaleString()}</span>
+                <GiGoldBar className={classes.gold} size={22}/>
             </div>
         </div>
         <div className={classes.openBtn} onClick={()=>openHandler(idx)}>

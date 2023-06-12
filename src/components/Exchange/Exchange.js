@@ -2,14 +2,13 @@ import classes from './Exchange.module.css';
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ExchangeList from "./ExchangeList/ExchangeList";
-import {fetchItems,fetchFilterItems} from "../../store/exchange/exchange-action";
+import {fetchItems, fetchFilterItems, fetchFavorite} from "../../store/exchange/exchange-action";
 import {useDispatch, useSelector} from "react-redux";
 import {exchangeActions} from "../../store/exchange/exchange";
 import {MdKeyboardArrowDown} from "react-icons/md";
 
 const Exchange =()=>{
-    const {items:itemArray,filterOptions} = useSelector(state=> state.exchange);
-    console.log('itemArray',Object.values(itemArray));
+    const {items:itemArray,filterOptions,fav_items:favorite} = useSelector(state=> state.exchange);
     const [isOpen,setIsOpen] = useState('');
     const [activeIdx,setActiveIdx] = useState(null);
     const dispatch = useDispatch();
@@ -17,7 +16,11 @@ const Exchange =()=>{
     useEffect(()=>{
         dispatch(fetchFilterItems());
     },[filterOptions,dispatch])
-
+    useEffect(()=>{
+        const user = JSON.parse(localStorage.getItem('userData')) ;
+        const userKey = user.key;
+        dispatch(fetchFavorite(userKey));
+    },[dispatch]);
     useEffect(()=>{
         dispatch(fetchItems());
     },[dispatch])
@@ -31,10 +34,8 @@ const Exchange =()=>{
     const mouseOverHandler = (e,name)=>{
         dispatch(exchangeActions.filterItem({name,value:e.target.dataset.name}));
     }
-    const fnc = ()=>{
-
-
-
+    const favoriteHandler = ()=>{
+        dispatch(exchangeActions.updateItems(favorite));
     }
     return <div className={classes.body}>
         <div className={classes.container}>
@@ -48,15 +49,15 @@ const Exchange =()=>{
                 </div>
                 <div className={classes.main_body}>
                     <div className={classes.main_body_box}>
-                        {itemArray.map((data,idx)=><ExchangeList key={idx} idx={idx} activeIdx={activeIdx} setActiveIdx={setActiveIdx} items={data} />)}
+                        {itemArray.map((data,idx)=><ExchangeList key={idx} idx={idx} activeIdx={activeIdx} setActiveIdx={setActiveIdx} items={data} favorite={favorite}/>)}
                     </div>
                 </div>
             </div>
             <div className={classes.aside}>
                 <Link to='write' className={classes.writeBtn}>판매 아이템 등록</Link>
                 <div className={classes.box}>
-                    <button onClick={fnc}>전체</button>
-                    <button>관심 아이템</button>
+                    <button onClick={()=>dispatch(fetchItems())}>전체</button>
+                    <button onClick={favoriteHandler}>관심 아이템</button>
                 </div>
                 <div className={classes.input_container} tabIndex={0} onBlur={()=>setIsOpen('')} onClick={()=>openHandler('서버')}>
                     <div className={classes.input_box}>

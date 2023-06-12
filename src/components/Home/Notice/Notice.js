@@ -1,20 +1,20 @@
 import {useEffect, useState} from "react";
 import classes from "./Notice.module.css";
+import useHttp from "../../../hooks/use-http";
 
 const Notice = ({news})=>{
     const [notice,setNotice] = useState([]);
+    const {sendRequest} = useHttp();
     useEffect(()=>{
-        fetch('https://developer-lostark.game.onstove.com/news/notices',{
+        sendRequest({
+            url:'https://developer-lostark.game.onstove.com/news/notices',
             headers:{
                 accept:'application/json',
-                authorization : 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyIsImtpZCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyJ9.eyJpc3MiOiJodHRwczovL2x1ZHkuZ2FtZS5vbnN0b3ZlLmNvbSIsImF1ZCI6Imh0dHBzOi8vbHVkeS5nYW1lLm9uc3RvdmUuY29tL3Jlc291cmNlcyIsImNsaWVudF9pZCI6IjEwMDAwMDAwMDAxNzUwMzYifQ.QLDqQWrSXV2PN_oJnZ799LlVcsJ1jAjGwRLOSxIeWGyqUH2hCYCjONlsygYgDUCz7UsnVffNHFmA6gT9JX1EO-o_sdjLC6xsn3UZrLn-wmGYKpsfFzplRPZoo2HHYmblZDfrOIUKYZDCg7OMS8pJ1uRAA-5j3n9FQSM1n3vl2pFBxkXFKQbQERtiljwYFEFpaZeBsMgi2LjzTG1aKXW-5qDheiiaADrOKni95PTIy0vs4pP8QKeI-LMq1nqGb0OgnTTDg8mJIXePv4YJiDXGgDMefRFgB7Dei-1Hgn7I-mLmspsX5OZjiIs84yjZMLhXKiJK78fQux9bcOZL-hQwMQ'
+                authorization : process.env.REACT_APP_LOSTARK_API_KEY
             }
-        }).then(res=>{
-            return res.json();
         }).then(res=>{
             const filter = res.filter((data,idx)=> idx<5);
             setNotice(filter);
-            console.log(filter);
         })
     },[]);
 

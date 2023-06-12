@@ -11,7 +11,8 @@ const useHttp = ()=>{
             if(!response.ok){
                 throw new Error('요청에 실패 했어요.');
             }
-            return response.json();
+            const data = await response.json();
+            return data;
         }catch (error){
           alert('error 발생'+error);
         }

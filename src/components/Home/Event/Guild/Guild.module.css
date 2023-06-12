@@ -1,0 +1,26 @@
+.select_btn,
+.indicator_btn{
+  display:flex;
+  justify-content: flex-end;
+}
+thead th{
+  background: #f2f2f2;
+}
+tbody{
+  font-size: 0.8rem;
+}
+tbody td:not(:last-child) {
+  text-align: center;
+}
+tbody td{
+  height: 40px;
+}
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* 원하는 회색 배경색으로 변경 */
+}
+tbody td:nth-child(2) {
+  width: 358px; /* 원하는 너비로 변경 */
+}
+tbody td:first-child {
+  width: 100px; /* 원하는 너비로 변경 */
+}

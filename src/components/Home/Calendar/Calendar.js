@@ -7,18 +7,27 @@
  import Raid from "./Raid/Raid";
  import Abyss from "./Abyss/Abyss";
  import Timer from "./Timer/Timer";
+ import useHttp from "../../../hooks/use-http";
 
 const Calendar =()=>{
+    const {sendRequest} = useHttp();
+    const [calendar,setCalendar] = useState([]);
     const [island,setIsland] = useState([]);
-    const [type,setType] = useState(false);
     const [chaosgate,setChaosgate] = useState([]);
     const [ghostship,setGhostship] = useState([]);
     const [fieldbossSchedule,setFieldboss] = useState([]);
     useEffect(()=>{
+        sendRequest({
+            url:'https://developer-lostark.game.onstove.com/gamecontents/calendar',
+            headers:{
+                accept:'application/json',
+                authorization : process.env.REACT_APP_LOSTARK_API_KEY
+            }
+        }).then(res=>setCalendar(res));
         fetch('https://developer-lostark.game.onstove.com/gamecontents/calendar',{
             headers:{
                 accept:'application/json',
-                authorization : 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyIsImtpZCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyJ9.eyJpc3MiOiJodHRwczovL2x1ZHkuZ2FtZS5vbnN0b3ZlLmNvbSIsImF1ZCI6Imh0dHBzOi8vbHVkeS5nYW1lLm9uc3RvdmUuY29tL3Jlc291cmNlcyIsImNsaWVudF9pZCI6IjEwMDAwMDAwMDAxNzUwMzYifQ.QLDqQWrSXV2PN_oJnZ799LlVcsJ1jAjGwRLOSxIeWGyqUH2hCYCjONlsygYgDUCz7UsnVffNHFmA6gT9JX1EO-o_sdjLC6xsn3UZrLn-wmGYKpsfFzplRPZoo2HHYmblZDfrOIUKYZDCg7OMS8pJ1uRAA-5j3n9FQSM1n3vl2pFBxkXFKQbQERtiljwYFEFpaZeBsMgi2LjzTG1aKXW-5qDheiiaADrOKni95PTIy0vs4pP8QKeI-LMq1nqGb0OgnTTDg8mJIXePv4YJiDXGgDMefRFgB7Dei-1Hgn7I-mLmspsX5OZjiIs84yjZMLhXKiJK78fQux9bcOZL-hQwMQ'
+                authorization : process.env.REACT_APP_LOSTARK_API_KEY
             }
         }).then(res=>{
             return res.json();
@@ -55,8 +64,12 @@ const Calendar =()=>{
 
 
     const hasTodayDate = (arrDate)=>{
-        const today = new Date().toISOString().slice(0, 10);
-        return arrDate.some(date => date.startsWith(today));
+        const today = new Date().toISOString().split("T")[0];
+
+
+        const todayDates = arrDate.filter(date => date.startsWith(today));
+        console.log(todayDates);
+        return todayDates;
     }
     return <section id="calendar">
         <div className={classes.wrapper}>
@@ -65,7 +78,7 @@ const Calendar =()=>{
                     <span>모험섬</span>
                     <Timer/>
                 </div>
-                <p>2023년 5월</p>
+                <p>2023년 6월</p>
             </div>
             <div className={classes.main}>
                 <div className={classes.selector}>
@@ -95,7 +108,7 @@ const Calendar =()=>{
                             <Timer schedules={chaosgate} content={'chaosgate'}/>
                         </div>
                     </div>
-                {<Island items={island} hasTodayDate={hasTodayDate}/>}
+                {<Island items={calendar} hasTodayDate={hasTodayDate}/>}
             </div>
         </div>
     </section>

@@ -7,6 +7,7 @@ const initialState = {
         server:'',
         category:'',
         quality:'',
+        favorite:false,
     },
     fav_items:[]
 }
@@ -25,8 +26,12 @@ const exchangeSlice = createSlice({
             const {name,value} = action.payload;
             state.filterOptions[name] = value;
         },
-        addFavorite:(state,action)=>{
-
+        fetchFavorite:(state,action)=>{
+            const favoriteArray = Object.entries(action.payload).map(([key,value])=>value);
+            state.fav_items=favoriteArray;
+        },
+        updateItems:(state,action)=>{
+            state.items = action.payload;
         }
     },
     extraReducers:(builder)=>{

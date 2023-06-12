@@ -1,7 +1,9 @@
 import {useReducer} from "react";
-import useHttp from "./use-http";
-
+import useHttp from "../../../hooks/use-http";
+const characteristicOptions = ['치명','특화','신속','인내','제압','숙련'];
 const initialState = {
+      characteristicOptions,
+      selectedOptions:Array(2).fill(''),
       formData:{
           server:'',
           category:'',
@@ -17,7 +19,7 @@ const initialState = {
           sub_engrave_amount:0,
           penalty:'',
           penalty_amount:0,
-          price:'',
+          price:0,
       },
       error:{
           server:'',
@@ -41,6 +43,14 @@ const inputStateReducer = (state,action)=>{
     switch (action.type){
         case 'SELECT':
             return {...state,formData:{...state.formData,[action.name]:action.value}};
+        case 'SELECT_OPTIONS':
+
+            const remainingOptions = characteristicOptions.filter(option=>!state.selectedOptions.includes(option));
+            console.log(remainingOptions);
+            return {...state,formData:{...state.formData,[action.name]:action.value},characteristicOptions:remainingOptions};
+        case 'ADD_OPTIONS':
+            const updatedSelectedOptions = [...state.selectedOptions,action.value];
+            return {...state,selectedOptions:updatedSelectedOptions.slice(1)};
         case 'INPUT':
             return {...state,formData:{...state.formData,[action.name]:action.value}};
         case 'ERROR':
@@ -55,7 +65,7 @@ const inputStateReducer = (state,action)=>{
             return state;
     }
 }
-const useInput = ()=>{
+const useExchangeForm = ()=>{
     const[inputState,dispatch] = useReducer(inputStateReducer,initialState);
     const {sendRequest} = useHttp();
     const inputHandler = (e,name)=>{
@@ -68,6 +78,12 @@ const useInput = ()=>{
         dispatch({type:'SELECT',name,value});
         dispatch({type:'ERROR_CLEAR',name});
     }
+    const selectOptionHandler = (e,name)=>{
+        const value= e.target.innerText;
+        dispatch({type:'ADD_OPTIONS',value});
+        dispatch({type:'SELECT_OPTIONS',name,value});
+        dispatch({type:'ERROR_CLEAR',name});
+    }
     const submitHandler = (e)=>{
         e.preventDefault();
         const {formData} = inputState;
@@ -75,15 +91,15 @@ const useInput = ()=>{
         Object.entries(formData).forEach(([name,value])=>{
             if(!value){
                 emptyField.push(name)
-            };
+            }
         });
         emptyField.map(name => {
-            console.log(name);
+
             const errorMessage =`${name}을/를 입력해주세요!`;
             dispatch({type:'ERROR',name,error:errorMessage});
         })
         if(emptyField.length === 0){
-            console.log('폼이 유효합니다.');
+
             sendRequest({
                 url:'https://curious-furnace-340706-default-rtdb.firebaseio.com/items.json',
                 method:'POST',
@@ -91,19 +107,20 @@ const useInput = ()=>{
                 body:formData
             }).then(r=>r);
         }
-
-
     }
     const updownHandler = (type,name)=>{
         dispatch({type,name})
     }
     return {
+        selectedOptions:inputState.selectedOptions,
+        characteristicOptions:inputState.characteristicOptions,
         formData:inputState.formData,
         error:inputState.error,
         inputHandler,
         selectHandler,
+        selectOptionHandler,
         updownHandler,
         submitHandler
     }
 }
-export default useInput;
+export default useExchangeForm;

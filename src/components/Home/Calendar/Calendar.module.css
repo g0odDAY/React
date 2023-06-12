@@ -8,6 +8,7 @@ hr{
     margin: 0 auto;
 }
 .header{
+    margin-top:2rem;
     padding:0 1rem;
     font-size: 1.4rem;
     display: flex;

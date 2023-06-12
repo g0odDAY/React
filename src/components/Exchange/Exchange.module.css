@@ -86,6 +86,13 @@
 .penalty{
     color:#F95126;
 }
+.gold_sector{
+    display:flex;
+    align-items:center;
+}
+.gold{
+    color:#d0b14e;
+}
 /* aside */
 .aside{
     padding: 1rem;

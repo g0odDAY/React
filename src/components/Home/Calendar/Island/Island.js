@@ -1,7 +1,11 @@
 import classes from './Island.module.css'
 const Island = ({items,hasTodayDate}) =>{
+    console.log('island',items.filter(data=>data.CategoryName==='모험 섬'));
+    const today = new Date().toISOString().split("T")[0];
+    const island = items.filter(data=>data.CategoryName==='모험 섬');
+
     return  <div className={classes.island}>
-        {items.map((item,idx)=><div key={idx} className={classes.island_box}>
+        {island.map((item,idx)=><div key={idx} className={classes.island_box}>
             <img src={item.ContentsIcon} alt={item.ContentsName}/>
             <div  className={classes.island_reward}>
                 <div>

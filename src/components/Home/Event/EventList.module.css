@@ -35,14 +35,13 @@
     background-color: #fff;
     object-fit: cover;
 }
-.arrows{
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top:100px;
-    width: 100%;
+.prev_button,
+.next_button{
+    position:absolute;
 }
-.arrow,
+.next_button{
+    right:0;
+}
 .indicator{
     background: transparent;
     border: none;
