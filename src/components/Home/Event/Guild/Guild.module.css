@@ -3,24 +3,24 @@
   display:flex;
   justify-content: flex-end;
 }
-thead th{
+.guild_table thead th{
   background: #f2f2f2;
 }
-tbody{
+.guild_table tbody{
   font-size: 0.8rem;
 }
-tbody td:not(:last-child) {
+.guild_table tbody td:not(:last-child) {
   text-align: center;
 }
-tbody td{
+.guild_table tbody td{
   height: 40px;
 }
-tbody tr:nth-child(even) {
+.guild_table tbody tr:nth-child(even) {
   background-color: #f2f2f2; /* 원하는 회색 배경색으로 변경 */
 }
-tbody td:nth-child(2) {
+.guild_table tbody td:nth-child(2) {
   width: 358px; /* 원하는 너비로 변경 */
 }
-tbody td:first-child {
+.guild_table tbody td:first-child {
   width: 100px; /* 원하는 너비로 변경 */
 }

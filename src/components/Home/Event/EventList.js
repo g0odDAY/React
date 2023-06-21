@@ -1,9 +1,9 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import classes from "./EventList.module.css";
 import {BiChevronLeft, BiChevronRight, BiRadioCircleMarked} from "react-icons/bi";
-import AudioPlayer from "../AudioPlayer";
+
 import useHttp from "../../../hooks/use-http";
 import Guild from "./Guild/Guild";
 
@@ -20,7 +20,7 @@ const EventList = ()=>{
             }
         }).then(response=>setEvents(response));
 
-    },[])
+    },[sendRequest])
 
 
 
@@ -74,5 +74,5 @@ const Indicator = ({events,activeIdx,updateIdx})=>{
     const indicatorBtn = events.map((_,idx)=>{
             return <button key={idx} className={classes.indicator} onClick={()=>updateIdx(idx)}> <span className={`${idx === activeIdx ? classes.indicatorSymbolActive : classes.indicatorSymbol}`}><BiRadioCircleMarked size="36"/></span></button>;
         })
-    return indicatorBtn
+    return indicatorBtn;
 }

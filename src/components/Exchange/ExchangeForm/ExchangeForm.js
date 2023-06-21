@@ -8,7 +8,7 @@ import {FaMinus, FaPlus} from "react-icons/fa";
 
 const ExchangeForm = ()=>{
     const serverArr = ['루페온','아브렐슈드','카제로스','카마인','니나브','실리안','카단','아만'];
-    const categoryArr=['장신구-목걸이','장신구-귀걸이','장신구-반지','장신구-팔찌','보석'];
+    const categoryArr=['장신구-목걸이','장신구-귀걸이','장신구-반지'];
     const itemArr = [{type:'necklace',name:'거룩한 수호자의 목걸이'},{type:'necklace',name:'거룩한 선지자의 목걸이'},{type:'necklace',name:'공허한 운명의 목걸이'},{type:'necklace',name:'공허한 미래의 목걸이'},{type:'necklace',name:'참혹한 파멸의 목걸이'},{type:'necklace',name:'참혹한 쇠락의 목걸이'}]
     const engraveArr = ['각성','강령술','결투의 대가','구슬동자','굳은 의지','급소 타격','기습의 대가','긴급 구조','달인의 저력'];
     const penaltyArr = ['공격력 감소','공격속도 감소','방어력 감소','이동속도 감소'];

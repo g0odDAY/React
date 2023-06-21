@@ -85,20 +85,20 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
                                     </td>
                                     <td>
                                         <div className={classes.td_content}>
-                                            <span>{data.YDayAvgPrice === 0 ? '-':data.YDayAvgPrice}</span>
+                                            <span>{data.YDayAvgPrice === 0 ? '-':data.YDayAvgPrice.toLocaleString()}</span>
                                             <GiGoldBar size={25} className={classes.gold}/>
                                         </div>
                                     </td>
                                     <td>
                                         <div className={classes.td_content}>
-                                            <span>{data.RecentPrice === 0?'-':data.RecentPrice}</span>
+                                            <span>{data.RecentPrice === 0?'-':data.RecentPrice.toLocaleString()}</span>
                                             <GiGoldBar size={25} className={classes.gold}/>
                                         </div>
 
                                     </td>
                                     <td>
                                         <div className={classes.td_content}>
-                                            <span>{data.CurrentMinPrice===0?'-':data.CurrentMinPrice}</span>
+                                            <span>{data.CurrentMinPrice===0?'-':data.CurrentMinPrice.toLocaleString()}</span>
                                             <GiGoldBar size={25} className={classes.gold}/>
                                         </div>
                                     </td>
@@ -115,9 +115,6 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
                     <button type='button' onClick={() => pageHandler(marketState.PageNo-10)} disabled={marketState.PageNo === 1}>
                         <MdArrowBackIos size={25}/>
                     </button>
-                    {/*<div>*/}
-                    {/*    {data ? `${marketState.PageNo}/${totalPage===0 ?1:totalPage}` : null}*/}
-                    {/*</div>*/}
                     <div>
                         <Indicator pageNo={marketState.PageNo} totalPage={totalPage} pageHandler={pageHandler}/>
                     </div>

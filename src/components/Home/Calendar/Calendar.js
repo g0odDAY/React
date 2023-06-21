@@ -4,7 +4,6 @@
  import classes from "./Calendar.module.css";
  import {useEffect, useState} from "react";
  import Island from "./Island/Island";
- import Raid from "./Raid/Raid";
  import Abyss from "./Abyss/Abyss";
  import Timer from "./Timer/Timer";
  import useHttp from "../../../hooks/use-http";
@@ -12,7 +11,7 @@
 const Calendar =()=>{
     const {sendRequest} = useHttp();
     const [calendar,setCalendar] = useState([]);
-    const [island,setIsland] = useState([]);
+
     const [chaosgate,setChaosgate] = useState([]);
     const [ghostship,setGhostship] = useState([]);
     const [fieldbossSchedule,setFieldboss] = useState([]);
@@ -33,7 +32,7 @@ const Calendar =()=>{
             return res.json();
         }).then(res =>{
             console.log('calendar',res);
-            setIsland(res.filter(data=>data.CategoryName === '모험 섬').filter(data=>hasTodayDate(data.StartTimes)));
+
 
 
             const data = res.filter(data=>data.CategoryName === '카오스게이트').filter(data=>hasTodayDate(data.StartTimes));
@@ -60,7 +59,7 @@ const Calendar =()=>{
 
 
         });
-    },[]);
+    },[sendRequest]);
 
 
     const hasTodayDate = (arrDate)=>{
@@ -68,7 +67,7 @@ const Calendar =()=>{
 
 
         const todayDates = arrDate.filter(date => date.startsWith(today));
-        console.log(todayDates);
+
         return todayDates;
     }
     return <section id="calendar">
@@ -108,7 +107,7 @@ const Calendar =()=>{
                             <Timer schedules={chaosgate} content={'chaosgate'}/>
                         </div>
                     </div>
-                {<Island items={calendar} hasTodayDate={hasTodayDate}/>}
+                {<Island items={calendar}/>}
             </div>
         </div>
     </section>

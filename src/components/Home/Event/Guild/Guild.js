@@ -25,7 +25,7 @@ const Guild = () => {
             const paging = res.filter(data => data.Rank <= page.pageNo * page.pageSize && data.Rank > page.pageNo * page.pageSize - 5);
             setGuild(paging)
         });
-    }, [page.pageNo, serverName])
+    }, [page.pageNo,page.pageSize, serverName,sendRequest])
     const btn = (number) => {
         setPage((prev) => ({
             ...prev,
@@ -52,7 +52,7 @@ const Guild = () => {
                 <option value="카단">카단</option>
             </select>
         </div>
-        <table>
+        <table className={classes.guild_table}>
             <thead>
                 <tr>
                     <th>길드명</th>

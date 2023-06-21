@@ -2,6 +2,7 @@ import classes from './Login.module.css';
 import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import AuthContext from "../../Context/auth-context";
+import {AiFillLock} from "react-icons/ai";
 
 const Login = ()=>{
     const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const Login = ()=>{
         <div className={classes.container}>
 
                 <form className={classes.form} onSubmit={(e)=>ctx.onLogin(e,email,password)}>
-                    <h2>로그인</h2>
+                    <h2><AiFillLock/>로그인</h2>
                     <div className={classes.inputContainer}>
                         <label htmlFor="">이메일</label>
                         <input

@@ -5,6 +5,7 @@ import useHttp from "../../../hooks/use-http";
 const Notice = ({news})=>{
     const [notice,setNotice] = useState([]);
     const {sendRequest} = useHttp();
+
     useEffect(()=>{
         sendRequest({
             url:'https://developer-lostark.game.onstove.com/news/notices',
@@ -16,7 +17,7 @@ const Notice = ({news})=>{
             const filter = res.filter((data,idx)=> idx<5);
             setNotice(filter);
         })
-    },[]);
+    },[sendRequest]);
 
 
     return <section id="notice">

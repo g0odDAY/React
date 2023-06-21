@@ -44,9 +44,7 @@ const inputStateReducer = (state,action)=>{
         case 'SELECT':
             return {...state,formData:{...state.formData,[action.name]:action.value}};
         case 'SELECT_OPTIONS':
-
             const remainingOptions = characteristicOptions.filter(option=>!state.selectedOptions.includes(option));
-            console.log(remainingOptions);
             return {...state,formData:{...state.formData,[action.name]:action.value},characteristicOptions:remainingOptions};
         case 'ADD_OPTIONS':
             const updatedSelectedOptions = [...state.selectedOptions,action.value];
@@ -94,7 +92,6 @@ const useExchangeForm = ()=>{
             }
         });
         emptyField.map(name => {
-
             const errorMessage =`${name}을/를 입력해주세요!`;
             dispatch({type:'ERROR',name,error:errorMessage});
         })
