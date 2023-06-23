@@ -1,6 +1,6 @@
 import classes from './Market.module.css';
 import {SlArrowDown} from "react-icons/sl";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import MarketHeader from "./MarketHeader";
 import MarketBody from "./MarketBody";
 import {useLoaderData} from "react-router-dom";
@@ -11,11 +11,17 @@ import useMarket from "./hooks/marketReducer";
 const Market = ()=>{
     const [activeIdx,setActiveIdx] = useState('');
     const market = useLoaderData();
-    const {codeHandler,sortHandler,pageHandler,formHandler,marketState} = useMarket();
-    const submitHandler = (e,formData)=>{
+    const {
+        codeHandler,
+        sortHandler,
+        pageHandler,
+        formHandler,
+        marketState
+    } = useMarket();
+    const submitHandler = useCallback((e,formData)=>{
         e.preventDefault();
         formHandler(formData);
-    }
+    },[])
     return <div className={classes.container}>
         <div className={classes.aside}>
             <ul className={classes.accordionMenu}>

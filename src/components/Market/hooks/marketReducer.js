@@ -1,8 +1,8 @@
-import {useReducer} from "react";
+import {useCallback, useReducer} from "react";
 
 const initialState = {
     CategoryCode:'',
-    PageNo:0,
+    PageNo:1,
     Sort:'',
     SortCondition:'DESC',
     CharacterClass:'',
@@ -28,21 +28,21 @@ const marketStateReducer = (state,action)=>{
 const useMarket = ()=>{
     const [marketState,dispatch] = useReducer(marketStateReducer,initialState);
 
-    const codeHandler = (e)=>{
+    const codeHandler = useCallback((e)=>{
         const code = e.target.dataset.code;
         dispatch({ type:'CODE', code });
-    }
+    },[])
 
-    const pageHandler = (number) =>{
+    const pageHandler = useCallback((number) =>{
         dispatch({type:'PAGE',number});
-    }
+    },[])
 
-    const sortHandler = (sort)=>{
+    const sortHandler = useCallback((sort)=>{
         dispatch({type:'SORT',sort});
-    }
+    },[])
 
     const formHandler = (formData)=>{
-
+        console.log('formData',formData);
         dispatch({type:'FORM',formData});
     }
     return {

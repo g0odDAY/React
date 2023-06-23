@@ -32,7 +32,7 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
     })
     const totalPage = data? Math.ceil(data.TotalCount/10):null;
 
-    const sortFnc = (Sort)=>{
+    const sortFnc =(Sort)=>{
         if(isQueryLoaded){
             sortHandler(Sort);
             setToggle(!toggle);
@@ -109,21 +109,22 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
                     </table>
                 </div>
                 {data?<div className={classes.indicator}>
-                    <button type='button' disabled={marketState.PageNo===1} onClick={()=>pageHandler(1)}>
+                    <button type='button' disabled={Math.ceil(marketState.PageNo/10)===1} onClick={()=>pageHandler(1)}>
                         <RxDoubleArrowLeft size={35}/>
                     </button>
-                    <button type='button' onClick={() => pageHandler(marketState.PageNo-10)} disabled={marketState.PageNo === 1}>
-                        <MdArrowBackIos size={25}/>
-                    </button>
-                    <div>
-                        <Indicator pageNo={marketState.PageNo} totalPage={totalPage} pageHandler={pageHandler}/>
-                    </div>
-                    <button type='button' onClick={() => pageHandler(marketState.PageNo+10)} disabled={marketState.PageNo === totalPage}>
-                        <MdArrowForwardIos size={25}/>
-                    </button>
-                    <button type='button' onClick={()=>pageHandler(totalPage)}>
+                        <button type='button' onClick={() => pageHandler(Math.floor(marketState.PageNo / 10) * 10 - 9)} disabled={Math.ceil(marketState.PageNo/10)===1}>
+                            <MdArrowBackIos size={25}/>
+                        </button>
+                            <div>
+                                <Indicator pageNo={marketState.PageNo} totalPage={totalPage} pageHandler={pageHandler}/>
+                            </div>
+                        <button type='button' onClick={() => pageHandler(Math.floor((marketState.PageNo - 1) / 10) * 10 + 11)} disabled={Math.ceil(marketState.PageNo/10)===Math.ceil(totalPage/10)}>
+                            <MdArrowForwardIos size={25}/>
+                        </button>
+                    <button type='button' onClick={()=>pageHandler(totalPage)} disabled={Math.ceil(marketState.PageNo/10)===Math.ceil(totalPage/10)}>
                         <RxDoubleArrowRight size={35}/>
                     </button>
+
                 </div>:null}
             </div>
             <Outlet/>
@@ -132,18 +133,22 @@ const MarketBody = ({sortHandler,pageHandler, marketState})=>{
 }
 
 export default MarketBody;
-const Indicator = ({pageNo, totalPage, pageHandler})=>{
-        console.log(pageNo);
-        const pageSize = 10;
-        const startPage = Math.floor(pageNo / 10) * 10 ;
-        const endPage = Math.min( startPage+pageSize-1, totalPage);
-        console.log("startPage",startPage,'endPage',endPage);
-        const pages = [];
-        for (let i = startPage+1; i <= endPage+1; i++) {
-            pages.push(<span key={i} className={`${pageNo===i?classes.select:null}`} onClick={()=>pageHandler(i)}>{i}</span>);
-        }
-        return pages;
+const Indicator = ({pageNo, totalPage, pageHandler,maxButtons = 10})=>{
 
+    let startIdx = Math.floor((pageNo - 1) / maxButtons) * maxButtons + 1;
+    console.log('startIdx',startIdx);
+    let endIdx = Math.min(startIdx + maxButtons - 1, totalPage);
+    console.log('endIdx - startIdx + 1',endIdx - startIdx + 1);
+    // if (endIdx - startIdx + 1 < maxButtons) {
+    //     startIdx = Math.max(1, endIdx - maxButtons + 1);
+    // }
+    console.log('pageNo',pageNo,'startIdx',startIdx,'endIdx',endIdx,'totalpage',totalPage);
+    const pages = [];
+    for (let i = startIdx; i <= endIdx; i++) {
+        pages.push(<span key={i} className={`${pageNo===i?classes.select:null}`} onClick={()=>pageHandler(i)}>{i}</span>);
+    }
+
+    return pages;
 }
 export const Empty = ()=>{
     return  <tr>
